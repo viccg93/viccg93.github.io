@@ -61,13 +61,15 @@
 
         let canvasWidth = 0
         let canvasHeight = 0
-        let maxCirclesQuantity = 200
+        let maxCirclesQuantity = 300
         let minradius = 0, maxRadius = 0
 
         let canvas = document.getElementById('main_canvas')
         let ctx = canvas.getContext('2d')
         let dprGlobal = 1
 
+        //this whole function has to be reviewed and rewritten if necessary for performance issues
+        //verify strategy used for getting window sizing
         function adjustCanvasToWindow(canvas,ctx){
             //prototype - adjust only scale and dpr
             const dpr = window.devicePixelRatio || 1
@@ -84,8 +86,13 @@
             canvasWidth = window.innerWidth
             canvasHeight = window.innerHeight
             //we should use both dimensions to get a value which we can get a proportion for circles
+            /*
             maxRadius = Math.round(((canvasWidth + canvasHeight)/2)*(1/20))
             minradius = Math.round(((canvasWidth + canvasHeight)/2)*(1/50))
+            */
+
+            maxRadius = Math.round((canvasHeight)*(1/7))
+            minradius = Math.round(maxRadius/5)
         }
         adjustCanvasToWindow(canvas, ctx)
         let circles = generateCircles(maxCirclesQuantity,canvasWidth,canvasHeight, minradius, maxRadius, dprGlobal)
@@ -105,7 +112,7 @@
                 //bluriness  can be changed through alpha
                 ctx.beginPath()
                 ctx.rect(0,0,canvasWidth,canvasHeight)
-                ctx.fillStyle = 'rgba(128,128,128,0.2)'
+                ctx.fillStyle = 'rgba(255,255,255,1)'
                 ctx.fill()
                 ctx.closePath()
                 circles.forEach( (circle, index) => {
@@ -178,13 +185,13 @@
             if(circle.marked){
                 console.log(`new Y position: ${yPos}`)
             }
-            return yPos
+            return Math.round(yPos)
         }
 
         function calculateXPosition(circle){
             let elapsedTime = Date.now() - circle.initialStamp
             let xPos = circle.xPos + (circle.speed * Math.cos(circle.angle)*(elapsedTime/1000))
-            return xPos
+            return Math.round(xPos)
         }
 
         function getNormalisedVector(vectorDimension, vectorAngle){
@@ -206,50 +213,91 @@
         function generateCircles(quantityMaxLimit=0, canvasWidth, canvasHeight, minRadius, maxRadius,dpr){
             let circles = []
             if(quantityMaxLimit == 0){
-                quantityMaxLimit = 10
+                quantityMaxLimit = 200
             }
-            let realQuantity = Math.ceil(Math.random()* quantityMaxLimit + 1)
+            let realQuantity = Math.round((Math.random()*(quantityMaxLimit - 1)) + 1)
+            let negativeFlag = true
             console.log('real quantity: ' + realQuantity)
+            let negativeQuantity = Math.round(realQuantity/3)
             for(let i = 0; i< realQuantity; i++){
-                circles.push(generateCircle(canvasWidth, canvasHeight, minRadius/dpr, maxRadius/dpr))
+                if( i > negativeQuantity && negativeFlag == true){
+                    negativeFlag = false
+                }
+                circles.push(generateCircle(canvasWidth, canvasHeight, minRadius/dpr, maxRadius/dpr, negativeFlag))
             }
             return circles
         }
 
-        function generateCircle(rightLimit, topLimit, minRadius, maxRadius){
+        function assignSpeed(canvasWidth, canvasHeight){
+            //changes were made here
+            let speedRatio = (1/10)
+            let speedLimit = canvasHeight*speedRatio
+            let speedMin = speedLimit*(1/4)
+            let speed = (Math.random()*(speedLimit - speedMin))+speedMin
+            console.log(`speed: ${speed}`)
+            return speed
+        }
+
+        function assignSpeedV2(yPos, angle){
+            //changes were made here
+            //width dependant prototype
+            //value defined here is just for testing porpouses 
+            let speedRatio = (1/200)
+            if(canvasWidth > 600){
+                speedRatio = (35/1000)
+            }else{
+                console.log('it keeps on 1/200')
+            }
+            //evaluate if proportions do match and if there's such what is the proportion given on that model
+            let speedLimit = yPos*speedRatio
+            let speedMin = speedLimit*(1/4)
+            let speed = (Math.random()*(speedLimit - speedMin))+speedMin
+            //console.log(`speed limit: ${speedLimit}`)
+            let minimalSpeed = ((2*9.81)*(yPos-canvasHeight))/Math.pow(Math.sin(angle),2)
+            minimalSpeed = Math.sqrt(minimalSpeed)
+            //model is ok, as we are using ms and 120 fps we oughta normalise recommended speed
+            minimalSpeed *= (90/1000)
+            console.log(`minimal speed: ${minimalSpeed}`)
+            speed = minimalSpeed + (minimalSpeed * Math.random())
+            console.log(`best speed: ${speed}`)
+            return speed
+        }
+
+        function assignXPosition(canvasWidth, isNegativeSpace){
+            let xPos = 0
+            if(!isNegativeSpace){
+                //double canvas width as a way to expand init zone on x axis
+                xPos = Math.round(Math.random()*(canvasWidth*2))
+            }else{
+                xPos = -Math.round(Math.random()*(canvasWidth))
+            }
+            return xPos
+        }
+
+        function assignYPosition(canvasHeight){
+            let yPos = 0
+            //negative positions are not required here
+            //TODO instead should be accounted if this should change due to devices sizing
+            yPos = Math.round((Math.random()*(canvasHeight)) + (canvasHeight*1.2))
+            return yPos
+        }
+
+        function generateCircle(rightLimit, topLimit, minRadius, maxRadius, isNegativeSpace){
             if(rightLimit == 0 || topLimit == 0){
                 rightLimit = 3000
                 topLimit = 3000
             }
 
-            
-
-            //speed should be calculated as a relation of the sizing of area
-            //speedRatio
-            let speedRatio = (40/1000)
-            let speedLimit = Math.round(topLimit * speedRatio)
-            let speedMin = Math.round(speedLimit*(1/4))
-
-            console.log(`speed limit: ${speedLimit}`)
-
-            //sideoff x-axis
-            let averageBreakpoint = 1000
-            let sideoffRatio = Math.abs(averageBreakpoint/rightLimit) //lesser limit, greater ratio
-            if(sideoffRatio<1){sideoffRatio=1}
-            let sideoff = Math.round(sideoffRatio)*rightLimit
-            console.log(`sideoff: ${sideoff}, ratio: ${sideoffRatio}`)
-
             //TODO revisar generacion de circles
-            let yPos = Math.round((Math.random() * (topLimit*2*sideoffRatio)) + (topLimit*2*sideoffRatio))
-            let xPos = (Math.random() * (rightLimit + sideoff)) - rightLimit*(1/2)
+            let yPos = assignYPosition(topLimit)
+            let xPos = assignXPosition(rightLimit, isNegativeSpace)
 
             //angle logic s moved onto this place in order to calculate an early angle
 
             let earlyAngle = calculateExperimentalAngle3(rightLimit, topLimit, xPos, yPos)
             let radius = 10
-            let minSpeed = Math.sqrt((((yPos-topLimit)+radius)*(2*gravity))/(Math.pow(Math.sin(earlyAngle),2)))
-            console.log(`minSpeed: ${minSpeed}`)
-
+            //let minSpeed = 20//Math.sqrt((((yPos-topLimit)+radius)*(2*gravity))/(Math.pow(Math.sin(earlyAngle),2)))
+            //assignSpeedV2(yPos, earlyAngle)
 
             let circle = {
                 yPos: yPos,
@@ -260,8 +308,9 @@
                 angle: earlyAngle,
                 //angle: Math.random() * Math.PI,
                 spinAngle: 0,
-                spinStep: (Math.PI * 2) / (Math.random() * (720 - 360) + 360),
-                speed: Math.round((Math.random() * (speedLimit - speedMin)) + speedMin),
+                spinStep: (Math.PI * 2) / ((Math.random() * 360) + 360),
+                //speed: assignSpeed(rightLimit,topLimit),
+                speed: assignSpeedV2(yPos,earlyAngle),
                 radius: Math.round(Math.random() * (maxRadius - minRadius) + minRadius),
                 initialStamp: Date.now(),
                 hasAppeared: false,
@@ -315,7 +364,7 @@
                 //moving the cartesian field but we should keep guaranted going back
                 ctx.beginPath()
                 ctx.save()
-                ctx.fillStyle = 'rgba(255,120,120,1)'
+                ctx.fillStyle = 'rgba(10,128,64,0.9)'
                 ctx.translate(Math.round(circle.xPos), Math.round(circle.yPos))
                 
                 //now that plane is positioned where circle should be printed we oughto adjust angle uising another transformation
@@ -334,11 +383,13 @@
                 ctx.arc(0, 0, circle.radius,0,Math.PI*2,true)
                 ctx.fill()
                 //this should be used because arc moves the stroke initial place
+                /*
                 ctx.moveTo(0,0)
                 ctx.lineTo(0,circle.radius)
                 ctx.strokeStyle = 'rgb(0,0,0)'
                 ctx.lineWidth = 1
                 ctx.stroke()
+                */
 
 
                 //ctx.moveTo(circle.xPos, circle.yPos)
@@ -353,14 +404,6 @@
                 ctx.closePath()
                 ctx.restore()
             }
-        }
-
-        function generateColorValueRandom(){
-            return Math.round(Math.random() * 255)
-        }
-
-        function validatedissapearedCircles(canvasWidth, canvasHeight){
-
         }
 
         /**
