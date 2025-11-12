@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <!-- external links -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <!-- self-hosted links-->
+    <link rel="stylesheet" href="./main_styles.css">
+
+</head>
+<body>
+    <div class="topnav" id="myTopnav">
+        <a id="logo-container" href="#home" class="active">
+            <img src="./main_logo.png" alt="" srcset="">
+        </a>
+        <!-- <a href="#news">Acerca de mi</a>
+        <a href="#contact">Tecnologias</a>
+        <a href="#about">Proyectos</a> -->
+        <a href="#about">Resume clasico</a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+    <div id="canvasContainer" class="canvasContainer">
+        <canvas id="main_canvas" width="2000px" height="600px">
+
+        </canvas>
+
+    </div>
+    <div id="cards-container">
+        <div class="card">
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis necessitatibus non labore cupiditate nemo? Similique animi et harum! A totam blanditiis optio officia non molestias corrupti! Ut tempore iusto cumque!</p>
+        </div>
+        <div class="card">
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis necessitatibus non labore cupiditate nemo? Similique animi et harum! A totam blanditiis optio officia non molestias corrupti! Ut tempore iusto cumque!</p>
+        </div>
+        <div class="card">
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis necessitatibus non labore cupiditate nemo? Similique animi et harum! A totam blanditiis optio officia non molestias corrupti! Ut tempore iusto cumque!</p>
+        </div>
+        <div class="card">
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis necessitatibus non labore cupiditate nemo? Similique animi et harum! A totam blanditiis optio officia non molestias corrupti! Ut tempore iusto cumque!</p>
+        </div>
+        <div class="card">
+            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis necessitatibus non labore cupiditate nemo? Similique animi et harum! A totam blanditiis optio officia non molestias corrupti! Ut tempore iusto cumque!</p>
+        </div>
+    </div>
+
+    <script src="./main_script.js"></script>
+    <script>
+
+        //global variables
+        var dprGlobal = 1, canvasWidth = 0, canvasHeight = 0
+        let minradius = 0, maxRadius = 0, maxCirclesQuantity = 200
+        //canvas
+        let canvas = document.getElementById('main_canvas')
+        let ctx = canvas.getContext('2d')
+        var lastTimeFrame = Date.now()
+        //configuration
+        const fps = 60
+        const msBetweenFrame = Math.round(1000/fps)
+        console.log('ms limit ' + msBetweenFrame)
+        
+
+        //this whole function has to be reviewed and rewritten if necessary for performance issues
+        //verify strategy used for getting window sizing
+        function adjustCanvasToWindow(canvas,ctx){
+            const dpr = window.devicePixelRatio || 1
+            let rect = canvas.getBoundingClientRect()
+            let calculatedWidth = Math.round(rect.width * dpr)
+            let calculatedHeight = Math.round(rect.height * dpr)
+            console.log(`${canvasWidth}, ${rect.width*dpr}`)
+            if(dprGlobal != dpr || canvas.width != calculatedWidth || canvas.height != calculatedHeight){
+                dprGlobal = dpr
+                //these dimensions are canvas drawing area related, not DOM element dimensions
+                canvas.width = calculatedWidth
+                canvas.height = calculatedHeight
+                ctx.scale(dpr,dpr)
+                //adjust globals for convenience
+                canvasWidth = rect.width
+                canvasHeight = rect.height
+                maxRadius = Math.round((canvasHeight)*(1/7))
+                minradius = Math.round(maxRadius/5)
+            }
+        }
+
+        function clearCanvas(){
+            ctx.fillStyle = 'rgba(255,255,255,0.4)'
+            ctx.beginPath()
+            ctx.rect(0,0,canvasWidth, canvasHeight)
+            ctx.fill()
+            ctx.closePath()
+        }
+
+        function drawCircleImage(img, x, y, radius){
+            ctx.beginPath()
+            ctx.arc(x,y,radius,0,2*Math.PI,true)
+            ctx.clip()
+            ctx.drawImage(img,x-radius,y-radius,radius*2,radius*2)
+            ctx.closePath()
+        }
+
+
+        function animate(){
+            let now = Date.now()
+            let deltaTime = now - lastTimeFrame
+            
+            if(deltaTime > msBetweenFrame){
+                adjustCanvasToWindow(canvas,ctx)
+                drawCircleImage(img,100,100,50)
+            }
+            requestAnimationFrame(animate)
+            
+        }
+
+        const img = new Image()
+        img.onload = () =>{
+            animate();
+        }
+        img.src = "main_logo.png"
+
+        
+    </script>
+</body>
+</html>
