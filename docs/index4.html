@@ -65,7 +65,8 @@
         const fps = 60
         const msBetweenFrame = Math.round(1000/fps)
         console.log('ms limit ' + msBetweenFrame)
-        let circles = generateCircles(maxCirclesQuantity,canvasWidth,canvasHeight, minradius, maxRadius, dprGlobal)
+        let circles
+        let images
         
 
         //this whole function has to be reviewed and rewritten if necessary for performance issues
@@ -127,6 +128,7 @@
             //angle logic s moved onto this place in order to calculate an early angle
             let earlyAngle = calculateExperimentalAngle3(rightLimit, topLimit, xPos, yPos)
             let radius = 10
+            const imgIndex = Math.trunc(Math.random()*(images.length-1))
             //let minSpeed = 20//Math.sqrt((((yPos-topLimit)+radius)*(2*gravity))/(Math.pow(Math.sin(earlyAngle),2)))
             //assignSpeedV2(yPos, earlyAngle)
 
@@ -146,6 +148,7 @@
                 initialStamp: Date.now(),
                 hasAppeared: false,
                 isVisible: false,
+                image: images[imgIndex],
                 validateAppeareance(){
                     if(
                         !this.hasAppeared &&
@@ -285,7 +288,7 @@
                 //ctx.fill()
                 //here image is used
                 ctx.clip()
-                ctx.drawImage(img,0-circle.radius,0-circle.radius,circle.radius*2,circle.radius*2)
+                ctx.drawImage(circle.image,0-circle.radius,0-circle.radius,circle.radius*2,circle.radius*2)
 
                 ctx.closePath()
                 ctx.restore()
@@ -320,11 +323,72 @@
             requestAnimationFrame(animate)
         }
 
-        const img = new Image()
-        img.onload = () =>{
-            animate();
+        async function loadImages(sources) {
+            const promises = sources.map(src => {
+                return new Promise((resolve, reject) => {
+                    const img = new Image();
+                    img.src = src;
+                    img.onload = () => resolve(img);
+                    img.onerror = () => reject(new Error(`Failed to load: ${src}`));
+                });
+            });
+            //this do a fast-fail if any of the promises is rejected
+            return Promise.all(promises);
         }
-        img.src = "main_logo.png"
+
+        async function initCanvas(animateFunction, sources) {
+            //added globally for future use
+            try{
+                images = await loadImages(sources)
+                console.log("images length " + images.length)
+            }catch(err){
+                console.error("error loading sources ", err)
+            }
+            
+            circles = generateCircles(maxCirclesQuantity,canvasWidth,canvasHeight, minradius, maxRadius, dprGlobal)
+            animateFunction()
+        }
+
+        const sources = [
+                "portfolio_img/Java-logo.jpg",
+                "portfolio_img/docker.png",
+                "portfolio_img/idea.png",
+                "portfolio_img/jquery.png",
+                "portfolio_img/mariadb.png",
+                "portfolio_img/node.png",
+                "portfolio_img/redis.png",
+                "portfolio_img/spring_boot.png",
+                "portfolio_img/android.jpg",
+                "portfolio_img/express.png",
+                "portfolio_img/java_2.png",
+                "portfolio_img/js.png",
+                "portfolio_img/mongodb.jpg",
+                "portfolio_img/php.png",
+                "portfolio_img/rust.png",
+                "portfolio_img/struts.jpeg",
+                "portfolio_img/angular.png",
+                "portfolio_img/java_logo2.png",
+                "portfolio_img/jenkins.jpg",
+                "portfolio_img/kotlin.jpeg",
+                "portfolio_img/mssql.png",
+                "portfolio_img/php_pdo.png",
+                "portfolio_img/shell.png",
+                "portfolio_img/vscode.png",
+                "portfolio_img/css3.jpg",
+                "portfolio_img/html5.png",
+                "portfolio_img/jetpack_compose.png",
+                "portfolio_img/linux.jpg",
+                "portfolio_img/mysql.png",
+                "portfolio_img/php_slim.jpg",
+                "portfolio_img/spring.png",
+                "portfolio_img/webpack.jpg"
+            ];
+
+        initCanvas(()=>{
+            console.log('init process completed')
+            animate();
+        },sources)
+        
     </script>
 </body>
 </html>
