@@ -17,18 +17,18 @@
 <body>
     <div class="topnav" id="myTopnav">
         <a id="logo-container" href="#home" class="active">
-            <img src="./main_logo.png" alt="" srcset="">
+            <img src="./VICG.png" alt="" srcset="">
         </a>
-        <!-- <a href="#news">Acerca de mi</a>
+        <a href="#news">Acerca de mi</a>
         <a href="#contact">Tecnologias</a>
-        <a href="#about">Proyectos</a> -->
+        <a href="#about">Proyectos</a>
         <a href="#about">Resume clasico</a>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i>
         </a>
     </div>
     <div id="canvasContainer" class="canvasContainer">
-        <canvas id="main_canvas" width="2000px" height="600px">
+        <canvas id="espacioUtil" width="1000px" height="600px">
 
         </canvas>
 
@@ -53,45 +53,30 @@
 
     <script src="./main_script.js"></script>
     <script>
-
-        const lastTime = 0
-        let initTime = 0
-        const globalTime = 0
-        const gravity = 9.81
-
-        let canvasWidth = 0
-        let canvasHeight = 0
-        let maxCirclesQuantity = 200
-        let minradius = 0, maxRadius = 0
-
-        let canvas = document.getElementById('main_canvas')
+        let canvas = document.getElementById("espacioUtil")
         let ctx = canvas.getContext('2d')
-        let dprGlobal = 1
 
-        function adjustCanvasToWindow(canvas,ctx){
-            //prototype - adjust only scale and dpr
-            const dpr = window.devicePixelRatio || 1
-            dprGlobal = dpr
-            //these dimensions are canvas drawing area related, not DOM element dimensions
-            canvas.width = window.innerWidth
-            canvas.height = window.innerHeight
-            //resize
-            //let ctx = canvas.getContext('2d')
-            ctx.scale(dpr,dpr)
-            console.log(`scale adjusted to ${dpr}`)
+        ctx.beginPath();
+        ctx.arc(0,400,40,0,Math.PI*2,true)
+        ctx.fillStyle = 'rgba(100,40,255,1)'
+        ctx.fill()
 
-            //adjust globals
-            canvasWidth = window.innerWidth
-            canvasHeight = window.innerHeight
-            //we should use both dimensions to get a value which we can get a proportion for circles
-            maxRadius = Math.round(((canvasWidth + canvasHeight)/2)*(1/20))
-            minradius = Math.round(((canvasWidth + canvasHeight)/2)*(1/50))
-        }
-        adjustCanvasToWindow(canvas, ctx)
-        let circles = generateCircles(maxCirclesQuantity,canvasWidth,canvasHeight, minradius, maxRadius, dprGlobal)
+        let lastTime = 0
+        let lastPos = 200
+        let initTime = 0
+        let xPosInit = 400
+        let yPosInit = 400
+        let initialSpeed= 900
+        let angle = (11/16)*Math.PI
+        let radius = 40
+        let globalTime = 0
+        let gravity = 9.81
+        let visible = false
+
+        let canvasWidth = 1000
+        let canvasHeight = 600
 
         function animate(){
-            adjustCanvasToWindow(canvas, ctx)
             let now = Date.now()
             if(initTime == 0){
                 initTime = Date.now()
@@ -99,35 +84,80 @@
             //se usan milisegundos
             deltaTime = now - lastTime
             elapsedTime = now - initTime
-
-            //frame rate at 120 fps
+            globalTime+= elapsedTime
+            //console.log('global time: ' + globalTime)
+            
+            //console.log('elapsed time: ' + elapsedTime)
             if(deltaTime >= Math.ceil(1000/120)){
-                //bluriness  can be changed through alpha
-                ctx.beginPath()
-                ctx.rect(0,0,canvasWidth,canvasHeight)
-                ctx.fillStyle = 'rgba(128,128,128,0.2)'
-                ctx.fill()
-                ctx.closePath()
-                circles.forEach( (circle, index) => {
-                    //this evaluation allows to manipulate circles list
-                    //TODO verify if validation inside drawCircle is still required
-                    if((!circle.isVisible && !circle.hasAppeared && circle.yPos <= circle.yPosInitial) || (circle.isVisible)){
-                    //if(!(circle.hasAppeared && circle.isVisible)){
-                        circle.xPos = calculateXPosition(circle)
-                        circle.yPos = calculateYPosition(circle)
-                        drawCircle(ctx, circle)
-                    }else{
-                        circles.splice(index,1)
-                        //console.log(`elements inside circles list: ${circles.length}`)
-                        //circles.push(generateCircle(canvasWidth,canvasHeight,20,90))
-                    }
-                })
-            }
-            //circles array should be populated only when it's empty
+                
+                console.log('elapsed time: ' + elapsedTime)
+                //let xPos = xPosInit + (initialSpeed * Math.cos(angle)*(elapsedTime/1000))
+                //let yPos = yPosInit - (initialSpeed * Math.sin(angle)*(elapsedTime/1000)-(0.5*9.8*(Math.pow((elapsedTime/1000 ),2))))
+                let xPos = calculateXPosition(initialSpeed, angle, elapsedTime)
+                let yPos = calculateYPosition(initialSpeed,angle,elapsedTime)
+                let desplazamiento = (initialSpeed * Math.sin(angle)*(elapsedTime/1000)-(0.5*9.8*(Math.pow((elapsedTime/1000 ),2))))
+                if(visible == false){
+                    visible = isVisible(xPos,yPos)
+                }
+                console.log('desplazamiento: ' + desplazamiento)
+                console.log('componente sin gravedad: ' + (initialSpeed * Math.sin(angle)*(elapsedTime/1000)))
+                console.log('initial speed: ' + initialSpeed)
+                console.log('xPos: ' + xPos)
+                console.log('yPos: ' + yPos)
+                if(!identifyCollision(xPos,yPos,radius)){
+                    console.log("animation triggered")
+                    //se dibuja la nueva posicion
+                    ctx.beginPath()
+                    ctx.rect(0,0,canvasWidth,canvasHeight)
+                    ctx.fillStyle = 'rgba(255,255,255,0.2)'
+                    ctx.fill()
+                    ctx.closePath()
+                    ctx.beginPath();
+                    ctx.arc(xPos,yPos,radius,0,Math.PI*2,true)
+                    ctx.fillStyle = 'rgba(100,40,255,1)'
+                    ctx.fill()
+                    lastPos+=80
+                    lastTime = now
+                }else{
+                    if(visible){
+                        console.log('colapso')
+                        //componentes antes de la colision con superficie de masa infinita
+                        //se omite coeficiente de restitución al asumir una colision completamente elastica
+                        //la componente en x se mantiene igual
+                        let vx = initialSpeed * Math.cos(angle)
+                        //la componente en y se ve afectada por el tiempo y la gravedad
+                        let vy = (initialSpeed * Math.sin(angle)) - (gravity*(elapsedTime/1000))
+                        //calculo de angulo
+                        //let newAngle = 0
+                        //let newAngle =  angle + (Math.PI/2)
+                        //newAngle = newAngle >= Math.PI*2? Math.PI*2 - newAngle: newAngle
+                        //console.log('new angle is: ' + newAngle)
+                        
+                        if((xPos == 0 || xPos >= canvasWidth) && yPos > 0){
+                            //newAngle = Math.atan(vy/-vx)
+                            newAngle = Math.atan(vy/(vx*-1))
+                            console-log('previous angle: ' + angle)
+                            console.log('new angle: ' + newAngle)
+                        }else{
+                            newAngle = Math.atan((vy*-1)/vx)
+                        }
+                        
+                        //newAngle = newAngle<0 ? ((Math.PI*2) + newAngle): newAngle
+                        //calculamos la nueva velocidad
+                        let newSpeed = Math.sqrt(Math.pow(vx,2) + Math.pow(vy,2))
+                        console.log('new speed: ' + newSpeed)
 
-            if(circles.length < Math.round(maxCirclesQuantity/10)){
-                console.log(`minradius: ${minradius}, maxRadius: ${maxRadius}`)
-                circles.push(...generateCircles(Math.round(Math.random()*maxCirclesQuantity),canvasWidth,canvasHeight, minradius, maxRadius, dprGlobal))
+                        //ajustamos valores iniciales
+                        xPosInit = xPos
+                        yPosInit = yPos
+                        angle = newAngle
+                        initialSpeed = newSpeed
+                        initTime = Date.now()
+                    }else{
+                        console.log('no deberia de estar aqui')
+                    }
+
+                }
             }
             requestAnimationFrame(animate)
         }
@@ -172,18 +202,38 @@
             }
         }
 
-        function calculateYPosition(circle){
-            let elapsedTime = Date.now() - circle.initialStamp
-            let yPos = circle.yPos - (circle.speed * Math.sin(circle.angle)*(elapsedTime/1000)-(0.5*9.8*(Math.pow((elapsedTime/1000 ),2))))
-            if(circle.marked){
-                console.log(`new Y position: ${yPos}`)
+        function calculateYPosition(speed, angle, time){
+            let yPos = yPosInit - (initialSpeed * Math.sin(angle)*(elapsedTime/1000)-(0.5*9.8*(Math.pow((elapsedTime/1000 ),2))))
+            let refVal = Math.abs(canvasWidth/canvasWidth)
+            let yPosTan2 =  Math.atan2((initialSpeed * Math.sin(angle)*(elapsedTime/1000)-(0.5*9.8*(Math.pow((elapsedTime/1000 ),2)))))
+            
+            //validate inminent collision
+            //la trayectoria es ascendente
+            //TODO verificar la igualdad con PI
+            if(angle<Math.PI){
+                if(yPos > 0 && yPos-radius < 0){
+                    yPos = radius
+                }
+            }else{
+                //trayectoria descendente
+                if(yPos < canvasHeight && yPos+radius > canvasHeight){
+                    yPos = canvasHeight-radius
+                }
             }
             return yPos
         }
 
-        function calculateXPosition(circle){
-            let elapsedTime = Date.now() - circle.initialStamp
-            let xPos = circle.xPos + (circle.speed * Math.cos(circle.angle)*(elapsedTime/1000))
+        function calculateXPosition(speed, angle, time){
+            let xPos = xPosInit + (initialSpeed * Math.cos(angle)*(time/1000))
+
+            //el espectro de posibilidades esta denotada por el limite entre pi y 2 pi
+            if(xPos > 0 && xPos - radius < 0){
+                xPos = radius
+            }else if(xPos + radius > canvasWidth && canvasWidth - xPos >= 0){
+                //trayectoria en el limite superior
+                xPos = canvasWidth - radius
+                console.log('it got adjusted')
+            }
             return xPos
         }
 
@@ -199,287 +249,8 @@
         function getArcTan(x,y,vx,vy){
             //this function deals with y axis inverted on canvas, with no assumptions of algebraic translations
 
-            let compTan = Math.round(Math.tan(vy/vx))
-            return compTan
+            let 
         }
-
-        function generateCircles(quantityMaxLimit=0, canvasWidth, canvasHeight, minRadius, maxRadius,dpr){
-            let circles = []
-            if(quantityMaxLimit == 0){
-                quantityMaxLimit = 10
-            }
-            let realQuantity = Math.ceil(Math.random()* quantityMaxLimit + 1)
-            console.log('real quantity: ' + realQuantity)
-            for(let i = 0; i< realQuantity; i++){
-                circles.push(generateCircle(canvasWidth, canvasHeight, minRadius/dpr, maxRadius/dpr))
-            }
-            return circles
-        }
-
-        function generateCircle(rightLimit, topLimit, minRadius, maxRadius){
-            if(rightLimit == 0 || topLimit == 0){
-                rightLimit = 3000
-                topLimit = 3000
-            }
-
-            
-
-            //speed should be calculated as a relation of the sizing of area
-            //speedRatio
-            let speedRatio = (40/1000)
-            let speedLimit = Math.round(topLimit * speedRatio)
-            let speedMin = Math.round(speedLimit*(1/4))
-
-            console.log(`speed limit: ${speedLimit}`)
-
-            //sideoff x-axis
-            let averageBreakpoint = 1000
-            let sideoffRatio = Math.abs(averageBreakpoint/rightLimit) //lesser limit, greater ratio
-            if(sideoffRatio<1){sideoffRatio=1}
-            let sideoff = Math.round(sideoffRatio)*rightLimit
-            console.log(`sideoff: ${sideoff}, ratio: ${sideoffRatio}`)
-
-            //TODO revisar generacion de circles
-            let yPos = Math.round((Math.random() * (topLimit*2*sideoffRatio)) + (topLimit*2*sideoffRatio))
-            let xPos = (Math.random() * (rightLimit + sideoff)) - rightLimit*(1/2)
-
-            //angle logic s moved onto this place in order to calculate an early angle
-
-            let earlyAngle = calculateExperimentalAngle3(rightLimit, topLimit, xPos, yPos)
-            let radius = 10
-            let minSpeed = Math.sqrt((((yPos-topLimit)+radius)*(2*gravity))/(Math.pow(Math.sin(earlyAngle),2)))
-            console.log(`minSpeed: ${minSpeed}`)
-
-
-            let circle = {
-                yPos: yPos,
-                //xPos: Math.round (Math.random() * (rightLimit*3) + (-1 * Math.random()*rightLimit)),
-                xPos: xPos,
-                //xPos should be wider when visible are is narrow
-                yPosInitial: yPos,
-                angle: earlyAngle,
-                //angle: Math.random() * Math.PI,
-                spinAngle: 0,
-                spinStep: (Math.PI * 2) / (Math.random() * (720 - 360) + 360),
-                speed: Math.round((Math.random() * (speedLimit - speedMin)) + speedMin),
-                radius: Math.round(Math.random() * (maxRadius - minRadius) + minRadius),
-                initialStamp: Date.now(),
-                hasAppeared: false,
-                isVisible: false,
-                validateAppeareance(){
-                    if(
-                        !this.hasAppeared &&
-                        this.xPos > 0 &&
-                        this.xPos < rightLimit &&
-                        this.yPos > 0 &&
-                        this.yPos < topLimit
-                    ){
-                        this.isVisible = true
-                        this.hasAppeared = true
-                    }
-                },
-                //TODO
-                validateVisbility(){
-                    if( this.hasAppeared && 
-                        (this.xPos < (-1 * this.radius) ||
-                        this.xPos > (rightLimit + this.radius) ||
-                        this.yPos > (topLimit + this.radius) ||
-                        this.yPos < (-1 * this.radius))
-                    ){
-                        this.isVisible = false
-
-                    }
-                },
-
-                validateDrawability(){
-                    this.validateAppeareance()
-                    this.validateVisbility()
-                    let result = false
-                    if(this.isVisible && this.hasAppeared){
-                        result = true
-                    }
-                    return result
-                },
-            }
-            //circle.angle = calculateAngle(canvasWidth, canvasHeight, circle.xPos, circle.yPos)
-            //circle.angle = calculateExperimentalAngle2(canvasWidth, canvasHeight, circle.xPos, circle.yPos)
-            //circle.angle = calculateExperimentalAngle3(canvasWidth, canvasHeight, circle.xPos, circle.yPos)
-            return circle
-        }
-
-        function drawCircle(ctx, circle){
-            if(circle.validateDrawability()){
-
-                //TODO spin prototype
-
-                //moving the cartesian field but we should keep guaranted going back
-                ctx.beginPath()
-                ctx.save()
-                ctx.fillStyle = 'rgba(255,120,120,1)'
-                ctx.translate(Math.round(circle.xPos), Math.round(circle.yPos))
-                
-                //now that plane is positioned where circle should be printed we oughto adjust angle uising another transformation
-                //w refers to angular speed
-                //s refers to spin coeficient
-                let s = 2
-                let w = (s*circle.speed)/circle.radius
-                //w is adjusted to match fps canvas refresh rate
-                if(circle.angle > (Math.PI/2)){
-                    w = -w
-                }
-                circle.spinAngle = circle.spinAngle += (w/(1000/120)) //Math.PI / 15
-                ctx.rotate(circle.spinAngle)
-                
-                //at this place postiton and angle are adjusted so circle should be drawn
-                ctx.arc(0, 0, circle.radius,0,Math.PI*2,true)
-                ctx.fill()
-                //this should be used because arc moves the stroke initial place
-                ctx.moveTo(0,0)
-                ctx.lineTo(0,circle.radius)
-                ctx.strokeStyle = 'rgb(0,0,0)'
-                ctx.lineWidth = 1
-                ctx.stroke()
-
-
-                //ctx.moveTo(circle.xPos, circle.yPos)
-                //spin secuence
-                //circle.spinAngle += circle.spinStep
-                //ctx.translate(circle.xPos, circle.yPos)
-                //ctx.rotate(circle.spinAngle)
-                //ctx.lineTo(0, (-1 * circle.radius))
-                //ctx.stroke()
-                //this line ensures canvas default origin is 0,0
-                //ctx.translate(0,0)
-                ctx.closePath()
-                ctx.restore()
-            }
-        }
-
-        function generateColorValueRandom(){
-            return Math.round(Math.random() * 255)
-        }
-
-        function validatedissapearedCircles(canvasWidth, canvasHeight){
-
-        }
-
-        /**
-         * 
-         * canvasWidth is needed for deltaX
-         * canvasHeight is needed for deltaY
-         * xPos is needed for angles
-         * yPos is needed for complementary angle
-         **/
-
-        function calculateAngle(canvasWidth, canvasHeight, xPos, yPos){
-            let angle = 0
-            let coeficientePosicion = xPos/canvasWidth
-
-            let delthaX = xPos
-            //should be avaluated as a abs value
-            let delthaXPrime = canvasWidth - xPos
-            //this axiom is always true as field of generation is always greater than canvasHeight
-            let delthaY = yPos - canvasHeight
-
-            let angleThreshold = Math.PI - (Math.atan(delthaY/delthaX) + Math.atan(delthaY/delthaXPrime))
-            console.log(`angle threshold: ${angleThreshold}`)
-            
-            if(xPos > (canvasWidth/2)){
-                angle = (Math.random() * Math.PI) + Math.PI/2
-            }else{
-                angle = (Math.random() * Math.PI/2)
-            }
-
-            return angle
-        }
-
-        //developed by Cha0t1cR1zh0m4
-        function calculateExperimentalAngle(canvasWidth, canvasHeight, xPos, yPos){
-            let deltaX = xPos
-            let deltaY = yPos
-            let deltaXRD = deltaX - canvasWidth
-            //this is valid always true due to initial zone is always greater than canvesheight
-            let deltaYRD = deltaY - canvasHeight
-            //tetha is the angle using RD
-            //sides are inverted in order to get complementary angle for theta
-            let theta = Math.atan(deltaYRD/deltaXRD)
-            //prime theta is the angle determined by RI
-            //therefore we use deltaX intead of deltaXRD
-            let thetaPrime = Math.atan(deltaYRD/deltaX)
-            let anglethreshold = Math.PI - theta - thetaPrime
-            let minAngle = Math.PI - theta
-            let maxAngle = Math.PI - thetaPrime
-
-            //calculate max and min angles
-            //each case represent a different behaviour on complementary angles along x axis
-            if(xPos > canvasWidth){
-                minAngle = Math.PI - theta
-                maxAngle = Math.PI - thetaPrime
-            }else if(xPos > 0){
-                minAngle = theta
-                maxAngle = Math.PI - thetaPrime
-            }else{
-                minAngle = theta
-                maxAngle = thetaPrime
-            }
-
-            let angle = Math.random() * (maxAngle - (Math.PI/32) - minAngle) + minAngle
-            console.log(`deltaXRD = ${deltaXRD}, deltaYRD = ${deltaYRD}`)
-            console.log(`theta = ${theta}, thetaPrime = ${thetaPrime}, angle threshold = ${anglethreshold}`)
-            console.log(`minAngle = ${minAngle}, maxAngle = ${maxAngle}, angle = ${angle}`)
-            return angle
-        }
-
-        //developed by Cha0t1cR1zh0m4
-        function calculateExperimentalAngle2(canvasWidth, canvasHeight, xPos, yPos){
-            let deltaXRD = xPos - canvasWidth
-            //this is valid always true due to initial zone is always greater than canvesheight
-            let deltaYRD = yPos - canvasHeight
-            let theta = Math.atan(yPos/deltaXRD)
-            let thetaPrime = Math.atan(yPos/xPos)
-            
-
-            //when a value of theta is negative, it means the point is lower than right dimension
-            //TODO evaluation on the value on angles less than zero should be replaced using a model
-            let minAngle = theta > 0?Math.PI - theta:Math.abs(theta)
-            let maxAngle = thetaPrime > 0?Math.PI - thetaPrime:Math.abs(thetaPrime)
-            let angle = Math.random() * (maxAngle -(Math.PI/64)- minAngle) + (minAngle + (Math.PI/64))
-            console.log(`minAngle = ${minAngle}, maxAngle = ${maxAngle}, angle = ${angle}`)
-            return angle
-        }
-
-        //developed by Cha0t1cR1zh0m4
-        function calculateExperimentalAngle3(canvasWidth, canvasHeight, xPos, yPos){
-            let deltaXRD = xPos - canvasWidth
-            //this is valid therefore always true due to initial zone is always greater than canvasheight
-            let deltaYRD = yPos - canvasHeight
-            let theta = Math.atan(yPos/deltaXRD)
-            let thetaPrime = Math.atan(yPos/xPos)
-            
-            //cTheta turns into zero only when theta is less than zero
-            //TODO there's a possible way to change absolute function controlling the operation that do affects theta or thetaPrime
-            let minAngle = Math.abs((1/2*((theta/Math.abs(theta))+1)* Math.PI) - theta)
-            let maxAngle = Math.abs((1/2*((thetaPrime/Math.abs(thetaPrime))+1)* Math.PI) - thetaPrime)
-            let angle = Math.random() * (maxAngle -(Math.PI/64)- minAngle) + (minAngle + (Math.PI/64))
-            return angle
-        }
-
-        //it draws a clipped image instead of 2d form
-        /*
-        function drawImage(canvas, ctx, circle){
-            let imageName = 'main_logo.png'
-            ctx.beginPath()
-            ctx.save()
-            //here we should move onto the plane and prepare position and angle
-
-            const img = new Image()
-            img.src = imageName
-            let xPosAdjusted = circle.xPos - (img.width/2)
-            let yPosAdjusted = circle.yPos - (img.height/2)
-            ctx.drawImage(img,xPosAdjusted, yPosAdjusted, circle.radius*2, circle.radius*2)
-            ctx.restore()
-            ctx.closePath()
-        }*/
         
         animate();
     </script>
