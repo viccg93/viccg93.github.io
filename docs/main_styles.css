@@ -198,10 +198,9 @@ Add an active class to highlight the current page
   height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  align-items: start;
+  justify-content: center;
+  align-items: center;
   pointer-events: none;
-  margin-left: 5vw;
 }
 
 /* efecto fade-in con blur */
@@ -229,7 +228,7 @@ Add an active class to highlight the current page
 /* estilo hacker oscuro */
 .overlay h1 {
   color: #000000;
-  font-size: 4rem;
+  font-size: 9vw;
   text-shadow:
     0 0 10px rgba(238, 241, 240, 0.8),
     0 0 20px rgba(15, 15, 15, 0.4);
@@ -319,9 +318,23 @@ Add an active class to highlight the current page
 
 .subhero {
   margin-top: 10vh;
-  font-size: 2.5rem;
+  font-size: 5vw;
   font-weight: 100;
-  max-width: 20vw;
+  max-width: 80vw;
+  color: #6e747f;
+  letter-spacing: 1cap;
+}
+
+@media (min-width: 768px){
+  .subhero{
+    font-size: 10vw;
+  }
+}
+
+@media (max-width: 768px){
+  .subhero{
+    font-size: 4vw;
+  }
 }
 
 
@@ -329,9 +342,22 @@ Add an active class to highlight the current page
 .fredoka-subhero {
   font-family: "Fredoka", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 700;
+  font-weight: 400;
   font-style: normal;
   font-variation-settings:
     "wdth" 40;
-  font-size: 1.5em;
+  font-size: 2vw;
+}
+
+@media (min-width: 768px){
+  .subhero{
+    font-size: 2vw;
+  }
+}
+
+@media (max-width: 768px){
+  .subhero{
+    font-size: 4vw;
+    font-weight: 400;
+  }
 }
