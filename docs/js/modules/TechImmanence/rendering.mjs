@@ -35,8 +35,13 @@ function adjustCanvasToWindow(canvas,ctx){
         //adjust globals for convenience
         canvasWidth = rect.width
         canvasHeight = rect.height
-        maxRadius = Math.round((canvasHeight)*(1/7))
-        minRadius = Math.round(maxRadius/5)
+        //maxRadius = Math.round((canvasHeight)*(1/7))
+        //minRadius = Math.round(maxRadius/5)
+
+        let aspectRelation = canvasWidth/canvasHeight
+
+        maxRadius = Math.round(aspectRelation*(((canvasWidth+canvasHeight)/2)*(20/canvasWidth)))
+        minRadius = Math.round(canvasWidth*0.005)
     }
 }
 function clearCanvas(ctx){
@@ -48,7 +53,7 @@ function clearCanvas(ctx){
 }
 
 function drawCircle(ctx, circle){
-    const frameWindow = 1000/120
+    const frameWindow = 1000/400
     if(circle.validateDrawability()){
         //translations and rotations on the cartesian field are made but original state is guaranteed post-process
         ctx.beginPath()

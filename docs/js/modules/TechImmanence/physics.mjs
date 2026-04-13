@@ -1,7 +1,7 @@
  //round() operations on pixel positions are necessary due canvas pixels are integers, not using it would mean extra overload
 const gravity = 9.8
 //this constant controls how high speed can turn, when higher values are used speeds tend to be stable and slow
-const epsilon = 0.9
+const epsilon = 0.5
 //this helps to control how chaotic single box muller can turn when generating noise
 const sigma = 0.3
 //developed by Cha0t1cR1zh0m4
