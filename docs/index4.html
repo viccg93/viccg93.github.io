@@ -46,10 +46,10 @@
     <div id="ribbonDetail" class="flex-container">
         <section id="detail-section">
             <h2 class="lucid-text lucid-heading">
-                [Acerca de mi]
+                [Más allá de la sintaxis]
             </h2>
             <p class="lucid-text lucid-detail">
-                soy un programador de Java con experiencia en desarrollo web
+                Utilizo las herramientas para crear soluciones y el pensamiento critico para evaluar la viabilidad y eficiencia, he trabajado en distintas empresas con roles como Desarrollador redwood, control-M, Devops, Programador analista y programador web.
             </p>
         </section>
         <section id="medal-container">
@@ -67,11 +67,15 @@
             </div>
         </section>
     </div>
-    <!--
-    <div id="lineContainer" class="line-container">
-        <canvas id="lineCanvas" width="2000px" height="600px"></canvas>d
+
+
+    <div id="backgroundContainer" class="line-container">
+        <canvas id="canvasBg0" width="2000px" height="600px"></canvas>d
     </div>
-    -->
+
+
+
+
     <div class="section-container">
         <section class="reveal elegant-section">
             <h2>Projects</h2>
@@ -85,7 +89,7 @@
     </section>
 
     <div id="detailContainer" class="sub_container">
-        <canvas id="bgCanvas" class="bg_canvas"></canvas>
+        <canvas id="canvasBg0" class="bg_canvas"></canvas>
     </div>
 
 
@@ -158,6 +162,25 @@
                 "portfolio_img/webpack.jpg"
             ];
         initCanvas(900, sources, ()=>{console.log('initialisation completed')})
+    </script>
+
+    <script type="module">
+        import {initBackground} from './js/modules/LiveBackground/rendering.mjs'
+        const backgroundImages = ["portfolio_img/everest_bg.jpg"]
+            
+        let promises = backgroundImages.map(src => {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.src = src;
+                img.onload = () => resolve(img);
+                img.onerror = () => reject(new Error(`Failed to load: ${src}`));
+            })
+        })
+        Promise.all(promises).then((images)=>{
+            initBackground(images[0], "canvasBg0")
+        })
+        
+        //alert("image loaded for background")
     </script>
 </body>
 </html>

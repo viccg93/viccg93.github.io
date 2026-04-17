@@ -384,9 +384,9 @@ Add an active class to highlight the current page
   height: 100vh;
 }
 
-#lineCanvas {
+#canvasBg0 {
   width: 100%;
-  height: 100%  ;
+  height: 100%;
 }
 
 .flex-container{
