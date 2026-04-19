@@ -69,8 +69,11 @@
     </div>
 
 
-    <div id="backgroundContainer" class="line-container">
-        <canvas id="canvasBg0" width="2000px" height="600px"></canvas>d
+    <div id="backgroundContainer" class="section-container">
+        <canvas id="canvasBg0" width="2000px" height="600px"></canvas>
+        <div class="description-section">
+            <p>The rover</p>   
+        </div>
     </div>
 
 
@@ -165,8 +168,8 @@
     </script>
 
     <script type="module">
-        import {initBackground} from './js/modules/LiveBackground/rendering.mjs'
-        const backgroundImages = ["portfolio_img/everest_bg.jpg"]
+        import {initBackground, animateBackground} from './js/modules/LiveBackground/rendering.mjs'
+        const backgroundImages = ["portfolio_img/gentera_bg.jpg"]
             
         let promises = backgroundImages.map(src => {
             return new Promise((resolve, reject) => {
@@ -177,7 +180,8 @@
             })
         })
         Promise.all(promises).then((images)=>{
-            initBackground(images[0], "canvasBg0")
+            let background = initBackground(images[0], "canvasBg0")
+            animateBackground(background, 100)
         })
         
         //alert("image loaded for background")
