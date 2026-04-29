@@ -37,11 +37,20 @@ function adjustCanvasToWindow(canvas,ctx){
         canvasHeight = rect.height
         //maxRadius = Math.round((canvasHeight)*(1/7))
         //minRadius = Math.round(maxRadius/5)
+        if(canvasWidth>canvasHeight){
+            minRadius = Math.round(canvasWidth/80)
+        }else{
+            minRadius = Math.round(canvasHeight/30)
+        }
 
+        maxRadius = Math.round(minRadius * 3)
+
+        /*
         let aspectRelation = canvasWidth/canvasHeight
 
         maxRadius = Math.round(aspectRelation*(((canvasWidth+canvasHeight)/2)*(20/canvasWidth)))
         minRadius = Math.round(canvasWidth*0.005)
+        */
     }
 }
 function clearCanvas(ctx){

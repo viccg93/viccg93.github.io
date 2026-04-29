@@ -3,6 +3,7 @@
  body {
     margin: 0px;
     width: 100vw;
+    background-color: #000000;
  }
  
  
@@ -370,13 +371,13 @@ Add an active class to highlight the current page
 
 .subsection-overlay{
   height: 100%;
-  width: 50%;
+  width: 70%;
   position: relative;
   z-index: 2;
   color: #6e747f;
   text-shadow: 2px 2px 1px 0px rgba(rgba(24, 22, 22, 0.726), green, blue, alpha);
-  background-color: rgba(0,0,0,0.95);
-  transform: translateX(50vw);
+  background-color: rgba(0,0,0,0.85);
+  transform: translateX(30vw);
   /*border-radius: 20px 0 0 20px;*/
 
 }
@@ -466,8 +467,43 @@ Add an active class to highlight the current page
   }
 
   .lucid-detail{
-  font-weight: 200;
-  font-size: 10pt;
-  margin: 1vh;
+    font-weight: 200;
+    font-size: 10pt;
+    margin: 1vh;
+  }
 }
+
+.fredoka-subsection-title {
+  font-family: "Fredoka", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200;
+  font-style: normal;
+  font-size: 6vw;
+  color: rgb(240, 232, 219);
+}
+
+.subsection-title{
+  text-align: center;
+  margin-top: 2vh;
+  margin-bottom: 0;
+  text-shadow: 0 0 1vh rgba(240, 232, 219, 0.8)
+}
+
+.subsection-subtitle{
+  font-size: 1vw;
+  text-align: center;
+  margin-top: 0;
+  text-shadow: 0 0 1vh rgba(240, 232, 219, 0.8)
+}
+
+.subsection-text{
+  font-family: "Fredoka", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.5vh;
+  color: rgb(240, 232, 219);
+  margin-left: 5vw;
+  margin-right: 5vw;
+  text-align: justify;
 }
