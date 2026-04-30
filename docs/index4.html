@@ -12,6 +12,11 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alata&family=Bruno+Ace+SC&display=swap" rel="stylesheet">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Fredoka:wght@300..700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 
@@ -22,12 +27,8 @@
 <body>
     <div class="topnav" id="myTopnav">
         <a id="logo-container" href="#home" class="active">
-            <img src="./main_logo.png" alt="" srcset="">
+            <img src="./minimal_logo.png" alt="" srcset="">
         </a>
-        <!-- <a href="#news">Acerca de mi</a>
-        <a href="#contact">Tecnologias</a>
-        <a href="#about">Proyectos</a> -->
-        <!--<a href="#about">Resume clasico</a>-->
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i>
         </a>
@@ -37,35 +38,41 @@
             <canvas id="main_canvas" width="2000px" height="600px"></canvas>
         </div>
         <div class="overlay">
-            <p class="fade-blur delay subhero fredoka-subhero">Programador Java, Spring, JS y estudiante de filosofia.</p>
+            <p class="fade-blur delay subhero alata-regular landing-text">Programador Java, Spring, JS y estudiante de filosofia.</p>
 
-            <h1 class="fade-blur">Víctor Cruz Granillo</h1>
+            <h1 class="fade-blur bruno-ace-sc-regular landing-heading">Víctor Cruz Granillo</h1>
             <p class="fade-blur delay">Developed by Ch40t1cR1z0m4.</p>
+        </div>
+        <div class="badges-vertical-list">
+            <!-- Badge Individual -->
+            <div class="badge-item">
+            <img src="./portfolio_img/logotipo_ipn.png" class="badge-img">
+            <span class="badge-text">Ingenieria en Informatica</span>
+            </div>
+
+            <div class="badge-item">
+            <img src="./portfolio_img/unam.png" class="badge-img">
+            <span class="badge-text">Licenciatura en Filosofia</span>
+            </div>
+
+            <div class="badge-item">
+            <img src="./portfolio_img/github.svg" class="badge-img">
+            <span class="badge-text">VicCG93</span>
+            </div>
+
         </div>
     </div>
     <div id="ribbonDetail" class="flex-container">
         <section id="detail-section">
-            <h3 class="lucid-text lucid-heading">
-                [Más allá de la sintaxis]
-            </h3>
-            <p class="lucid-text lucid-detail">
-                Utilizo las herramientas para crear soluciones y el pensamiento critico para evaluar la viabilidad y eficiencia, he trabajado en distintas empresas con roles como Desarrollador redwood, control-M, Devops, Programador analista y programador web.
+            <h3 class="bruno-ace-sc-regular">Acerca de mi</h3>
+            <p class="alata-regular">
+                Estudie Ingenieria en Informatica en el IPN (Ced. 14836275) y actualmente estudio Filósofia en la UNAM.
+            </p>
+            <p class="alata-regular">
+                Utilizo la tecnologia para presentar soluciones puntuales y el pensamiento critico para evaluar la viabilidad y eficiencia, he trabajado en distintas empresas como desarrollador redwood, control-M, Devops, Programador analista y programador web.
             </p>
         </section>
-        <section id="medal-container">
-            <div class="medal">
-                <img src="./portfolio_img/logotipo_ipn.png" alt="ipn univerity logo" class="medal-image">
-                <p class="lucid-text">Ing. Informatica</p>
-            </div>
-            <div class="medal">
-                <img src="./portfolio_img/unam.png" alt="ipn univerity logo" class="medal-image">
-                <p class="lucid-text">Lic. filósofia</p>
-            </div>
-            <div class="medal">
-                <img src="./portfolio_img/github.svg" alt="ipn univerity logo" class="medal-image">
-                <p class="lucid-text">@VicCG93</p>
-            </div>
-        </section>
+        
     </div>
 
 
@@ -234,6 +241,7 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         animateBackground(background, delay)
+                        entry.target.querySelector('.subsection-overlay').classList.add("slideIn")
                         observer.unobserve(entry.target);
                     }
                 });
