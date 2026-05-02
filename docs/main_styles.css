@@ -478,32 +478,6 @@ Add an active class to highlight the current page
   color: rgb(240, 232, 219);
 }
 
-.subsection-title{
-  text-align: center;
-  margin-top: 2vh;
-  margin-bottom: 0;
-  text-shadow: 0 0 1vh rgba(240, 232, 219, 0.8)
-}
-
-.subsection-subtitle{
-  font-size: 1vw;
-  text-align: center;
-  margin-top: 0;
-  text-shadow: 0 0 1vh rgba(240, 232, 219, 0.8)
-}
-
-.subsection-text{
-  font-family: "Fredoka", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: normal;
-  font-style: normal;
-  font-size: 1.5vh;
-  color: rgb(240, 232, 219);
-  margin-left: 5vw;
-  margin-right: 5vw;
-  text-align: justify;
-}
-
 /*badges*/
 
 .badges-vertical-list {
@@ -518,13 +492,11 @@ Add an active class to highlight the current page
   display: flex;
   align-items: center;
   gap: 12px;
-  /* Margen negativo para que se junten (overlap) */
   margin-top: -15px; 
-  opacity: 0; /* Empiezan invisibles para la animación */
-  animation: aparecer 0.5s ease-out forwards;
+  opacity: 0;
+  animation: slideInBadge 0.5s ease-out forwards;
 }
 
-/* La primera no debe tener margen negativo arriba */
 .badge-item:first-child {
   margin-top: 0;
 }
@@ -535,7 +507,6 @@ Add an active class to highlight the current page
   border-radius: 50%;
   border: 1px solid #ffffff;
   object-fit: cover;
-  /* Sombra que rodea toda la imagen (0px de desplazamiento) */
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.6), 0 0 5px rgba(0, 0, 0, 0.8);
   background: #333;
 }
@@ -548,13 +519,11 @@ Add an active class to highlight the current page
   background: rgba(0, 0, 0, 0.6);
   padding: 5px 12px;
   border-radius: 20px;
-  backdrop-filter: blur(4px); /* Efecto de vidrio esmerilado */
+  backdrop-filter: blur(4px);
   text-shadow: 1px 1px 2px black;
 }
 
-/* --- ANIMACIONES --- */
-
-@keyframes aparecer {
+@keyframes slideInBadge {
   from {
     opacity: 0;
     transform: translateX(-20px) scale(0.8);
@@ -564,13 +533,10 @@ Add an active class to highlight the current page
     transform: translateX(0) scale(1);
   }
 }
-
-/* Retrasos para el efecto de cascada */
 .delay-1 { animation-delay: 0.2s; z-index: 3; }
 .delay-2 { animation-delay: 0.4s; z-index: 2; }
 .delay-3 { animation-delay: 0.6s; z-index: 1; }
 
-/* Invertir Z-index al hacer hover para que la de abajo no tape a la de arriba */
 .badge-item:hover {
   z-index: 10;
   transform: translateX(5px);
@@ -633,8 +599,8 @@ Add an active class to highlight the current page
 
 #detail-section p {
   color: white;
-  font-size: 1.5vw;
-  font-weight: 100;
+  font-size: 1.3vw;
+  font-weight: 300;
   margin-top: 2vh;
   margin-left: 5vw;
   margin-right: 5vw;
@@ -645,4 +611,49 @@ Add an active class to highlight the current page
     font-size: 11px;
   }
 }
+
+/*Detailed sections*/
+
+.subsection-title{
+  font-weight: 800;
+  font-size: 4vh;
+  color: white;
+  text-align: center;
+  margin-top: 2vh;
+  margin-bottom: 0;
+  
+}
+
+.subsection-subtitle{
+  font-weight: 200;
+  font-size: 1.4vh;
+  color: white;
+  text-align: center;
+  margin-top: 0;
+  text-shadow: 0 0 2vh rgba(255, 255, 254, 0.877)
+}
+
+.subsection-text{
+  font-size: 1.1vw;
+  color: rgb(240, 232, 219);
+  margin-left: 5vw;
+  margin-right: 5vw;
+  text-align: justify;
+}
+
+@media (max-width: 768px){
+  .subsection-title{
+    font-size: 28px;
+  }
+
+  .subsection-subtitle{
+    font-size: 9px;
+  }
+
+  .subsection-text{
+    font-size: 12px;
+
+  }
+}
+
 
