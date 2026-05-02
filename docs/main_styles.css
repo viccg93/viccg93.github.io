@@ -597,11 +597,11 @@ Add an active class to highlight the current page
   margin-bottom: 0;
 }
 
-#detail-section p {
+#detail-section article {
   color: white;
   font-size: 1.3vw;
   font-weight: 300;
-  margin-top: 2vh;
+  margin-top: 0.5vh;
   margin-left: 5vw;
   margin-right: 5vw;
 }
@@ -610,8 +610,8 @@ Add an active class to highlight the current page
   #detail-section h3 {
   font-size: 22px;
 }
-  #detail-section p {
-    font-size: 11px;
+  #detail-section article {
+    font-size: 9px;
   }
 }
 
