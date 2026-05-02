@@ -607,6 +607,9 @@ Add an active class to highlight the current page
 }
 
 @media (max-width: 768px){
+  #detail-section h3 {
+  font-size: 22px;
+}
   #detail-section p {
     font-size: 11px;
   }
@@ -643,7 +646,7 @@ Add an active class to highlight the current page
 
 @media (max-width: 768px){
   .subsection-title{
-    font-size: 28px;
+    font-size: 26px;
   }
 
   .subsection-subtitle{
@@ -651,7 +654,7 @@ Add an active class to highlight the current page
   }
 
   .subsection-text{
-    font-size: 12px;
+    font-size: 10px;
 
   }
 }
