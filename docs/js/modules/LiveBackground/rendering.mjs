@@ -15,7 +15,7 @@ function adjustCanvasToWindow(canvas, ctx) {
     }
 }
 
-function initBackground(source, idCanvas) {
+function initBackground(source, idCanvas, blacknessLimit) {
     const canvas = document.getElementById(idCanvas);
     const ctx = canvas.getContext('2d');
     adjustCanvasToWindow(canvas, ctx);
@@ -35,8 +35,8 @@ function initBackground(source, idCanvas) {
             baseCanvas: baseCanvas, 
             baseCtx: baseCtx,
             imageData: baseCtx.getImageData(0, 0, canvasWidth, canvasHeight),
-            undrawingStep: 10,
-            blackUpperLimit: 40,
+            undrawingStep: 20,
+            blackUpperLimit: blacknessLimit,
             animateBehavior: function () {
                 proccessImageSection(this.imageData.data, this.undrawingStep, this.blackUpperLimit);
                 this.baseCtx.putImageData(this.imageData, 0, 0);

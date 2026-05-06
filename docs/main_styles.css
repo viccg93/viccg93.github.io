@@ -599,11 +599,11 @@ Add an active class to highlight the current page
 
 #detail-section article {
   color: white;
-  font-size: 1.3vw;
+  font-size: 1.1vw;
   font-weight: 300;
-  margin-top: 0.5vh;
-  margin-left: 5vw;
-  margin-right: 5vw;
+  margin-top: 0.2vh;
+  margin-left: 3vw;
+  margin-right: 3vw;
 }
 
 @media (max-width: 768px){
@@ -611,7 +611,7 @@ Add an active class to highlight the current page
   font-size: 22px;
 }
   #detail-section article {
-    font-size: 9px;
+    font-size: 12px;
   }
 }
 
@@ -619,7 +619,7 @@ Add an active class to highlight the current page
 
 .subsection-title{
   font-weight: 800;
-  font-size: 4vh;
+  font-size: 10vh;
   color: white;
   text-align: center;
   margin-top: 2vh;
@@ -638,7 +638,7 @@ Add an active class to highlight the current page
 
 .subsection-text{
   font-size: 1.1vw;
-  color: rgb(240, 232, 219);
+  color: white;
   margin-left: 5vw;
   margin-right: 5vw;
   text-align: justify;
@@ -646,7 +646,7 @@ Add an active class to highlight the current page
 
 @media (max-width: 768px){
   .subsection-title{
-    font-size: 26px;
+    font-size: 40px;
   }
 
   .subsection-subtitle{
@@ -654,9 +654,24 @@ Add an active class to highlight the current page
   }
 
   .subsection-text{
-    font-size: 10px;
+    font-size: 13px;
 
   }
+}
+
+.date-container {
+    z-index: 10;
+    transform: translateX(3vw);
+    font-size: 5vw;
+    position: absolute;
+    text-shadow: 5px 10px 10px #ffffff;
+    font-weight: bolder;
+}
+
+.date-container p {
+    border: solid 1px white;
+    border-radius: 6vw;
+    background-color: white;
 }
 
 

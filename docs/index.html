@@ -10,6 +10,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alata&family=Bruno+Ace+SC&display=swap" rel="stylesheet">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Fredoka:wght@300..700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+
     <!-- self-hosted links-->
     <link rel="stylesheet" href="./main_styles.css">
 
@@ -17,242 +27,264 @@
 <body>
     <div class="topnav" id="myTopnav">
         <a id="logo-container" href="#home" class="active">
-            <img src="./VICG.png" alt="" srcset="">
+            <img src="./minimal_logo.png" alt="" srcset="">
         </a>
-        <a href="#news">Acerca de mi</a>
-        <a href="#contact">Tecnologias</a>
-        <a href="#about">Proyectos</a>
-        <a href="#about">Resume clasico</a>
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
             <i class="fa fa-bars"></i>
         </a>
     </div>
-    <div id="canvasContainer" class="canvasContainer">
-        <canvas id="espacioUtil" width="1000px" height="600px">
+    <div id="landing_container">
+        <div id="canvasContainer" class="canvasContainer">
+            <canvas id="main_canvas" width="2000px" height="600px"></canvas>
+        </div>
+        <div class="overlay">
+            <p class="fade-blur delay subhero alata-regular landing-text">Programador Java, Spring, JS y estudiante de filosofia.</p>
 
-        </canvas>
+            <h1 class="fade-blur bruno-ace-sc-regular landing-heading">Víctor Cruz Granillo</h1>
+            <p class="fade-blur delay">Developed by Ch40t1cR1z0m4.</p>
+        </div>
+        <div class="badges-vertical-list">
+            <!-- Badge Individual -->
+            <div class="badge-item">
+            <img src="./portfolio_img/logotipo_ipn.png" class="badge-img">
+            <span class="badge-text">Ingenieria en Informatica</span>
+            </div>
 
+            <div class="badge-item">
+            <img src="./portfolio_img/unam.png" class="badge-img">
+            <span class="badge-text">Licenciatura en Filosofia</span>
+            </div>
+
+            <div class="badge-item">
+            <img src="./portfolio_img/github.svg" class="badge-img">
+            <span class="badge-text">VicCG93</span>
+            </div>
+
+        </div>
     </div>
-    <div id="cards-container">
-        <div class="card">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis necessitatibus non labore cupiditate nemo? Similique animi et harum! A totam blanditiis optio officia non molestias corrupti! Ut tempore iusto cumque!</p>
-        </div>
-        <div class="card">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis necessitatibus non labore cupiditate nemo? Similique animi et harum! A totam blanditiis optio officia non molestias corrupti! Ut tempore iusto cumque!</p>
-        </div>
-        <div class="card">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis necessitatibus non labore cupiditate nemo? Similique animi et harum! A totam blanditiis optio officia non molestias corrupti! Ut tempore iusto cumque!</p>
-        </div>
-        <div class="card">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis necessitatibus non labore cupiditate nemo? Similique animi et harum! A totam blanditiis optio officia non molestias corrupti! Ut tempore iusto cumque!</p>
-        </div>
-        <div class="card">
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis necessitatibus non labore cupiditate nemo? Similique animi et harum! A totam blanditiis optio officia non molestias corrupti! Ut tempore iusto cumque!</p>
-        </div>
-    </div>
-
-    <script src="./main_script.js"></script>
-    <script>
-        let canvas = document.getElementById("espacioUtil")
-        let ctx = canvas.getContext('2d')
-
-        ctx.beginPath();
-        ctx.arc(0,400,40,0,Math.PI*2,true)
-        ctx.fillStyle = 'rgba(100,40,255,1)'
-        ctx.fill()
-
-        let lastTime = 0
-        let lastPos = 200
-        let initTime = 0
-        let xPosInit = 400
-        let yPosInit = 400
-        let initialSpeed= 900
-        let angle = (11/16)*Math.PI
-        let radius = 40
-        let globalTime = 0
-        let gravity = 9.81
-        let visible = false
-
-        let canvasWidth = 1000
-        let canvasHeight = 600
-
-        function animate(){
-            let now = Date.now()
-            if(initTime == 0){
-                initTime = Date.now()
-            }
-            //se usan milisegundos
-            deltaTime = now - lastTime
-            elapsedTime = now - initTime
-            globalTime+= elapsedTime
-            //console.log('global time: ' + globalTime)
-            
-            //console.log('elapsed time: ' + elapsedTime)
-            if(deltaTime >= Math.ceil(1000/120)){
-                
-                console.log('elapsed time: ' + elapsedTime)
-                //let xPos = xPosInit + (initialSpeed * Math.cos(angle)*(elapsedTime/1000))
-                //let yPos = yPosInit - (initialSpeed * Math.sin(angle)*(elapsedTime/1000)-(0.5*9.8*(Math.pow((elapsedTime/1000 ),2))))
-                let xPos = calculateXPosition(initialSpeed, angle, elapsedTime)
-                let yPos = calculateYPosition(initialSpeed,angle,elapsedTime)
-                let desplazamiento = (initialSpeed * Math.sin(angle)*(elapsedTime/1000)-(0.5*9.8*(Math.pow((elapsedTime/1000 ),2))))
-                if(visible == false){
-                    visible = isVisible(xPos,yPos)
-                }
-                console.log('desplazamiento: ' + desplazamiento)
-                console.log('componente sin gravedad: ' + (initialSpeed * Math.sin(angle)*(elapsedTime/1000)))
-                console.log('initial speed: ' + initialSpeed)
-                console.log('xPos: ' + xPos)
-                console.log('yPos: ' + yPos)
-                if(!identifyCollision(xPos,yPos,radius)){
-                    console.log("animation triggered")
-                    //se dibuja la nueva posicion
-                    ctx.beginPath()
-                    ctx.rect(0,0,canvasWidth,canvasHeight)
-                    ctx.fillStyle = 'rgba(255,255,255,0.2)'
-                    ctx.fill()
-                    ctx.closePath()
-                    ctx.beginPath();
-                    ctx.arc(xPos,yPos,radius,0,Math.PI*2,true)
-                    ctx.fillStyle = 'rgba(100,40,255,1)'
-                    ctx.fill()
-                    lastPos+=80
-                    lastTime = now
-                }else{
-                    if(visible){
-                        console.log('colapso')
-                        //componentes antes de la colision con superficie de masa infinita
-                        //se omite coeficiente de restitución al asumir una colision completamente elastica
-                        //la componente en x se mantiene igual
-                        let vx = initialSpeed * Math.cos(angle)
-                        //la componente en y se ve afectada por el tiempo y la gravedad
-                        let vy = (initialSpeed * Math.sin(angle)) - (gravity*(elapsedTime/1000))
-                        //calculo de angulo
-                        //let newAngle = 0
-                        //let newAngle =  angle + (Math.PI/2)
-                        //newAngle = newAngle >= Math.PI*2? Math.PI*2 - newAngle: newAngle
-                        //console.log('new angle is: ' + newAngle)
-                        
-                        if((xPos == 0 || xPos >= canvasWidth) && yPos > 0){
-                            //newAngle = Math.atan(vy/-vx)
-                            newAngle = Math.atan(vy/(vx*-1))
-                            console-log('previous angle: ' + angle)
-                            console.log('new angle: ' + newAngle)
-                        }else{
-                            newAngle = Math.atan((vy*-1)/vx)
-                        }
-                        
-                        //newAngle = newAngle<0 ? ((Math.PI*2) + newAngle): newAngle
-                        //calculamos la nueva velocidad
-                        let newSpeed = Math.sqrt(Math.pow(vx,2) + Math.pow(vy,2))
-                        console.log('new speed: ' + newSpeed)
-
-                        //ajustamos valores iniciales
-                        xPosInit = xPos
-                        yPosInit = yPos
-                        angle = newAngle
-                        initialSpeed = newSpeed
-                        initTime = Date.now()
-                    }else{
-                        console.log('no deberia de estar aqui')
-                    }
-
-                }
-            }
-            requestAnimationFrame(animate)
-        }
-
-        function identifyCollision(xPos, yPos, radius){
-            let collisionTreshold = 1
-            let result = false
-            if(
-                yPos - radius < collisionTreshold || 
-                yPos + radius > (600 - collisionTreshold) //||
-                //limite inferior de x
-                /*
-                xPos - radius < collisionTreshold ||
-                xPos + radius > (canvasWidth + collisionTreshold)*/
-            ){
-                result = true
-            }
-
-            //temporarily the logic's about x collision
-            if(xPos - radius < collisionTreshold || xPos + radius > (canvasWidth + collisionTreshold)){
-                result = true
-                /*
-                if((angle < (Math.PI/2) || angle > (3/2 * Math.PI)) && canvasWidth - xPos <= 0){
-                    result = true
-                }*/
-                
-                console.log('colision encontrada en x')
-            }
-            return result
-        }
-
-        function getCurrentAngle(xComponent, yComponent){
-            return Math.atan(xComponent/yComponent)
-        }
-
-        function isVisible(xPos, yPos){
-            let borderTreshold = 10
-            if (xPos-radius > (0 + borderTreshold) && xPos + radius <= (1000 - borderTreshold) && yPos - radius > (0 + borderTreshold) && yPos + radius <= (600 - borderTreshold)){
-                return true
-            }else{
-                return false
-            }
-        }
-
-        function calculateYPosition(speed, angle, time){
-            let yPos = yPosInit - (initialSpeed * Math.sin(angle)*(elapsedTime/1000)-(0.5*9.8*(Math.pow((elapsedTime/1000 ),2))))
-            let refVal = Math.abs(canvasWidth/canvasWidth)
-            let yPosTan2 =  Math.atan2((initialSpeed * Math.sin(angle)*(elapsedTime/1000)-(0.5*9.8*(Math.pow((elapsedTime/1000 ),2)))))
-            
-            //validate inminent collision
-            //la trayectoria es ascendente
-            //TODO verificar la igualdad con PI
-            if(angle<Math.PI){
-                if(yPos > 0 && yPos-radius < 0){
-                    yPos = radius
-                }
-            }else{
-                //trayectoria descendente
-                if(yPos < canvasHeight && yPos+radius > canvasHeight){
-                    yPos = canvasHeight-radius
-                }
-            }
-            return yPos
-        }
-
-        function calculateXPosition(speed, angle, time){
-            let xPos = xPosInit + (initialSpeed * Math.cos(angle)*(time/1000))
-
-            //el espectro de posibilidades esta denotada por el limite entre pi y 2 pi
-            if(xPos > 0 && xPos - radius < 0){
-                xPos = radius
-            }else if(xPos + radius > canvasWidth && canvasWidth - xPos >= 0){
-                //trayectoria en el limite superior
-                xPos = canvasWidth - radius
-                console.log('it got adjusted')
-            }
-            return xPos
-        }
-
-        function getNormalisedVector(vectorDimension, vectorAngle){
-            // Cuando x→+∞ x→+∞ la funcion se vuelve asintotica paso arctan(tetha)
-
-            componentX = vectorDimension * Math.sin(vectorAngle)
-            componentY = vectorDimension * Math.cos(vectorAngle)
-
-            //we shpuld find out a way to determine if conversion sould be applied on y
-        }
-
-        function getArcTan(x,y,vx,vy){
-            //this function deals with y axis inverted on canvas, with no assumptions of algebraic translations
-
-            let 
-        }
+    <div id="ribbonDetail" class="flex-container">
+        <section id="detail-section">
+            <h3 class="bruno-ace-sc-regular">Acerca de mi</h3>
+            <article class="alata-regular">
+                <p>
+                    Estudie Ingenieria en Informatica en el IPN (Ced. 14836275) y actualmente estudio Filósofia en la UNAM.
+                </p>
+                <p>
+                    Utilizo la tecnologia para presentar soluciones puntuales y el pensamiento critico para evaluar la viabilidad y eficiencia, he trabajado en distintas empresas como desarrollador redwood, control-M, Devops, Programador analista y programador web.
+                </p>
+            </article>
+        </section>
         
-        animate();
+    </div>
+
+
+    <div id="backgroundContainer" class="section-container reveal">
+        <canvas id="canvasBg0" class="backgrounded-canvas"></canvas>
+        <div class="date-container bruno-ace-sc-regular">
+            <p>JUL/23</p>
+            <p>SEP/25</p>
+        </div>
+        <div class="subsection-overlay">
+            <p class="subsection-title bruno-ace-sc-regular">Gentera</p>  
+            <p class="subsection-subtitle alata-regular">Consultor Redwood / Consultor Control-M</p>
+
+            <section class="subsection-text alata-regular">
+                <p>Mis labores esenciales fueron el desarrollo y correccion de Jobs de Redwood y Control-M usando RedwoodScript (Java) y Shell script.</p>
+                <p>Participe en la migración de Redwood a control-M, analisis, desarrollo y pruebas unitarias.</p>
+
+                <p>Actividades clave:</p>
+                <p>
+                    <ul>
+                        <li>Desarrollo y soporte a cliente REST en python para consumir DAGS de Airflow.</li>
+                        <li>Solución de vulnerabilidades en servidores pre-productivos.</li>
+                        <li>Tareas de mantenimiento como generación de certificados SSL y HTTPS en los ambientes de control-M</li>
+                        <li>instalacion de utilidades, entornos virtuales venv y contenedores de Docker.</li>
+                        <li>Elaboración de reportes de ejecución de Folders/Jobs.</li>
+                        <li>Duplicidad de OT's de SAP Banking y Payment Engine en entornos de pruebas.</li>
+                        <li>Pruebas unitarias de las cadenas/folders.</li>
+                        <li>Ejecuciones nocturnas del cierre de dia en entornos de testing.</li>
+                        <li>Desarrollo de una extensión para navegadores basados en Chromium</li>
+                    </ul>
+                </p>
+
+                <p>Tecnologias:</p>
+                <p>
+                    <ul>
+                        <li>Java, RedwoodScript, Python.</li>
+                        <li>Shell-script.</li>
+                        <li>OpenSSL</li>
+                        <li>Redwood,Control-M,SAP GUI</li>
+                    </ul>
+                </p>
+            </section>
+        </div>
+    </div>
+
+    <div id="backgroundContainer2" class="section-container reveal">
+        <canvas id="canvasBg1" class="backgrounded-canvas"></canvas>
+        <div class="date-container bruno-ace-sc-regular">
+            <p>OCT/22</p>
+            <p>MAY/23</p>
+        </div>
+        <div class="subsection-overlay">
+            <p class="subsection-title bruno-ace-sc-regular">Terraza Everest</p>
+            <p class="subsection-subtitle alata-regular">Programador web (PHP SPA)</p>
+        </div>
+    </div>
+
+    <div id="backgroundContainer3" class="section-container reveal">
+        <canvas id="canvasBg2" class="backgrounded-canvas"></canvas>
+        <div class="date-container bruno-ace-sc-regular">
+            <p>MAR/21</p>
+            <p>MAY/21</p>
+        </div>
+        <div class="subsection-overlay">
+            <p class="subsection-title bruno-ace-sc-regular">Directo Telecom</p>
+            <p class="subsection-subtitle alata-regular">Ingeniero Devops</p> 
+        </div>
+    </div>
+
+    <div id="backgroundContainer4" class="section-container reveal">
+        <canvas id="canvasBg3" class="backgrounded-canvas"></canvas>
+        <div class="date-container bruno-ace-sc-regular">
+            <p>ENE/18</p>
+            <p>SEP/20</p>
+        </div>
+        <div class="subsection-overlay">
+            <p class="subsection-title bruno-ace-sc-regular">E-Global</p>
+            <p class="subsection-subtitle alata-regular">Prgramador analista SR.</p> 
+        </div>
+    </div>
+
+    <div id="backgroundContainer5" class="section-container reveal">
+        <canvas id="canvasBg4" class="backgrounded-canvas"></canvas>
+        <div class="date-container bruno-ace-sc-regular">
+            <p>FEB/16</p>
+            <p>AGO/17</p>
+        </div>
+        <div class="subsection-overlay">
+            <p class="subsection-title bruno-ace-sc-regular">Museo Palacio de Bellas Artes</p>
+            <p class="subsection-subtitle alata-regular">Programador web</p> 
+        </div>
+    </div>
+
+    <script>
+        const reveals = document.querySelectorAll(".reveal");
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
+        reveals.forEach(el => observer.observe(el));
+    </script>
+    <script src="./main_script.js"></script>
+    <script type="module">
+        import {initCanvas} from './js/modules/TechImmanence/rendering.mjs'
+        const sources = [
+                "portfolio_img/Java-logo.jpg",
+                "portfolio_img/docker.png",
+                "portfolio_img/idea.png",
+                "portfolio_img/jquery.png",
+                "portfolio_img/mariadb.png",
+                "portfolio_img/node.png",
+                "portfolio_img/redis.png",
+                "portfolio_img/spring_boot.png",
+                "portfolio_img/android.jpg",
+                "portfolio_img/express.png",
+                "portfolio_img/java_2.png",
+                "portfolio_img/js.png",
+                "portfolio_img/mongodb.jpg",
+                "portfolio_img/php.png",
+                "portfolio_img/rust.png",
+                "portfolio_img/struts.jpeg",
+                "portfolio_img/angular.png",
+                "portfolio_img/java_logo2.png",
+                "portfolio_img/jenkins.jpg",
+                "portfolio_img/kotlin.jpeg",
+                "portfolio_img/mssql.png",
+                "portfolio_img/php_pdo.png",
+                "portfolio_img/shell.png",
+                "portfolio_img/vscode.png",
+                "portfolio_img/css3.jpg",
+                "portfolio_img/html5.png",
+                "portfolio_img/jetpack_compose.png",
+                "portfolio_img/linux.jpg",
+                "portfolio_img/mysql.png",
+                "portfolio_img/php_slim.jpg",
+                "portfolio_img/spring.png",
+                "portfolio_img/webpack.jpg"
+            ];
+        initCanvas(900, sources, ()=>{console.log('initialisation completed')})
+    </script>
+
+    <script type="module">
+        import {initBackground, animateBackground} from './js/modules/LiveBackground/rendering.mjs'
+        const backgroundImages = [
+            "portfolio_img/gentera_bg.jpg",
+            "portfolio_img/everest_bg.jpg",
+            "portfolio_img/virreyes.png",
+            "portfolio_img/egl_bg.jpeg",
+            "portfolio_img/mpba_bg.jpg"
+        ]
+            
+        let promises = backgroundImages.map(src => {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.src = src;
+                img.onload = () => resolve(img);
+                img.onerror = () => reject(new Error(`Failed to load: ${src}`));
+            })
+        })
+        Promise.all(promises).then((images)=>{
+            let background = initBackground(images[0], "canvasBg0", 50)
+            let backgroundEverest = initBackground(images[1], "canvasBg1", 20)
+            let backgroundVirreyes = initBackground(images[2], "canvasBg2", 20)
+            let backgroundEgl = initBackground(images[3], "canvasBg3", 50)
+            let backgroundMPBA = initBackground(images[4], "canvasBg4", 70)
+
+            loadAnimation("backgroundContainer", background, 200)
+            loadAnimation("backgroundContainer2", backgroundEverest, 200)
+            loadAnimation("backgroundContainer3", backgroundVirreyes, 200)
+            loadAnimation("backgroundContainer4", backgroundEgl, 200)
+            loadAnimation("backgroundContainer5", backgroundMPBA, 200)
+
+            /*
+            animateBackground(background, 200)
+            animateBackground(backgroundEverest, 200)
+            animateBackground(backgroundVirreyes, 200)
+            */
+        })
+        
+        function loadAnimation(idElement, background, delay){
+            const element = document.getElementById(idElement)
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateBackground(background, delay)
+                        entry.target.querySelector('.subsection-overlay').classList.add("slideIn")
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.05
+            });
+            
+            observer.observe(element);
+
+            /*
+            element.addEventListener('transitionend', () => {
+                if (parseFloat(window.getComputedStyle(element).opacity) > 0.01) {
+                    animateBackground(background, delay)
+                }
+            });
+            */
+        }
+        //alert("image loaded for background")
     </script>
 </body>
 </html>
