@@ -12,7 +12,7 @@
   /* background-color: rgb(0, 0, 0);*/
   background-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0.8) 90%, rgba(255,255,255,0.3) 100%);
   overflow: hidden;
-  height: 8vh;
+  height: 7vh;
 }
 
 #logo-container{
@@ -39,14 +39,6 @@ a img{
   height: 7vh;
   width: 120px;
   object-fit: contain;
-}
-
-
-
-/* Change the color of links on hover */
-.topnav a:hover {
-  background-color: rgba(202, 210, 197, 1);
-  color: black;
 }
 
 /*
@@ -91,62 +83,14 @@ Add an active class to highlight the current page
   }
 } 
 
-/*Font configuration and descriptors*/
-
-.work-sans-regular {
-  font-family: "Work Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.work-sans-light {
-  font-family: "Work Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 300;
-  font-style: normal;
-}
-
-.work-sans-semi-bold{
-  font-family: "Work Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 600;
-  font-style: normal;
-}
-
-.work-sans-bold{
-  font-family: "Work Sans", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 700;
-  font-style: normal;
-}
-
-/*cards*/
-
-.card {
-    border: solid 1px rgba(10, 10, 10, 1);
-    border-radius: 20px;
-    padding-top: 5vh;
-    padding-bottom: 7vh;
-    padding-left: 5vw;
-    padding-right: 5vw;
-    margin-top: 5vh;
-    margin-bottom: 5vh;
-    margin-left: 7vw;
-    margin-right: 7vw;
-    box-shadow: 9px 8px 19px 9px gray;
-}
+/*canvas*/
 
 #main_canvas{
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  opacity: 1; /* opcional: también se puede fade */
-  /*
-  width: 100vw;
-  height: 90vh;
-  */
+  opacity: 1;
 }
 
 .floating_box{
@@ -184,7 +128,7 @@ Add an active class to highlight the current page
 
 #landing_container {
   position: relative;
-  height: 70vh;
+  height: 80vh;
   max-width: 100vw;
   overflow: hidden;
   padding: 0;
@@ -320,7 +264,11 @@ Add an active class to highlight the current page
 .subhero {
   margin-top: 10vh;
   max-width: 80vw;
-  color: #6e747f;
+  
+  border-radius: 9px;
+  background-color: white;
+
+
 }
 
 @media (min-width: 768px){
@@ -333,27 +281,6 @@ Add an active class to highlight the current page
   .subhero{
     font-size: 4vw;
   }
-}
-
-
-/* outstanding subhero text */
-.fredoka-subhero {
-  font-family: "Fredoka", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 400;
-  font-style: normal;
-  font-variation-settings:
-    "wdth" 40;
-  font-size: 2vw;
-}
-
-.elegant-section {
-  width: 90%;
-  height: 100%;
-  background-image: linear-gradient(black 99%, rgba(0,0,0,0.2));
-  align-self: center;
-  border-radius:  1rem;
-
 }
 
 .section-container {
@@ -391,8 +318,9 @@ Add an active class to highlight the current page
   display: flex;
   flex-wrap: wrap;
   width: 100vw;
-  height: 20vh;
+  height: 10vh;
   background-color: black;
+  align-items: center;
 }
 
 #detail-section{
@@ -407,24 +335,10 @@ Add an active class to highlight the current page
   align-items: center;
 }
 
-.lucid-text{
-  color: rgb(240, 232, 219);
-  font-family: "Fredoka", sans-serif;
-  font-optical-sizing: auto;
-  font-weight: 200;
-  font-style: normal;
-  font-size: 1.5vh;
-}
 
 .lucid-heading{
   font-weight: 400;
   font-size: 2.4vh;
-  margin: 1vh;
-}
-
-.lucid-detail{
-  font-weight: 200;
-  font-size: 2.7vw;
   margin: 1vh;
 }
 
@@ -557,7 +471,7 @@ Add an active class to highlight the current page
 }
 
 .landing-heading {
-  font-size: 6vw;
+  font-size: 7vw;
   font-weight: 600;
   font-style: normal;
 }
@@ -591,7 +505,7 @@ Add an active class to highlight the current page
 
 #detail-section h3 {
   color: white;
-  font-size: 2.5vh;
+  font-size: 5vh;
   font-weight: 800;
   margin-top: 1vh;
   margin-bottom: 0;
@@ -608,7 +522,7 @@ Add an active class to highlight the current page
 
 @media (max-width: 768px){
   #detail-section h3 {
-  font-size: 22px;
+  font-size: 40px;
 }
   #detail-section article {
     font-size: 11px;
@@ -674,4 +588,8 @@ Add an active class to highlight the current page
     background-color: white;
 }
 
-
+#main-description {
+  min-height: 90vh;
+  max-height: 90vh;
+  background-color: white;
+}
