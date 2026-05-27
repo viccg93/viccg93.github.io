@@ -12,7 +12,7 @@
   /* background-color: rgb(0, 0, 0);*/
   background-image: linear-gradient(to bottom, rgba(0,0,0,1) 80%, rgba(0,0,0,0.8) 90%, rgba(255,255,255,0.3) 100%);
   overflow: hidden;
-  height: 7dvh;
+  height: 7svh;
 }
 
 #logo-container{
@@ -36,7 +36,7 @@
 }
 
 a img{
-  height: 7dvh;
+  height: 7svh;
   width: 120px;
   object-fit: contain;
 }
@@ -110,7 +110,7 @@ Add an active class to highlight the current page
 
 .decorationCanvas{
   width: 100%;
-  height: 60dvh;
+  height: 60svh;
 }
 
 .sub_container{
@@ -121,14 +121,14 @@ Add an active class to highlight the current page
 
 .bg_canvas{
   width: 100vw;
-  height: 90dvh;
+  height: 90svh;
 }
 
 /*estilo de contenedor principal*/
 
 #landing_container {
   position: relative;
-  height: 80dvh;
+  height: 80svh;
   max-width: 100vw;
   overflow: hidden;
   padding: 0;
@@ -206,7 +206,7 @@ Add an active class to highlight the current page
 
   position: absolute;
   right: 40px;
-  top: 7dvh;
+  top: 7svh;
 
   display: flex;
   gap: 12px;
@@ -262,7 +262,7 @@ Add an active class to highlight the current page
 }
 
 .subhero {
-  margin-top: 10dvh;
+  margin-top: 10svh;
   max-width: 80vw;
   
   border-radius: 9px;
@@ -285,7 +285,7 @@ Add an active class to highlight the current page
 
 .section-container {
   width: 100vw;
-  height: 100dvh;
+  height: 100svh;
   display: flex;
   align-items: center;
   position: relative;
@@ -318,7 +318,7 @@ Add an active class to highlight the current page
   display: flex;
   flex-wrap: wrap;
   width: 100vw;
-  height: 10dvh;
+  height: 10svh;
   background-color: black;
   align-items: center;
 }
@@ -338,8 +338,8 @@ Add an active class to highlight the current page
 
 .lucid-heading{
   font-weight: 400;
-  font-size: 2.4dvh;
-  margin: 1dvh;
+  font-size: 2.4svh;
+  margin: 1svh;
 }
 
 .medal{
@@ -366,7 +366,7 @@ Add an active class to highlight the current page
   .lucid-detail{
   font-weight: 200;
   font-size: 1.2vw;
-  margin: 1dvh;
+  margin: 1svh;
 }
 }
 
@@ -379,7 +379,7 @@ Add an active class to highlight the current page
   .lucid-detail{
     font-weight: 200;
     font-size: 10pt;
-    margin: 1dvh;
+    margin: 1svh;
   }
 }
 
@@ -416,8 +416,8 @@ Add an active class to highlight the current page
 }
 
 .badge-img {
-  width: 5dvh;
-  height: 5dvh;
+  width: 5svh;
+  height: 5svh;
   border-radius: 50%;
   border: 1px solid #ffffff;
   object-fit: cover;
@@ -428,7 +428,7 @@ Add an active class to highlight the current page
 .badge-text {
   color: white;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  font-size: 1.2dvh;
+  font-size: 1.2svh;
   font-weight: 600;
   background: rgba(0, 0, 0, 0.6);
   padding: 5px 12px;
@@ -505,9 +505,9 @@ Add an active class to highlight the current page
 
 #detail-section h3 {
   color: white;
-  font-size: 5dvh;
+  font-size: 5svh;
   font-weight: 800;
-  margin-top: 1dvh;
+  margin-top: 1svh;
   margin-bottom: 0;
 }
 
@@ -533,21 +533,21 @@ Add an active class to highlight the current page
 
 .subsection-title{
   font-weight: 800;
-  font-size: 10dvh;
+  font-size: 10svh;
   color: white;
   text-align: center;
-  margin-top: 2dvh;
+  margin-top: 2svh;
   margin-bottom: 0;
   
 }
 
 .subsection-subtitle{
   font-weight: 200;
-  font-size: 1.4dvh;
+  font-size: 1.4svh;
   color: white;
   text-align: center;
   margin-top: 0;
-  text-shadow: 0 0 2dvh rgba(255, 255, 254, 0.877)
+  text-shadow: 0 0 2svh rgba(255, 255, 254, 0.877)
 }
 
 .subsection-text{
@@ -591,8 +591,8 @@ Add an active class to highlight the current page
 /* main description */
 
 #main-description {
-  min-height: 90dvh;
-  max-height: 90dvh;
+  min-height: 90svh;
+  max-height: 90svh;
   background-color: white;
 }
 
@@ -603,7 +603,7 @@ Add an active class to highlight the current page
 #main-description p{
   padding: 0 5vw 0 5vw;
   text-align: center;
-  font-size: 2.5dvh;
+  font-size: 2.5svh;
 }
 
 .card p {
@@ -668,7 +668,7 @@ Add an active class to highlight the current page
 @media (max-width: 768px){
   .card{
     min-width: 90vw;
-    min-height: 10dvh;
+    min-height: 10svh;
     margin-top: 0.5rem;
   }
 }
