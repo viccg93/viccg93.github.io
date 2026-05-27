@@ -597,7 +597,7 @@ Add an active class to highlight the current page
 }
 
 #main-description article{
-  padding-top: 4vh;
+  padding-top: 3vw;
 }
 
 #main-description p{
@@ -662,7 +662,7 @@ Add an active class to highlight the current page
 
     border: 1px solid rgba(255,255,255,0.15);
     margin-top: 1.5rem;
-    font-size: 1.2vh;
+    
 }
 
 @media (max-width: 768px){
