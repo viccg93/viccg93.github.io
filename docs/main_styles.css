@@ -318,7 +318,8 @@ Add an active class to highlight the current page
   display: flex;
   flex-wrap: wrap;
   width: 100vw;
-  height: 10svh;
+  height: 8svh;
+  height: 8dvh;
   background-color: black;
   align-items: center;
 }
@@ -597,17 +598,18 @@ Add an active class to highlight the current page
 }
 
 #main-description article{
-  padding-top: 3vw;
+  padding-top: 1vw;
 }
 
 #main-description p{
   padding: 0 5vw 0 5vw;
   text-align: center;
-  font-size: 2.5svh;
+  font-size: 1.4vw;
 }
 
 .card p {
   padding: 0 1.2vw !important;
+  font-size: 1.2vw !important;
 }
 
 .card li{
@@ -621,7 +623,7 @@ Add an active class to highlight the current page
 
 @media (max-width: 768px){
   #main-description p{
-    font-size: 14px;
+    font-size: 12px;
   }
   .card li{
     font-size: 11px;
@@ -634,12 +636,13 @@ Add an active class to highlight the current page
 .card-container{
     display: flex;
     justify-content: space-between;
-    gap: 1.5rem;
+    gap: 1rem;
     width: 100%;
-    padding: 1.5rem;
+    padding: 1rem;
     box-sizing: border-box;
     flex-wrap: wrap;
     justify-content: center;
+
 }
 
 .card{
@@ -654,7 +657,7 @@ Add an active class to highlight the current page
 
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: left;
 
     color: white;
     font-size: 1.2rem;
