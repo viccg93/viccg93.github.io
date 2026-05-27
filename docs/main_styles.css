@@ -623,11 +623,16 @@ Add an active class to highlight the current page
 
 @media (max-width: 768px){
   #main-description p{
-    font-size: 12px;
-  }
-  .card li{
     font-size: 11px;
   }
+  .card li{
+    font-size: 10px;
+  }
+  .card p {
+  padding: 0 1.2vw !important;
+  font-weight: bold;
+  font-size: 11px !important;
+}
 }
 
 
