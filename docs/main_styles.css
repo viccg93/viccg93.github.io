@@ -320,6 +320,7 @@ Add an active class to highlight the current page
   width: 100vw;
   height: 8svh;
   height: 8dvh;
+  height: 8lvh;
   background-color: black;
   align-items: center;
 }
