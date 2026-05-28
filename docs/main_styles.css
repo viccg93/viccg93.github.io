@@ -299,7 +299,7 @@ Add an active class to highlight the current page
   z-index: 2;
   color: #6e747f;
   text-shadow: 2px 2px 1px 0px rgba(rgba(24, 22, 22, 0.726), green, blue, alpha);
-  background-color: rgba(0,0,0,0.95);
+  background-color: rgba(59, 59, 59, 0.9);
   transform: translateX(100vw);
   /*border-radius: 20px 0 0 20px;*/
 
