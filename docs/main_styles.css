@@ -593,8 +593,7 @@ Add an active class to highlight the current page
 /* main description */
 
 #main-description {
-  min-height: 90lvh;
-  max-height: 90lvh;
+  min-height: 80lvh;
   background-color: white;
 }
 
