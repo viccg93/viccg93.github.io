@@ -8,6 +8,8 @@ function getCanvas(idCanvas){
         globalDPR: 1,
         widthDOM: 0,
         heightDOM: 0,
+        cWidth: 0,
+        cHeight: 0,
         adjustSizing(){
             const dpr = window.devicePixelRatio || 1
             const rect = this.canvas.getBoundingClientRect()
@@ -23,6 +25,8 @@ function getCanvas(idCanvas){
                 //update sizing members
                 this.widthDOM = rect.width
                 this.heightDOM = rect.height
+                this.cWidth = calculatedWidth
+                this.cHeight = calculatedHeight
             }
         }
     }
