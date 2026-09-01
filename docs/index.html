@@ -295,6 +295,12 @@ w?usp=share_link
         </div>
     </div>
 
+    <!-- amazingDrawing -->
+
+    <div class="section-container reveal">
+        <canvas id="amazingDrawing" class="amazingDrawing"></canvas>
+    </div>
+
     <script>
         const reveals = document.querySelectorAll(".reveal");
         const observer = new IntersectionObserver(entries => {
@@ -412,6 +418,31 @@ w?usp=share_link
             */
         }
         //alert("image loaded for background")
+    </script>
+
+    <!-- this should be used for new engine's testing-->
+    <script type="module">
+        import {getCanvas} from './js/modules/CanvasEngine/factory.mjs'
+        import {registerSizingChange} from './js/modules/CanvasEngine/rendering.mjs'
+        let canvas = getCanvas('amazingDrawing')
+        canvas.adjustSizing()
+        canvas.ctx.fillStyle = 'rgba(255,255,255,1)'
+        canvas.ctx.beginPath()
+        canvas.ctx.arc(100,20,10,0,Math.PI*2,false)
+        canvas.ctx.fill()
+        canvas.ctx.closePath()
+        console.log('canvas fully drawn')
+        registerSizingChange(canvas, function (){
+            let redComponent = Math.round(Math.random() * 255)
+            let greenComponent = Math.round(Math.random() * 254)
+            let blueComponent = Math.round(Math.random() * 254)
+            console.log('rgba(' + redComponent + ',' + greenComponent +',' + blueComponent + ',1)')
+            canvas.ctx.fillStyle = 'rgba(' + redComponent + ',' + greenComponent +',' + blueComponent + ',1)'
+            canvas.ctx.beginPath()
+            canvas.ctx.arc(100,20,10,0,Math.PI*2,false)
+            canvas.ctx.fill()
+            canvas.ctx.closePath()
+        })
     </script>
 </body>
 </html>

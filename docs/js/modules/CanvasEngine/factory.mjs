@@ -1,4 +1,4 @@
-function getCanvas(idCanvas, containerWidth, containerHeight){
+function getCanvas(idCanvas){
     let canvas = document.getElementById(idCanvas)
     let ctx = canvas.getContext('2d')
     //using a obj in return statement
@@ -8,13 +8,13 @@ function getCanvas(idCanvas, containerWidth, containerHeight){
         globalDPR: 1,
         widthDOM: 0,
         heightDOM: 0,
-        adjustCanvasToWindow(){
+        adjustSizing(){
             const dpr = window.devicePixelRatio || 1
             const rect = this.canvas.getBoundingClientRect()
             const calculatedWidth = Math.round(rect.width * dpr)
             const calculatedHeight = Math.round(rect.height * dpr)
             //change only mechanism
-            if(dprGlobal != dpr || this.canvas.width != calculatedWidth || this.canvas.height != calculatedHeight){
+            if(this.globalDPR != dpr || this.canvas.width != calculatedWidth || this.canvas.height != calculatedHeight){
                 this.globalDPR = dpr
                 //these dimensions are canvas drawing area related, not DOM element dimensions
                 this.canvas.width = calculatedWidth
@@ -24,6 +24,8 @@ function getCanvas(idCanvas, containerWidth, containerHeight){
                 this.widthDOM = rect.width
                 this.heightDOM = rect.height
             }
-        } 
+        }
     }
 }
+
+export {getCanvas}
