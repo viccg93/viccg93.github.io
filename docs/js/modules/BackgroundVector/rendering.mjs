@@ -1,4 +1,4 @@
-import {updateParticlePosition} from './physics.mjs'
+import {updateParticlePosition, getMaxSpeed} from './physics.mjs'
 let initialStamp = 0
 let lastStampRecorded = 0
 //this value is for 60 fps
@@ -10,14 +10,27 @@ let particles = []
 function initParticles(canvas, particles){
     for(let i=0; i < particles.length; i++){
         drawParticle(canvas, particles[i])
+        //max speed bypassed here, SHOULD be evaluated as a temp place, COHERENT model not validated
+        //this axiom is all cases valid
+        particles[i].maxSpeed = getMaxSpeed(canvas.cHeight -(particles[i].initialY))
     }
 }
 
+//TODO this should be OPTIMISED for non nominal cases and avoid repetitive axiom
 function updateAnddrawParticles(deltaTime){
     canvas.clearWhole()
     for(const particle of particles){
         updateParticlePosition(particle,deltaTime)
-        drawParticleOnMotion(canvas, particle)
+        //dirty patch prev refactor
+        if(!particle.isAscending && (particle.posY + particle.radius)>canvas.cHeight){
+            particle.posY = canvas.cHeight-particle.radius
+            drawParticleOnMotion(canvas, particle)
+            particle.isAscending = true
+            particle.collisionStamp = performance.now()
+        }else{
+            drawParticleOnMotion(canvas, particle)
+        }
+        
     }
     console.log("posY: " + particles[0].posY)
 }

@@ -24,8 +24,11 @@ function generateParticle(minRadius, maxRadius, cWidth, cHeight, color, zoneRadi
         destinyY: Math.round(Math.random * (cHeight - zoneRadius)),
         //using conservative sys lib for not dealing on 64 float values
         //improvement at future releases
-        initialStamp: Date.now()
+        initialStamp: Date.now(),
+        isAscending: false
     } 
 }
+
+
 
 export {generateParticles}
