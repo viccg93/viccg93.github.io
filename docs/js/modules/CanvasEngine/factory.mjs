@@ -28,6 +28,9 @@ function getCanvas(idCanvas){
                 this.cWidth = calculatedWidth
                 this.cHeight = calculatedHeight
             }
+        },
+        clearWhole(){
+            this.ctx.clearRect(0,0,this.cWidth,this.cHeight)
         }
     }
 }

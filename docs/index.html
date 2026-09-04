@@ -425,29 +425,22 @@ w?usp=share_link
         import {getCanvas} from './js/modules/CanvasEngine/factory.mjs'
         import {registerSizingChange} from './js/modules/CanvasEngine/rendering.mjs'
         import {generateParticles} from './js/modules/BackgroundVector/factory.mjs'
+        import {initParticles, initAnimation} from './js/modules/BackgroundVector/rendering.mjs'
+
+
         let canvas = getCanvas('amazingDrawing')
         canvas.adjustSizing()
         //factory and rendering
-        let particles = generateParticles(30, 70, 200, canvas.cWidth, canvas.cHeight, 'rgba(120,180,220,1)',Math.round((canvas.cWidth+canvas.cHeight)/2*0.35))
-
-
-        canvas.ctx.fillStyle = 'rgba(255,255,255,1)'
-        canvas.ctx.beginPath()
-        canvas.ctx.arc(100,20,10,0,Math.PI*2,false)
-        canvas.ctx.fill()
-        canvas.ctx.closePath()
+        let particles = generateParticles(60, 10, 15, canvas.cWidth, canvas.cHeight, 'rgba(255,255,220,1)',Math.round((canvas.cWidth+canvas.cHeight)/2*0.35))
+        initParticles(canvas, particles)
         console.log('canvas fully drawn')
+        console.log('animation initialisation')
+        initAnimation(canvas, particles)
         //this function does adjust DOMMatrix, so no neccesary clearings are performed
         registerSizingChange(canvas, function (){
-            let redComponent = Math.round(Math.random() * 255)
-            let greenComponent = Math.round(Math.random() * 254)
-            let blueComponent = Math.round(Math.random() * 254)
-            console.log('rgba(' + redComponent + ',' + greenComponent +',' + blueComponent + ',1)')
-            canvas.ctx.fillStyle = 'rgba(' + redComponent + ',' + greenComponent +',' + blueComponent + ',1)'
-            canvas.ctx.beginPath()
-            canvas.ctx.arc(100,20,10,0,Math.PI*2,false)
-            canvas.ctx.fill()
-            canvas.ctx.closePath()
+            console.log("future redrawing technique will be adressed")
+            //hoisting used for testing porpouses only
+            initParticles(canvas, particles)
         })
     </script>
 </body>
