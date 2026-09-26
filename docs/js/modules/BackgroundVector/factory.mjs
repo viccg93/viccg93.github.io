@@ -18,14 +18,15 @@ function generateParticle(minRadius, maxRadius, cWidth, cHeight, color, zoneRadi
     return {
         radius: Math.round((Math.random()*maxRadius) + minRadius),
         //this value isn't magical, it does represent superior non visible limit on y axis
-        initialY: -Math.round((Math.random() * 60) + 20),
+        initialY: -Math.round((Math.random() * 500) + 100),
         initialX: Math.round((Math.random()*cWidth - 1) + 1),
         fillStyle: color,
-        destinyY: Math.round(Math.random * (cHeight - zoneRadius)),
+        destinyY: Math.round(Math.random() * (cHeight - zoneRadius)),
         //using conservative sys lib for not dealing on 64 float values
         //improvement at future releases
         initialStamp: Date.now(),
-        isAscending: false
+        isAscending: false, 
+        initialSpeed:0
     } 
 }
 

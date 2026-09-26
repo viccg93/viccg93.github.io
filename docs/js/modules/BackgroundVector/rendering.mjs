@@ -1,4 +1,4 @@
-import {updateParticlePosition, getMaxSpeed} from './physics.mjs'
+import {updateParticlePosition, getCollisionSpeed} from './physics.mjs'
 let initialStamp = 0
 let lastStampRecorded = 0
 //this value is for 60 fps
@@ -12,7 +12,8 @@ function initParticles(canvas, particles){
         drawParticle(canvas, particles[i])
         //max speed bypassed here, SHOULD be evaluated as a temp place, COHERENT model not validated
         //this axiom is all cases valid
-        particles[i].maxSpeed = getMaxSpeed(canvas.cHeight -(particles[i].initialY))
+        particles[i].totalHeight = canvas.cHeight - particles[i].initialY
+        particles[i].collisionSpeed = getCollisionSpeed(particles[i].totalHeight)
     }
 }
 
@@ -27,6 +28,7 @@ function updateAnddrawParticles(deltaTime){
             drawParticleOnMotion(canvas, particle)
             particle.isAscending = true
             particle.collisionStamp = performance.now()
+            particle.posCollision = particle.posY
         }else{
             drawParticleOnMotion(canvas, particle)
         }
@@ -49,6 +51,7 @@ function drawParticleOnMotion(canvas, particle){
     canvas.ctx.beginPath()
     canvas.ctx.arc(particle.initialX,particle.posY, particle.radius, 0, Math.PI*2,false)
     canvas.ctx.fill()
+    canvas.ctx.stroke()
     canvas.ctx.closePath()
 }
 
