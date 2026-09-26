@@ -297,8 +297,14 @@ w?usp=share_link
 
     <!-- amazingDrawing -->
 
-    <div class="section-container reveal">
+    <div class="section-container reveal" style="display: none;">
         <canvas id="amazingDrawing" class="amazingDrawing"></canvas>
+    </div>
+
+     <!-- sprite section -->
+
+    <div class="section-container reveal">
+        <canvas id="spriteCanvas" class="amazingDrawing"></canvas>
     </div>
 
     <script>
@@ -421,6 +427,7 @@ w?usp=share_link
     </script>
 
     <!-- this should be used for new engine's testing-->
+     <!--
     <script type="module">
         import {getCanvas} from './js/modules/CanvasEngine/factory.mjs'
         import {registerSizingChange} from './js/modules/CanvasEngine/rendering.mjs'
@@ -442,6 +449,26 @@ w?usp=share_link
             //hoisting used for testing porpouses only
             initParticles(canvas, particles)
         })
+    </script>
+    -->
+
+    <!-- this part is only intended for new sprite engine testing -->
+     <!--148 h1 140 w1 - r4 (h1*3)-->
+
+    <script type="module">
+        import {drawSprite} from './js/modules/SpriteEngine/rendering.mjs'
+        import {getCanvas} from './js/modules/CanvasEngine/factory.mjs'
+        import {generateAtlas} from './js/modules/SpriteEngine/dataProcessing.mjs'
+        let spriteCanvas = getCanvas('spriteCanvas')
+        spriteCanvas.adjustSizing()
+        const spriteSheetPath = './spritesheets/sprites3.png'
+        const atlas = generateAtlas(5,8,140,160,[1,1.05,1.12,1.23,1.6],5,3)
+        console.log(atlas)
+        let element = atlas[32]
+        //drawSprite(canvasObj, path, atlasElement, destinyWidth, destinyHeight){
+        //drawSprite(spriteCanvas, spriteSheetPath, element,element.width,element.height)
+        drawSprite(spriteCanvas, spriteSheetPath, element,element.width*2,element.height*2)
+
     </script>
 </body>
 </html>
