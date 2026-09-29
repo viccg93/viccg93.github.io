@@ -69,7 +69,7 @@
         <section id="detail-section">
             <h3 class="bruno-ace-sc-regular">Acerca de mi</h3>
         </section>
-        
+
     </div>
     <div id="main-description" class="reveal">
         <article class="alata-regular">
@@ -138,7 +138,7 @@
         </div>
 
             <!--
-            
+
             <p>
                 Stacks profesionales:
                 <ul>
@@ -203,7 +203,7 @@ w?usp=share_link
         <section id="detail-section">
             <h3 class="bruno-ace-sc-regular">Experiencia</h3>
         </section>
-        
+
     </div>
     <div id="backgroundContainer" class="section-container reveal">
         <canvas id="canvasBg0" class="backgrounded-canvas"></canvas>
@@ -212,7 +212,7 @@ w?usp=share_link
             <p>SEP/25</p>
         </div>
         <div class="subsection-overlay">
-            <p class="subsection-title bruno-ace-sc-regular">Gentera</p>  
+            <p class="subsection-title bruno-ace-sc-regular">Gentera</p>
             <p class="subsection-subtitle alata-regular">Consultor Redwood / Consultor Control-M</p>
 
             <section class="subsection-text alata-regular">
@@ -267,7 +267,7 @@ w?usp=share_link
         </div>
         <div class="subsection-overlay">
             <p class="subsection-title bruno-ace-sc-regular">Directo Telecom</p>
-            <p class="subsection-subtitle alata-regular">Ingeniero Devops</p> 
+            <p class="subsection-subtitle alata-regular">Ingeniero Devops</p>
         </div>
     </div>
 
@@ -279,7 +279,7 @@ w?usp=share_link
         </div>
         <div class="subsection-overlay">
             <p class="subsection-title bruno-ace-sc-regular">E-Global</p>
-            <p class="subsection-subtitle alata-regular">Prgramador analista SR.</p> 
+            <p class="subsection-subtitle alata-regular">Prgramador analista SR.</p>
         </div>
     </div>
 
@@ -291,7 +291,7 @@ w?usp=share_link
         </div>
         <div class="subsection-overlay">
             <p class="subsection-title bruno-ace-sc-regular">Museo Palacio de Bellas Artes</p>
-            <p class="subsection-subtitle alata-regular">Programador web</p> 
+            <p class="subsection-subtitle alata-regular">Programador web</p>
         </div>
     </div>
 
@@ -369,7 +369,7 @@ w?usp=share_link
             "portfolio_img/egl_bg.jpeg",
             "portfolio_img/mpba_bg.jpg"
         ]
-            
+
         let promises = backgroundImages.map(src => {
             return new Promise((resolve, reject) => {
                 const img = new Image();
@@ -397,7 +397,7 @@ w?usp=share_link
             animateBackground(backgroundVirreyes, 200)
             */
         })
-        
+
         function loadAnimation(idElement, background, delay){
             const element = document.getElementById(idElement)
 
@@ -412,7 +412,7 @@ w?usp=share_link
             }, {
                 threshold: 0.05
             });
-            
+
             observer.observe(element);
 
             /*
@@ -458,17 +458,22 @@ w?usp=share_link
     <script type="module">
         import {drawSprite} from './js/modules/SpriteEngine/rendering.mjs'
         import {getCanvas} from './js/modules/CanvasEngine/factory.mjs'
-        import {generateAtlas} from './js/modules/SpriteEngine/dataProcessing.mjs'
+        import {generateAtlas, getSpriteSheet} from './js/modules/SpriteEngine/dataProcessing.mjs'
         let spriteCanvas = getCanvas('spriteCanvas')
         spriteCanvas.adjustSizing()
-        const spriteSheetPath = './spritesheets/sprites3.png'
-        const atlas = generateAtlas(5,8,140,160,[1,1.05,1.12,1.23,1.6],5,3)
+        const spriteSheetPath = './spritesheets/sprites6.png'
+        const spriteSheet = await getSpriteSheet(spriteSheetPath)
+        const rowHeights = [178,165,185,185,194,153,125]
+        const atlas = generateAtlas(7,8,160,rowHeights,4,4)
         console.log(atlas)
-        let element = atlas[32]
-        //drawSprite(canvasObj, path, atlasElement, destinyWidth, destinyHeight){
-        //drawSprite(spriteCanvas, spriteSheetPath, element,element.width,element.height)
-        drawSprite(spriteCanvas, spriteSheetPath, element,element.width*2,element.height*2)
-
+        let x = 0
+        let scaleFactor = 1.5
+        for(let i=8; i<16; i++){
+          let element = atlas[i]
+          //drawSprite(spriteCanvas, spriteSheetPath, element,element.width,element.height)
+          drawSprite(spriteCanvas, spriteSheet, element,x, spriteCanvas.cHeight - (element.height+50), element.width*scaleFactor, element.height*scaleFactor)
+          x+=Math.floor((element.width*scaleFactor)-120)
+        }
     </script>
 </body>
 </html>
