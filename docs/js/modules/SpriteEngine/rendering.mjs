@@ -1,12 +1,15 @@
 //this module relies on canvasEngine, whenever canvasObj is called you should take for granted that it refers to an instance of that
 async function drawSprite(canvasObj, spriteSheet, atlasElement, x, y, destinyWidth, destinyHeight){
   if (spriteSheet != null) {
+    /*
     canvasObj.ctx.imageSmoothingEnabled = false;
     canvasObj.ctx.mozImageSmoothingEnabled = false;
     canvasObj.ctx.webkitImageSmoothingEnabled = false;
-    //canvasObj.ctx.imageSmoothingQuality = "high";
+    */
+    canvasObj.ctx.imageSmoothingQuality = "low";
     //canvasObj.ctx.drawImage(spriteSheet,atlasElement.x,atlasElement.y,atlasElement.width, atlasElement.height,x,y,destinyWidth,destinyHeight)
-    canvasObj.ctx.drawImage(
+    canvasObj.canvas.getContext('2d').drawImage(
+    //canvasObj.ctx.drawImage(
       spriteSheet,
       Math.floor(atlasElement.x),
       Math.floor(atlasElement.y),

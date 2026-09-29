@@ -471,7 +471,7 @@ w?usp=share_link
         for(let i=8; i<16; i++){
           let element = atlas[i]
           //drawSprite(spriteCanvas, spriteSheetPath, element,element.width,element.height)
-          drawSprite(spriteCanvas, spriteSheet, element,x, spriteCanvas.cHeight - (element.height+50), element.width*scaleFactor, element.height*scaleFactor)
+          drawSprite(spriteCanvas, spriteSheet, element,x, spriteCanvas.heightDOM - ((element.height*scaleFactor)+50), element.width*scaleFactor, element.height*scaleFactor)
           x+=Math.floor((element.width*scaleFactor)-120)
         }
     </script>
