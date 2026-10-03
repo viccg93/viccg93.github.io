@@ -456,24 +456,48 @@ w?usp=share_link
      <!--148 h1 140 w1 - r4 (h1*3)-->
 
     <script type="module">
-        import {drawSprite} from './js/modules/SpriteEngine/rendering.mjs'
+        import {drawSprite, drawLandscape, drawFramedLandscape} from './js/modules/SpriteEngine/rendering.mjs'
         import {getCanvas} from './js/modules/CanvasEngine/factory.mjs'
-        import {generateAtlas, getSpriteSheet} from './js/modules/SpriteEngine/dataProcessing.mjs'
+        import {generateAtlas, getSpriteSheet, getLandscape} from './js/modules/SpriteEngine/dataProcessing.mjs'
         let spriteCanvas = getCanvas('spriteCanvas')
         spriteCanvas.adjustSizing()
         const spriteSheetPath = './spritesheets/sprites6.png'
         const spriteSheet = await getSpriteSheet(spriteSheetPath)
+        const widthReference = 160
         const rowHeights = [178,165,185,185,194,153,125]
-        const atlas = generateAtlas(7,8,160,rowHeights,4,4)
-        console.log(atlas)
-        let x = 0
-        let scaleFactor = 1.5
-        for(let i=8; i<16; i++){
-          let element = atlas[i]
-          //drawSprite(spriteCanvas, spriteSheetPath, element,element.width,element.height)
-          drawSprite(spriteCanvas, spriteSheet, element,x, spriteCanvas.heightDOM - ((element.height*scaleFactor)+50), element.width*scaleFactor, element.height*scaleFactor)
-          x+=Math.floor((element.width*scaleFactor)-120)
+        const atlas = generateAtlas(7,8,widthReference,rowHeights,4,4)
+        const landscape = getLandscape({
+            atlas: atlas, 
+            canvasWidth: spriteCanvas.widthDOM,
+            canvasHeight: spriteCanvas.heightDOM,
+            numberOfElements: 30, 
+            widthRelationExpected: 0.2, 
+            widthReference: widthReference 
+        })
+        drawLandscape(spriteCanvas, landscape, spriteSheet)
+
+        //function for landscape animation
+        const startStamp = performance.now()
+        let lastFrameStamp = startStamp
+        const fps = 60
+        const timewindow = 1000/60 
+        animate()
+
+        function animate(){
+            let capturedTime = performance.now()
+            let delta = capturedTime- lastFrameStamp
+            if(delta>=timewindow){
+                //frame should be triggered
+                //drawLandscape(spriteCanvas, landscape, spriteSheet)
+                let deltaTime = capturedTime - startStamp
+                drawFramedLandscape(spriteCanvas, landscape, spriteSheet, deltaTime)
+                lastFrameStamp = performance.now()
+            }
+            requestAnimationFrame(animate)
         }
+
+        console.log(landscape)
+
     </script>
 </body>
 </html>

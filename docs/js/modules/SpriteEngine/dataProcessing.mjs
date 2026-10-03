@@ -29,4 +29,33 @@ async function getSpriteSheet(path) {
   return spriteSheet
 }
 
-export {generateAtlas, getSpriteSheet}
+function getScaleFactor(canvasWidth, widthRelationExpected, widthReference) {
+  let expectedWidth = canvasWidth * widthRelationExpected
+  return (expectedWidth/widthReference).toFixed(2)
+}
+
+function getLandscape({ atlas, canvasWidth, canvasHeight, numberOfElements, widthRelationExpected, widthReference,}){
+  let landscape = [], counter=0
+  const scaleFactor = getScaleFactor(canvasWidth, widthRelationExpected, widthReference)
+  //offset element to fill empty gap at 0 position of x axis
+  const offsetIndex = Math.round(Math.random()*(atlas.length-1))
+  landscape.push(generateLandscapeElement(atlas[offsetIndex], canvasHeight, (-atlas[offsetIndex].width/2),scaleFactor))
+  while(counter<(numberOfElements-2)){
+    const index = Math.round(Math.random()*(atlas.length-1))
+    landscape.push(generateLandscapeElement(atlas[index],canvasHeight,Math.round(Math.random() * canvasWidth),scaleFactor))
+    counter++
+  }
+  return landscape
+}
+
+function generateLandscapeElement(atlasReference, canvasHeight, xPosition, scaleFactor){
+  return {
+    x: xPosition,
+    y: canvasHeight - (20),
+    width: atlasReference.width * scaleFactor,
+    height: atlasReference.height * scaleFactor,
+    atlasReference: atlasReference
+}
+}
+
+export {generateAtlas, getSpriteSheet, getLandscape}
