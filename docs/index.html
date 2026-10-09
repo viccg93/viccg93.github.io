@@ -361,6 +361,8 @@ w?usp=share_link
         initCanvas(900, sources, ()=>{console.log('initialisation completed')})
     </script>
 
+    <!--
+
     <script type="module">
         import {initBackground, animateBackground} from './js/modules/LiveBackground/rendering.mjs'
         const backgroundImages = [
@@ -391,12 +393,6 @@ w?usp=share_link
             loadAnimation("backgroundContainer3", backgroundVirreyes, 200)
             loadAnimation("backgroundContainer4", backgroundEgl, 200)
             loadAnimation("backgroundContainer5", backgroundMPBA, 200)
-
-            /*
-            animateBackground(background, 200)
-            animateBackground(backgroundEverest, 200)
-            animateBackground(backgroundVirreyes, 200)
-            */
         })
 
         function loadAnimation(idElement, background, delay){
@@ -415,17 +411,11 @@ w?usp=share_link
             });
 
             observer.observe(element);
-
-            /*
-            element.addEventListener('transitionend', () => {
-                if (parseFloat(window.getComputedStyle(element).opacity) > 0.01) {
-                    animateBackground(background, delay)
-                }
-            });
-            */
         }
         //alert("image loaded for background")
     </script>
+
+    -->
 
     <!-- this should be used for new engine's testing-->
      <!--
