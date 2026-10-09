@@ -480,21 +480,14 @@ w?usp=share_link
         //function for landscape animation
         const startStamp = performance.now()
         let lastFrameStamp = startStamp
-        const fps = 60
-        const timewindow = Math.round(1000/fps)
-        console.log("time window: " + timewindow)
-        animate()
+        //high precision timestamp is bypassed by web browser as a callback
+        window.requestAnimationFrame(animate)
 
-        function animate(){
-            let capturedTime = performance.now()
-            let delta = capturedTime- lastFrameStamp
-            if(delta>=timewindow){
-                //frame should be triggered
-                //drawLandscape(spriteCanvas, landscape, spriteSheet)
-                let deltaTime = capturedTime - startStamp
-                drawFramedLandscape(spriteCanvas, landscape, spriteSheet, deltaTime)
-                lastFrameStamp = performance.now()
-            }
+        function animate(currentStamp){
+            //deltaTime means in this context time elapsed from right before first frame calling
+            let deltaTime = currentStamp - startStamp
+            drawFramedLandscape(spriteCanvas, landscape, spriteSheet, deltaTime)
+            lastFrameStamp = currentStamp
             requestAnimationFrame(animate)
         }
 
