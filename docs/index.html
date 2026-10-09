@@ -469,6 +469,7 @@ w?usp=share_link
         //function for landscape animation
         const startStamp = performance.now()
         let lastFrameStamp = startStamp
+        console.log("frame requesting is about to be called")
         //high precision timestamp is bypassed by web browser as a callback
         window.requestAnimationFrame(animate)
 
@@ -479,8 +480,6 @@ w?usp=share_link
             lastFrameStamp = currentStamp
             requestAnimationFrame(animate)
         }
-
-        console.log(landscape)
 
     </script>
 </body>
