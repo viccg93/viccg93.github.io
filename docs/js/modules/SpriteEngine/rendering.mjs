@@ -33,18 +33,12 @@ function drawLandscape(canvasObj, landscape, spriteSheet) {
 
 function drawFramedLandscape(canvasObj, landscape, spriteSheet, deltaTime){
   console.log(deltaTime)
-  //prevents singularity in dt = 0
-  if(deltaTime>0 && deltaTime < 5000){
-    //console.log("drawing triggered")
-    canvasObj.ctx.beginPath()
-    canvasObj.ctx.fillStyle = 'rgba(255, 255, 255, 0.92)'
-    canvasObj.ctx.rect(0,0,canvasObj.widthDOM,canvasObj.heightDOM)
-    canvasObj.ctx.fill()
-    canvasObj.ctx.closePath()
+  //prevents singularity in dt = 0 due to model bh/(deltaTime/1000)
+  if(deltaTime>0){
+    clearWholeCanvas(canvasObj)
     //building drawing phase
     for(const building of landscape){
       let space = building.height - (building.height/(deltaTime/1000))
-      //console.log("space: " + space)
       if(building.height - space > 10){
         drawSprite(canvasObj, spriteSheet, building.atlasReference, building.x, (building.y-space), building.width, building.height) 
       }
@@ -52,6 +46,10 @@ function drawFramedLandscape(canvasObj, landscape, spriteSheet, deltaTime){
   }else{
     console.log("not drawing anything")
   }
+}
+
+function clearWholeCanvas(canvasObj){
+  canvasObj.ctx.clearRect(0,0,canvasObj.widthDOM, canvasObj.heightDOM)
 }
 
 export {drawSprite, drawLandscape, drawFramedLandscape}
