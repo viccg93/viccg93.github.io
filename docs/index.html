@@ -205,6 +205,7 @@ w?usp=share_link
         </section>
 
     </div>
+    <!--
     <div id="backgroundContainer" class="section-container reveal">
         <canvas id="canvasBg0" class="backgrounded-canvas"></canvas>
         <div class="date-container bruno-ace-sc-regular">
@@ -294,7 +295,7 @@ w?usp=share_link
             <p class="subsection-subtitle alata-regular">Programador web</p>
         </div>
     </div>
-
+    -->
     <!-- amazingDrawing -->
 
     <div class="section-container reveal" style="display: none;">
@@ -470,7 +471,7 @@ w?usp=share_link
             atlas: atlas, 
             canvasWidth: spriteCanvas.widthDOM,
             canvasHeight: spriteCanvas.heightDOM,
-            numberOfElements: 30, 
+            numberOfElements: 50, 
             widthRelationExpected: 0.2, 
             widthReference: widthReference 
         })
@@ -480,7 +481,8 @@ w?usp=share_link
         const startStamp = performance.now()
         let lastFrameStamp = startStamp
         const fps = 60
-        const timewindow = 1000/60 
+        const timewindow = Math.round(1000/fps)
+        console.log("time window: " + timewindow)
         animate()
 
         function animate(){

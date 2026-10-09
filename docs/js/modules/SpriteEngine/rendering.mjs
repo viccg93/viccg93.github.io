@@ -19,7 +19,7 @@ function drawSprite(canvasObj, spriteSheet, atlasElement, x, y, destinyWidth, de
       Math.floor(y),
       Math.floor(destinyWidth),
       Math.floor(destinyHeight)
-    );
+    )
     }else{
         console.error("sprite sheet reference could not be drawn")
     }

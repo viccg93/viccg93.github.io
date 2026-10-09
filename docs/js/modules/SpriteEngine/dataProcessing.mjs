@@ -29,6 +29,7 @@ async function getSpriteSheet(path) {
   return spriteSheet
 }
 
+//this should be changed
 function getScaleFactor(canvasWidth, widthRelationExpected, widthReference) {
   let expectedWidth = canvasWidth * widthRelationExpected
   return (expectedWidth/widthReference).toFixed(2)
