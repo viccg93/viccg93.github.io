@@ -29,33 +29,42 @@ async function getSpriteSheet(path) {
   return spriteSheet
 }
 
-//this should be changed
-function getScaleFactor(canvasWidth, widthRelationExpected, widthReference) {
-  let expectedWidth = canvasWidth * widthRelationExpected
-  return (expectedWidth/widthReference).toFixed(2)
+function getScaleFactor(sizingRef, portion, elemSizing){
+  let factor = 1
+  if(elemSizing>0){
+    factor = (sizingRef*portion)/elemSizing
+  }
+  return  factor
 }
 
-function getLandscape({ atlas, canvasWidth, canvasHeight, numberOfElements, widthRelationExpected, widthReference,}){
+//fixed to canvas height, only leaving custom portions
+function getLandscape({atlas, canvasWidth, canvasHeight, numberOfElements, portionForScale}){
   let landscape = [], counter=0
-  const scaleFactor = getScaleFactor(canvasWidth, widthRelationExpected, widthReference)
+  let maxHeightInLandscape = 0
   //offset element to fill empty gap at 0 position of x axis
   const offsetIndex = Math.round(Math.random()*(atlas.length-1))
-  landscape.push(generateLandscapeElement(atlas[offsetIndex], canvasHeight, (-atlas[offsetIndex].width/2),scaleFactor))
+  landscape.push(generateLandscapeElement(atlas[offsetIndex], canvasHeight, (-atlas[offsetIndex].width/2),portionForScale))
   while(counter<(numberOfElements-2)){
     const index = Math.round(Math.random()*(atlas.length-1))
-    landscape.push(generateLandscapeElement(atlas[index],canvasHeight,Math.round(Math.random() * canvasWidth),scaleFactor))
+    const building = generateLandscapeElement(atlas[index],canvasHeight,Math.round(Math.random() * canvasWidth),portionForScale)
+    maxHeightInLandscape = Math.max(maxHeightInLandscape,building.height)
+    landscape.push(building)
     counter++
   }
-  return landscape
+  return {landscape: landscape, maxHeightInLandscape: maxHeightInLandscape}
 }
 
-function generateLandscapeElement(atlasReference, canvasHeight, xPosition, scaleFactor){
+function generateLandscapeElement(atlasReference, canvasHeight, xPosition, portionForScale){
+  let scaleFactor = getScaleFactor(canvasHeight,portionForScale, atlasReference.height)
   return {
     x: xPosition,
+    //this offset is going to be formalised for optimising phase
+    //in the meantime this should be considered as an extre space below visible y-axis area
     y: canvasHeight - (20),
     width: atlasReference.width * scaleFactor,
     height: atlasReference.height * scaleFactor,
-    atlasReference: atlasReference
+    atlasReference: atlasReference,
+    scaleFactor: scaleFactor
 }
 }
 

@@ -467,13 +467,12 @@ w?usp=share_link
         const widthReference = 160
         const rowHeights = [178,165,185,185,194,153,125]
         const atlas = generateAtlas(7,8,widthReference,rowHeights,4,4)
-        const landscape = getLandscape({
+        const landscapeRef = getLandscape({
             atlas: atlas, 
             canvasWidth: spriteCanvas.widthDOM,
             canvasHeight: spriteCanvas.heightDOM,
             numberOfElements: 50, 
-            widthRelationExpected: 0.2, 
-            widthReference: widthReference 
+            portionForScale: 0.4
         })
         //drawLandscape(spriteCanvas, landscape, spriteSheet)
 
@@ -486,7 +485,7 @@ w?usp=share_link
         function animate(currentStamp){
             //deltaTime means in this context time elapsed from right before first frame calling
             let deltaTime = currentStamp - startStamp
-            drawFramedLandscape(spriteCanvas, landscape, spriteSheet, deltaTime)
+            drawFramedLandscape(spriteCanvas, landscapeRef.landscape, spriteSheet, deltaTime)
             lastFrameStamp = currentStamp
             requestAnimationFrame(animate)
         }
