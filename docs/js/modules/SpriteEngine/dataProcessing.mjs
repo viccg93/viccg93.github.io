@@ -51,7 +51,11 @@ function getLandscape({atlas, canvasWidth, canvasHeight, numberOfElements, porti
     landscape.push(building)
     counter++
   }
-  return {landscape: landscape, maxHeightInLandscape: maxHeightInLandscape}
+
+  //max times units elapsed to draw the whole landscape is calculated here
+  const maxTimeUnits = calculateMaxTimeAnimation(maxHeightInLandscape, 10)
+
+  return {landscape: landscape, maxHeightInLandscape: maxHeightInLandscape, maxTimeUnits: maxTimeUnits}
 }
 
 function generateLandscapeElement(atlasReference, canvasHeight, xPosition, portionForScale){
@@ -65,7 +69,18 @@ function generateLandscapeElement(atlasReference, canvasHeight, xPosition, porti
     height: atlasReference.height * scaleFactor,
     atlasReference: atlasReference,
     scaleFactor: scaleFactor
+  }
 }
+
+function calculateMaxTimeAnimation(referenceElementHeight, precision){
+  const auxPrecision = 20
+  let timeUnits = 0
+  if(precision>0){
+    timeUnits = referenceElementHeight/precision
+  }else{
+    timeUnits = referenceElementHeight/auxPrecision
+  }
+  return timeUnits
 }
 
 export {generateAtlas, getSpriteSheet, getLandscape}

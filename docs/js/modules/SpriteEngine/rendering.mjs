@@ -31,17 +31,19 @@ function drawLandscape(canvasObj, landscape, spriteSheet) {
   }
 }
 
-function drawFramedLandscape(canvasObj, landscape, spriteSheet, deltaTime){
-  console.log(deltaTime)
+function drawFramedLandscape(canvasObj, landscape, spriteSheet, deltaTime, unitDivider, maxTimeUnits){
+  const timeUnits = deltaTime/unitDivider
+  console.log("maxTimeUnits: " + maxTimeUnits + ", timeUnits: " + timeUnits)
   //prevents singularity in dt = 0 due to model bh/(deltaTime/1000)
-  if(deltaTime>0){
+  if(timeUnits>0 && timeUnits < maxTimeUnits){
     clearWholeCanvas(canvasObj)
     //building drawing phase
     for(const building of landscape){
-      let space = building.height - (building.height/(deltaTime/1000))
-      if(building.height - space > 10){
-        drawSprite(canvasObj, spriteSheet, building.atlasReference, building.x, (building.y-space), building.width, building.height) 
+      let space = building.height - (building.height/timeUnits)
+      if(building.height - space > 20){
+        building.lastY = building.y-space
       }
+      drawSprite(canvasObj, spriteSheet, building.atlasReference, building.x, building.lastY, building.width, building.height) 
     }
   }else{
     console.log("not drawing anything")

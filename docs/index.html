@@ -462,7 +462,7 @@ w?usp=share_link
             canvasWidth: spriteCanvas.widthDOM,
             canvasHeight: spriteCanvas.heightDOM,
             numberOfElements: 50, 
-            portionForScale: 0.4
+            portionForScale: 0.25
         })
         //drawLandscape(spriteCanvas, landscape, spriteSheet)
 
@@ -476,7 +476,7 @@ w?usp=share_link
         function animate(currentStamp){
             //deltaTime means in this context time elapsed from right before first frame calling
             let deltaTime = currentStamp - startStamp
-            drawFramedLandscape(spriteCanvas, landscapeRef.landscape, spriteSheet, deltaTime)
+            drawFramedLandscape(spriteCanvas, landscapeRef.landscape, spriteSheet, deltaTime, 1000, landscapeRef.maxTimeUnits)
             lastFrameStamp = currentStamp
             requestAnimationFrame(animate)
         }
