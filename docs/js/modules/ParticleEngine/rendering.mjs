@@ -5,8 +5,35 @@ let canvasWidth = 0, canvasHeight = 0, minRadius = 0, maxRadius = 0, maxCirclesQ
 //configuration
 const fps = 60, msBetweenFrame = Math.round(1000/fps)
 //canvas globals
-let canvas = document.getElementById('main_canvas'), ctx = canvas.getContext('2d'), lastTimeFrame = 0
-let images, circles
+let canvas, ctx
+let images, circles, lastTimeFrame = 0
+
+
+function adjustCanvasToWindow(canvas,ctx){
+    const dpr = window.devicePixelRatio || 1
+    const rect = canvas.getBoundingClientRect()
+    const calculatedWidth = Math.round(rect.width * dpr)
+    const calculatedHeight = Math.round(rect.height * dpr)
+    if(dprGlobal != dpr || canvas.width != calculatedWidth || canvas.height != calculatedHeight){
+        dprGlobal = dpr
+        //these dimensions are canvas drawing area related, not DOM element dimensions
+        canvas.width = calculatedWidth
+        canvas.height = calculatedHeight
+        ctx.scale(dpr,dpr)
+        canvasWidth = rect.width
+        canvasHeight = rect.height
+        updateRadiusValues(canvasWidth, canvasHeight)
+    }
+}
+
+function updateRadiusValues(canvasWidth, canvasHeight){
+    if(canvasWidth>canvasHeight){
+        minRadius = Math.round(canvasWidth/80)
+    }else{
+        minRadius = Math.round(canvasHeight/20)
+    }
+    maxRadius = Math.round(minRadius * 4)
+}
 
 async function loadImages(sources) {
     const promises = sources.map(src => {
@@ -21,38 +48,6 @@ async function loadImages(sources) {
     return Promise.all(promises);
 }
 
-function adjustCanvasToWindow(canvas,ctx){
-    const dpr = window.devicePixelRatio || 1
-    const rect = canvas.getBoundingClientRect()
-    const calculatedWidth = Math.round(rect.width * dpr)
-    const calculatedHeight = Math.round(rect.height * dpr)
-    if(dprGlobal != dpr || canvas.width != calculatedWidth || canvas.height != calculatedHeight){
-        dprGlobal = dpr
-        //these dimensions are canvas drawing area related, not DOM element dimensions
-        canvas.width = calculatedWidth
-        canvas.height = calculatedHeight
-        ctx.scale(dpr,dpr)
-        //adjust globals for convenience
-        canvasWidth = rect.width
-        canvasHeight = rect.height
-        //maxRadius = Math.round((canvasHeight)*(1/7))
-        //minRadius = Math.round(maxRadius/5)
-        if(canvasWidth>canvasHeight){
-            minRadius = Math.round(canvasWidth/80)
-        }else{
-            minRadius = Math.round(canvasHeight/30)
-        }
-
-        maxRadius = Math.round(minRadius * 3)
-
-        /*
-        let aspectRelation = canvasWidth/canvasHeight
-
-        maxRadius = Math.round(aspectRelation*(((canvasWidth+canvasHeight)/2)*(20/canvasWidth)))
-        minRadius = Math.round(canvasWidth*0.005)
-        */
-    }
-}
 function clearCanvas(ctx){
     ctx.fillStyle = 'rgba(255,255,255,0.6)'
     ctx.beginPath()
@@ -61,7 +56,7 @@ function clearCanvas(ctx){
     ctx.closePath()
 }
 
-function drawCircle(ctx, circle){
+function drawCircle(ctx, circle, deltaTime){
     const frameWindow = 1000/400
     if(circle.validateDrawability()){
         //translations and rotations on the cartesian field are made but original state is guaranteed post-process
@@ -69,12 +64,9 @@ function drawCircle(ctx, circle){
         ctx.save()
         ctx.translate(Math.round(circle.xPos), Math.round(circle.yPos))
         //w refers to angular speed
-        //s refers to spin coeficient
-        const s = 2
-        let w = (s*circle.speed)/circle.radius
-        //w is adjusted to match fps canvas refresh rate
-        if(circle.angle > (Math.PI/2)){w = -w}
-        circle.spinAngle = circle.spinAngle += (w/frameWindow)
+        const w = (2 * circle.speed) / circle.radius
+        const dir = circle.angle > Math.PI / 2 ? -1 : 1
+        circle.spinAngle += (dir * w * deltaTime) / 1000
         ctx.rotate(circle.spinAngle)
         ctx.arc(0, 0, circle.radius,0,Math.PI*2,true)
         ctx.clip()
@@ -84,19 +76,17 @@ function drawCircle(ctx, circle){
     }
 }
 
-function updateAndDrawCircles(){
+function updateAndDrawCircles(deltaTime){
+    const now = Date.now()
     circles.forEach( (circle, index) => {
         if((!circle.isVisible && !circle.hasAppeared && circle.yPos <= circle.yPosInitial) || (circle.isVisible)){
-            circle.xPos = calculateXPosition(circle)
-            circle.yPos = calculateYPosition(circle)
-            drawCircle(ctx, circle)
+            circle.xPos = calculateXPosition(circle, now)
+            circle.yPos = calculateYPosition(circle, now)
+            drawCircle(ctx, circle, deltaTime)
         }else{
-            circles.splice(index,1)
+            circle.respawn(canvasWidth, canvasHeight, minRadius, maxRadius)
         }
     })
-    if(circles.length < Math.round(maxCirclesQuantity/10)){
-        circles.push(...generateCircles(Math.round(Math.random()*maxCirclesQuantity),canvasWidth,canvasHeight, minRadius, maxRadius, dprGlobal, images))
-    }
 }
 
 function animate(){
@@ -106,13 +96,16 @@ function animate(){
     if(deltaTime > msBetweenFrame){
         adjustCanvasToWindow(canvas,ctx)
         clearCanvas(ctx)
-        updateAndDrawCircles()
+        updateAndDrawCircles(deltaTime)
         lastTimeFrame = Date.now()
     }
     requestAnimationFrame(animate)
 }
 
-async function initCanvas(maxQuantity, sources, callback) {
+async function initCanvas(idCanvas, maxQuantity, sources, callback) {
+    canvas = document.getElementById(idCanvas)
+    ctx = canvas.getContext('2d')
+    adjustCanvasToWindow(canvas,ctx)
     maxCirclesQuantity = maxQuantity
     try{
         images = await loadImages(sources)

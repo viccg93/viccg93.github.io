@@ -7,7 +7,7 @@ function generateCircles(quantityMaxLimit=0, canvasWidth, canvasHeight, minRadiu
     //array with size of realQuantity is created on the fly
     return Array.from({length: realQuantity},(_,index)=>{
         const isNegativeSpace = index > positiveLimit
-        return generateCircle(canvasWidth, canvasHeight, minRadius/dpr, maxRadius/dpr, images, isNegativeSpace)
+        return generateCircle(canvasWidth, canvasHeight, minRadius, maxRadius, images, isNegativeSpace)
     })
 }
 
@@ -19,12 +19,13 @@ function generateCircle(canvasWidth, canvasHeight, minRadius, maxRadius, images,
     const yPos = assignYPosition(canvasHeight)
     const xPos = assignXPosition(canvasWidth, isNegativeSpace)
     const earlyAngle = calculateAngle(canvasWidth, canvasHeight, xPos, yPos)
-    const imgIndex = Math.trunc(Math.random()*(images.length-1))
+    const imgIndex = Math.trunc(Math.random()*images.length)
     const spinStepSlice = 360
 
     let circle = {
         yPos: yPos,
         xPos: xPos,
+        xPosInitial: xPos,
         yPosInitial: yPos,
         angle: earlyAngle,
         spinAngle: 0,
@@ -58,6 +59,16 @@ function generateCircle(canvasWidth, canvasHeight, minRadius, maxRadius, images,
             }
             return result
         },
+        respawn(canvasWidth, canvasHeight, minRadius, maxRadius){
+            this.initialStamp = Date.now()
+            this.hasAppeared = false
+            this.isVisible = false
+            this.xPosInitial = this.xPos = assignXPosition(canvasWidth, Math.random() < 0.33)
+            this.yPosInitial = this.yPos = assignYPosition(canvasHeight)
+            this.angle = calculateAngle(canvasWidth, canvasHeight, this.xPosInitial, this.yPosInitial)
+            this.speed = assignSpeed(this.yPosInitial,this.angle, canvasHeight)
+            this.radius = Math.round(Math.random() * (maxRadius - minRadius) + minRadius)
+        }
     }
     return circle
 }

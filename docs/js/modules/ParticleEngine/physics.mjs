@@ -4,10 +4,6 @@
  
  //round() operations on pixel positions are necessary due canvas pixels are integers, not using it would mean extra overload
 const gravity = 9.8
-//this constant controls how high speed can turn, when higher values are used speeds tend to be stable and slow
-const epsilon = 2.5
-//this helps to control how chaotic single box muller can turn when generating noise
-const sigma = 0.9
 function calculateAngle(canvasWidth, canvasHeight, xPos, yPos){
     let deltaXRD = xPos - canvasWidth
     let minimalGap = Math.PI/64
@@ -47,52 +43,28 @@ function assignXPosition(canvasWidth, isNegativeSpace){
 function assignYPosition(canvasHeight){
     //offside means the minimal gap area between visible canvas and the y-axis limit for possible y values
     const offside = 100
-    const yPos = Math.round((Math.random()*(canvasHeight)) + offside)
+    const yPos = Math.round((Math.random()*(canvasHeight)) + (canvasHeight + offside))
     return yPos
 }
 
-/*normalisedTime means conversion from ms to s due to model usage
-**this should be accounted on new features
-*/
-function calculateXPosition(circle){
-    const elapsedTime = Date.now() - circle.initialStamp
-    const normalisedTime = elapsedTime/1000
-    const xPos = circle.xPos + (circle.speed * Math.cos(circle.angle)*normalisedTime)
-    return Math.round(xPos)
+function calculateXPosition(circle, now){
+    const t = (now - circle.initialStamp) / 1000
+    return Math.round(circle.xPosInitial + circle.speed * Math.cos(circle.angle) * t)
 }
 
-function calculateYPosition(circle){
-    const elapsedTime = Date.now() - circle.initialStamp
-    const normalisedTime = elapsedTime/1000
-    const yPos = circle.yPos - (circle.speed * Math.sin(circle.angle)*normalisedTime-(0.5*gravity*(normalisedTime*normalisedTime)))
-    return Math.round(yPos)
+function calculateYPosition(circle, now){
+    const t = (now - circle.initialStamp) / 1000
+    const y = circle.yPosInitial - (circle.speed * Math.sin(circle.angle) * t - 0.5 * gravity * t * t)
+    return Math.round(y)
 }
 
-/*stocastic generation
-**angle is guaranteed to not be theta -> 0 
-**tendency to infinite over the next thesis 1/sin^2(theta) -> infinite
-**epsilon prevents tendency to infinite on sin²(theta)
-*/
+const minSinAngle = 0.25
+const apexBias = 2   // 1 = uniforme, 2 = sesgado hacia el borde superior
+
 function assignSpeed(yPos, angle, canvasHeight){
-    const sinAngle = Math.sin(angle)
-    const speedRelation = (sinAngle * sinAngle) + (epsilon*epsilon)
-    const minimalSpeed = Math.sqrt((2*gravity*(yPos-canvasHeight))/speedRelation)
-    return generateStocasticVariation(minimalSpeed)
-}
-//using single gaussian and not double box-muller double limit behaviour sigma -> 0.5 (chaotic behaivour)
-function generateStocasticVariation(minimalSpeed){
-    return Math.max(0, minimalSpeed * (1 + (sigma * generateGaussianNoise())))
+    const apex = Math.pow(Math.random(), apexBias) * canvasHeight
+    const sinAngle = Math.max(Math.sin(angle), minSinAngle)
+    return Math.sqrt(2 * gravity * (yPos - apex)) / sinAngle
 }
 
-/*the model used for noise generation is 
-**f(u,v)=sqrt(−2ln(u)​cos(2πv))
-**proven continuity on uE[0,1] y vE[0,1]
-*/
-function generateGaussianNoise(){
-    let u=0, v=0
-    while(u===0) {u = Math.random()}
-    while(v===0) {v = Math.random()}
-    //return f(u,v)
-    return Math.sqrt(-2*Math.log(u)) * Math.cos(2*Math.PI*v)
-}
 export {calculateAngle, assignXPosition, assignYPosition, calculateXPosition, calculateYPosition, assignSpeed}

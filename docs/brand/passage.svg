@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Passage mark">
+  <g fill="none" stroke="#ffffff" stroke-width="16">
+    <rect x="128" y="128" width="256" height="256"/>
+    <circle cx="384" cy="256" r="72"/>
+  </g>
+</svg>

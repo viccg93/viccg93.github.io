@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="800" viewBox="0 0 600 800">
+  <title>Edificio Gentera</title>
+  <desc>Ilustración vectorial monocromática de un edificio de oficinas Gentera sobre fondo transparente.</desc>
+  <g fill="none" stroke="#202020" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Roof and tower silhouette -->
+    <path d="M170 170 L170 132 L205 112 L340 112 L340 139 L395 139 L395 170"/>
+    <path d="M170 170 L395 170 L430 190 L430 560 L395 583 L170 583 Z" fill="#fff" fill-opacity=".0"/>
+    <path d="M170 170 L395 170 L430 190 L430 560 L395 583 L170 583 Z"/>
+    <path d="M395 170 L395 583"/>
+    <path d="M170 170 L205 190 L430 190"/>
+    <path d="M205 190 L205 583"/>
+    <path d="M170 583 L205 605 L430 560"/>
+    <!-- Facade sign -->
+    <path d="M190 215 L374 215 L405 230 L405 273 L190 273 Z" fill="#fff"/>
+    <path d="M374 215 L405 230"/>
+    <text x="292" y="251" fill="#202020" stroke="none" font-family="Arial, Helvetica, sans-serif" font-size="29" font-weight="700" text-anchor="middle" letter-spacing="-.8">gentera</text>
+    <!-- Windows, front face -->
+    <g stroke-width="2.3">
+      <path d="M190 295 H374 M190 342 H374 M190 389 H374 M190 436 H374 M190 483 H374 M190 530 H374"/>
+      <path d="M225 295 V530 M260 295 V530 M295 295 V530 M330 295 V530 M365 295 V530"/>
+    </g>
+    <!-- Side face windows -->
+    <g stroke-width="2.1">
+      <path d="M405 249 L418 256 M405 296 L418 303 M405 343 L418 350 M405 390 L418 397 M405 437 L418 444 M405 484 L418 491"/>
+      <path d="M418 256 V491"/>
+    </g>
+    <!-- Ground-floor podium -->
+    <path d="M135 605 L205 605 L430 560 L475 583 L475 686 L135 686 Z"/>
+    <path d="M205 605 V686 M430 560 V660 L475 686"/>
+    <path d="M135 605 L170 625 L475 625"/>
+    <!-- Entrance canopy -->
+    <path d="M205 625 L365 625 L405 642 L245 642 Z" fill="#fff"/>
+    <path d="M245 642 V686 M365 625 V686 M405 642 V686"/>
+    <!-- Doors -->
+    <path d="M265 650 H345 V686 H265 Z"/>
+    <path d="M305 650 V686"/>
+    <circle cx="298" cy="669" r="1.8" fill="#202020"/>
+    <circle cx="312" cy="669" r="1.8" fill="#202020"/>
+    <!-- Lobby glazing / side panels -->
+    <path d="M185 635 V674 M220 642 V681 M385 640 V676 M420 628 V665"/>
+    <path d="M145 643 L170 657 V686 M160 650 L185 664"/>
+    <!-- Architectural base lines -->
+    <path d="M120 686 H490 M145 700 H465"/>
+    <!-- Roof detail -->
+    <path d="M214 132 H325 M214 145 H325 M350 151 H380"/>
+  </g>
+  <!-- Small leaf emblem above the wordmark -->
+  <g fill="none" stroke="#202020" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M279 202 C281 187 295 181 309 183 C307 198 296 206 279 202 Z"/>
+    <path d="M281 202 L302 187"/>
+  </g>
+</svg>

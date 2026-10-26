@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Víctor Cruz Granillo — Desarrollador</title>
+  <meta name="description" content="Ingeniero en Informática. Desarrollo de software, sistemas y herramientas.">
+  <link rel="icon" type="image/svg+xml" href="./brand/vc-line.svg">
+  <link rel="stylesheet" href="./v2.css">
+</head>
+<body>
+
+  <header class="nav">
+    <a class="brand" href="#top" aria-label="Víctor Cruz — inicio">
+      <svg class="brand-mark" viewBox="110 142 396 256" aria-hidden="true" focusable="false">
+        <g fill="none" stroke="currentColor" stroke-width="24" stroke-linecap="butt" stroke-linejoin="miter">
+          <path d="M128 160 L224 380 L320 160"/>
+          <path d="M451.1 194.3 A96 96 0 1 0 451.1 345.7"/>
+        </g>
+      </svg>
+      <span class="brand-name">Víctor Cruz</span>
+    </a>
+
+    <button class="menu-toggle" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
+      <svg width="22" height="14" viewBox="0 0 22 14" aria-hidden="true">
+        <g stroke="currentColor" stroke-width="1.5">
+          <line x1="0" y1="1" x2="22" y2="1"/>
+          <line x1="0" y1="13" x2="22" y2="13"/>
+        </g>
+      </svg>
+    </button>
+
+    <nav id="menu" class="menu" aria-label="Principal">
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#experiencia">Experiencia</a>
+      <a href="#stack">Stack</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero wrap" id="top">
+      <h1>Víctor Cruz Granillo</h1>
+      <p class="claim">Construyo y mantengo software que hace lo que promete.</p>
+    </section>
+
+    <section id="particle_viewer">
+      <canvas id="particle_canvas" class="wide-canvas"></canvas>
+    </section>
+
+    <section class="wrap" id="sobre-mi">
+      <h2>Sobre mí</h2>
+      <p class="claim">[ pendiente ]</p>
+    </section>
+
+    <section class="wrap" id="experiencia">
+      <h2>Experiencia</h2>
+      <p class="claim">[ pendiente ]</p>
+    </section>
+
+    <section class="wrap" id="stack">
+      <h2>Stack</h2>
+      <p class="claim">[ pendiente ]</p>
+    </section>
+
+    <section class="wrap" id="contacto">
+      <h2>Contacto</h2>
+      <p class="claim">[ pendiente ]</p>
+    </section>
+  </main>
+
+  <script>
+    const toggle = document.querySelector('.menu-toggle');
+    const menu = document.getElementById('menu');
+
+    toggle.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(open));
+      toggle.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    });
+
+    menu.addEventListener('click', (event) => {
+      if (event.target.tagName === 'A') {
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  </script>
+
+  <script type="module">
+    import {initCanvas} from './js/modules/ParticleEngine/rendering.mjs'
+
+    const sources = [
+      "portfolio_img/Java-logo.jpg",
+      "portfolio_img/docker.png",
+      "portfolio_img/idea.png",
+      "portfolio_img/jquery.png",
+      "portfolio_img/mariadb.png",
+      "portfolio_img/node.png",
+      "portfolio_img/redis.png",
+      "portfolio_img/spring_boot.png",
+      "portfolio_img/android.jpg",
+      "portfolio_img/express.png",
+      "portfolio_img/java_2.png",
+      "portfolio_img/js.png",
+      "portfolio_img/mongodb.jpg",
+      "portfolio_img/php.png",
+      "portfolio_img/rust.png",
+      "portfolio_img/struts.jpeg",
+      "portfolio_img/angular.png",
+      "portfolio_img/java_logo2.png",
+      "portfolio_img/jenkins.jpg",
+      "portfolio_img/kotlin.jpeg",
+      "portfolio_img/mssql.png",
+      "portfolio_img/php_pdo.png",
+      "portfolio_img/shell.png",
+      "portfolio_img/vscode.png",
+      "portfolio_img/css3.jpg",
+      "portfolio_img/html5.png",
+      "portfolio_img/jetpack_compose.png",
+      "portfolio_img/linux.jpg",
+      "portfolio_img/mysql.png",
+      "portfolio_img/php_slim.jpg",
+      "portfolio_img/spring.png",
+      "portfolio_img/webpack.jpg"
+    ];
+    initCanvas('particle_canvas', 200, sources, ()=>{console.log('canvas has been initialised')})
+  </script>
+
+</body>
+</html>

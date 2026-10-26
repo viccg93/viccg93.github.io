@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <!-- external links -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Alata&family=Bruno+Ace+SC&display=swap" rel="stylesheet">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&family=Fredoka:wght@300..700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+
+    <!-- self-hosted links-->
+    <link rel="stylesheet" href="./main_styles.css">
+
+</head>
+<body>
+    <div class="topnav" id="myTopnav">
+        <a id="logo-container" href="#home" class="active">
+            <img src="./minimal_logo.png" alt="" srcset="">
+        </a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+    <div id="landing_container">
+        <div id="canvasContainer" class="canvasContainer">
+            <canvas id="main_canvas" width="2000px" height="600px"></canvas>
+        </div>
+        <div class="overlay">
+            <p class="fade-blur delay subhero alata-regular landing-text">Programador Java, Spring, JS y estudiante de filosofia.</p>
+
+            <h1 class="fade-blur bruno-ace-sc-regular landing-heading">Víctor Cruz Granillo</h1>
+            <p class="fade-blur delay">Developed by Ch40t1cR1z0m4.</p>
+        </div>
+        <div class="badges-vertical-list">
+            <div class="badge-item">
+                <a href="">
+                    <img src="./portfolio_img/logotipo_ipn.png" class="badge-img">
+                </a>
+            <span class="badge-text">Ingenieria en Informatica</span>
+            </div>
+
+            <div class="badge-item">
+            <img src="./portfolio_img/unam.png" class="badge-img">
+            <span class="badge-text">Licenciatura en Filosofia</span>
+            </div>
+
+            <div class="badge-item">
+                <a href="https://github.com/viccg93" target="_blank">
+                    <img src="./portfolio_img/github.svg" class="badge-img">
+                </a>
+            <span class="badge-text">VicCG93</span>
+            </div>
+
+        </div>
+    </div>
+    <div id="ribbonDetail" class="flex-container">
+        <section id="detail-section">
+            <h3 class="bruno-ace-sc-regular">Acerca de mi</h3>
+        </section>
+
+    </div>
+    <div id="main-description" class="reveal">
+        <article class="alata-regular">
+            <p>
+                Programador de software, estudié Ingeniería en Informática en el IPN (Ced. 14836275) y actualmente estudio Filosofía en la UNAM.
+            </p>
+            <p>
+                Enfasis en soluciones puntuales y pensamiento crítico para evaluar la viabilidad y eficiencia; he trabajado en distintas empresas como desarrollador Redwood, Control-M, DevOps, programador analista y programador web.
+            </p>
+        </article>
+
+        <div class="card-container">
+            <div class="card">
+                <p>
+                    Stacks profesionales
+                    <ul>
+                        <li>PHP (7,8), PDO, Slim, laravel, MySQL, MariaDB.</li>
+                        <li>NodeJS, Express, npm y yarn, MongoDB y Redis.</li>
+                        <li>Java(8-11), Spring 5(web, security, batch y JDBC), Struts2, MSSQL Server y Tomcat.</li>
+                        <li>JS, HTML5(canvas), CSS3(Flexbox, animaciones), jquery.</li>
+                        <li>Angular, Vue, Bootstrap.</li>
+                    </ul>
+                </p>
+            </div>
+
+            <div class="card">
+                <p>
+                    Otros roles
+                    <ul>
+                        <li>Configuración de pipelines en Jenkins.</li>
+                        <li>Creacion de Dockerfiles y despliegue.</li>
+                        <li>Generación de reportes usando RedwoodScript.</li>
+                        <li>Jobs de Control-M con ShellScript.</li>
+                        <li>Solución de vulnerabilidades en codigo legacy.</li>
+                        <li>mantenimiento a servidores RHEL y OpenSUSE.</li>
+                    </ul>
+                </p>
+            </div>
+
+            <div class="card">
+                <p>
+                    Aprendizaje
+                    <ul>
+                        <li>Kotlin y Jetpack Compose.</li>
+                        <li>Rust.</li>
+                        <li>TypeScript.</li>
+                        <li>Containerd.</li>
+                        <li>MakeFile y shells personales.</li>
+                    </ul>
+                </p>
+            </div>
+
+            <div class="card">
+                <p>
+                Cursos y certificiones:
+                <ul>
+                    <li><a href="https://www.scrumstudy.com/certification/verify?type=SFC&number=715539" target="_blank">Scrum fundamentals</a></li>
+                    <li><a href="https://www.udemy.com/certificate/UC-46430a1e-d2b4-4fec-bf6f-3f78a02c313f/" target="_blank">Jenkins</a></li>
+                    <li><a href="" target="_blank">Desarrollo seguro top 10 OWASP 2019</a></li>
+                    <li><a href="" target="_blank">Desarrollo seguro top 10 OWASP 2020</a></li>
+                    <li><a href="" target="_blank">Seguridad de la información</a></li>
+                    <li><a href="" target="_blank">Sensibilización de la seguridad</a></li>
+                </ul>
+            </p>
+            </div>
+        </div>
+
+            <!--
+
+            <p>
+                Stacks profesionales:
+                <ul>
+                    <li>PHP (7 y 8), PDO, Slim, laravel, MySQL, MariaDB</li>
+                    <li>NodeJS, Express, npm y yarn, MongoDB y Redis</li>
+                    <li>Java (5, 7, 8, 11), Spring 5 (web, security, batch y JDBC), Struts2, MSSQL Server y Tomcat</li>
+                    <li>HTML5 (canvas), CSS3 (Flexbox, animaciones), jquery</li>
+                    <li>Angular, Vue, Bootstrap y Bulma</li>
+                </ul>
+            </p>
+            <p>
+                Ademas me he desempeñado en roles con un enfoque menos orientado al desarrollo, usando:
+                <ul>
+                    <li>Configuración de pipelines con Jenkins</li>
+                    <li>Creacion de Dockerfiles y despliegue posterior de contenedores</li>
+                    <li>Generación de reportes usando RedwoodScript y Jobs de Control-M con ShellScript</li>
+                    <li>Actualización y solución de vulnerabilidades en codigo legacy</li>
+                    <li>Solución de vulnerabilidades en servidores RHEL y OpenSUSE</li>
+                </ul>
+            </p>
+            <p>
+                En proyectos personales y de aprendizaje he utilizado:
+                <ul>
+                    <li>Kotlin y Jetpack Compose</li>
+                    <li>Rust</li>
+                    <li>TypeScript</li>
+                    <li>Containerd</li>
+                    <li>MakeFile y shells personales</li>
+                </ul>
+                Gran parte de lo que he realizado se encuentra en <a href="https://github.com/viccg93" target="_blank">Github</a>
+            </p>
+            <p>
+                Cursos y certificiones:
+                <ul>
+                    <li><a href="https://www.scrumstudy.com/certification/verify?type=SFC&number=715539" target="_blank">Scrum fundamentals</a></li>
+                    <li><a href="https://www.udemy.com/certificate/UC-46430a1e-d2b4-4fec-bf6f-3f78a02c313f/" target="_blank">Jenkins</a></li>
+                    <li><a href="" target="_blank">Desarrollo seguro top 10 OWASP 2019</a></li>
+                    <li><a href="" target="_blank">Desarrollo seguro top 10 OWASP 2020</a></li>
+                    <li><a href="" target="_blank">Seguridad de la información</a></li>
+                    <li><a href="" target="_blank">Sensibilización de la seguridad</a></li>
+                </ul>
+            </p>
+            </article>
+        -->
+    </div>
+<!--
+    Desarrollo seguro top 10 OWASP 2019
+https://drive.google.com/file/d/1NdImH74d4qT82MUpXmJzmK-azc8YhR6S/vie
+w?usp=share_link
+Desarrollo seguro top 10 OWASP 2020
+https://drive.google.com/file/d/1sJUpK4NTY51m4JEh0uN1TFTY1uwB3LQt/view?
+usp=share_link
+Seguridad de la información
+https://drive.google.com/file/d/1zw8laciLADltYOOmZo5Q3YUNjZmdgvY_/view?
+usp=share_link
+Sensibilización de la seguridad
+https://drive.google.com/file/d/1i0a5Fav1ZWFwKoGWDZ7tepUUx_KU-CEC/vie
+w?usp=share_link
+-->
+
+    <div id="sectionTitle" class="flex-container">
+        <section id="detail-section">
+            <h3 class="bruno-ace-sc-regular">Experiencia</h3>
+        </section>
+
+    </div>
+    <!--
+    <div id="backgroundContainer" class="section-container reveal">
+        <canvas id="canvasBg0" class="backgrounded-canvas"></canvas>
+        <div class="date-container bruno-ace-sc-regular">
+            <p>JUL/23</p>
+            <p>SEP/25</p>
+        </div>
+        <div class="subsection-overlay">
+            <p class="subsection-title bruno-ace-sc-regular">Gentera</p>
+            <p class="subsection-subtitle alata-regular">Consultor Redwood / Consultor Control-M</p>
+
+            <section class="subsection-text alata-regular">
+                <p>Mis labores esenciales fueron el desarrollo y correccion de Jobs de Redwood y Control-M usando RedwoodScript (Java) y Shell script.</p>
+                <p>Participe en la migración de Redwood a control-M, analisis, desarrollo y pruebas unitarias.</p>
+
+                <p>Actividades clave:</p>
+                <p>
+                    <ul>
+                        <li>Desarrollo y soporte a cliente REST en python para consumir DAGS de Airflow.</li>
+                        <li>Solución de vulnerabilidades en servidores pre-productivos.</li>
+                        <li>Tareas de mantenimiento como generación de certificados SSL y HTTPS en los ambientes de control-M</li>
+                        <li>instalacion de utilidades, entornos virtuales venv y contenedores de Docker.</li>
+                        <li>Elaboración de reportes de ejecución de Folders/Jobs.</li>
+                        <li>Duplicidad de OT's de SAP Banking y Payment Engine en entornos de pruebas.</li>
+                        <li>Pruebas unitarias de las cadenas/folders.</li>
+                        <li>Ejecuciones nocturnas del cierre de dia en entornos de testing.</li>
+                        <li>Desarrollo de una extensión para navegadores basados en Chromium</li>
+                    </ul>
+                </p>
+
+                <p>Tecnologias:</p>
+                <p>
+                    <ul>
+                        <li>Java, RedwoodScript, Python.</li>
+                        <li>Shell-script.</li>
+                        <li>OpenSSL</li>
+                        <li>Redwood,Control-M,SAP GUI</li>
+                    </ul>
+                </p>
+            </section>
+        </div>
+    </div>
+
+    <div id="backgroundContainer2" class="section-container reveal">
+        <canvas id="canvasBg1" class="backgrounded-canvas"></canvas>
+        <div class="date-container bruno-ace-sc-regular">
+            <p>OCT/22</p>
+            <p>MAY/23</p>
+        </div>
+        <div class="subsection-overlay">
+            <p class="subsection-title bruno-ace-sc-regular">Terraza Everest</p>
+            <p class="subsection-subtitle alata-regular">Programador web (PHP SPA)</p>
+        </div>
+    </div>
+
+    <div id="backgroundContainer3" class="section-container reveal">
+        <canvas id="canvasBg2" class="backgrounded-canvas"></canvas>
+        <div class="date-container bruno-ace-sc-regular">
+            <p>MAR/21</p>
+            <p>MAY/21</p>
+        </div>
+        <div class="subsection-overlay">
+            <p class="subsection-title bruno-ace-sc-regular">Directo Telecom</p>
+            <p class="subsection-subtitle alata-regular">Ingeniero Devops</p>
+        </div>
+    </div>
+
+    <div id="backgroundContainer4" class="section-container reveal">
+        <canvas id="canvasBg3" class="backgrounded-canvas"></canvas>
+        <div class="date-container bruno-ace-sc-regular">
+            <p>ENE/18</p>
+            <p>SEP/20</p>
+        </div>
+        <div class="subsection-overlay">
+            <p class="subsection-title bruno-ace-sc-regular">E-Global</p>
+            <p class="subsection-subtitle alata-regular">Prgramador analista SR.</p>
+        </div>
+    </div>
+
+    <div id="backgroundContainer5" class="section-container reveal">
+        <canvas id="canvasBg4" class="backgrounded-canvas"></canvas>
+        <div class="date-container bruno-ace-sc-regular">
+            <p>FEB/16</p>
+            <p>AGO/17</p>
+        </div>
+        <div class="subsection-overlay">
+            <p class="subsection-title bruno-ace-sc-regular">Museo Palacio de Bellas Artes</p>
+            <p class="subsection-subtitle alata-regular">Programador web</p>
+        </div>
+    </div>
+    -->
+    <!-- amazingDrawing -->
+
+    <div class="section-container reveal" style="display: none;">
+        <canvas id="amazingDrawing" class="amazingDrawing"></canvas>
+    </div>
+
+     <!-- sprite section -->
+
+    <div class="section-container reveal">
+        <canvas id="spriteCanvas" class="amazingDrawing"></canvas>
+    </div>
+
+    <script>
+        const reveals = document.querySelectorAll(".reveal");
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                }
+            });
+        }, {
+            threshold: 0.15
+        });
+        reveals.forEach(el => observer.observe(el));
+    </script>
+    <script src="./main_script.js"></script>
+    <script type="module">
+        import {initCanvas} from './js/modules/TechImmanence/rendering.mjs'
+        const sources = [
+                "portfolio_img/Java-logo.jpg",
+                "portfolio_img/docker.png",
+                "portfolio_img/idea.png",
+                "portfolio_img/jquery.png",
+                "portfolio_img/mariadb.png",
+                "portfolio_img/node.png",
+                "portfolio_img/redis.png",
+                "portfolio_img/spring_boot.png",
+                "portfolio_img/android.jpg",
+                "portfolio_img/express.png",
+                "portfolio_img/java_2.png",
+                "portfolio_img/js.png",
+                "portfolio_img/mongodb.jpg",
+                "portfolio_img/php.png",
+                "portfolio_img/rust.png",
+                "portfolio_img/struts.jpeg",
+                "portfolio_img/angular.png",
+                "portfolio_img/java_logo2.png",
+                "portfolio_img/jenkins.jpg",
+                "portfolio_img/kotlin.jpeg",
+                "portfolio_img/mssql.png",
+                "portfolio_img/php_pdo.png",
+                "portfolio_img/shell.png",
+                "portfolio_img/vscode.png",
+                "portfolio_img/css3.jpg",
+                "portfolio_img/html5.png",
+                "portfolio_img/jetpack_compose.png",
+                "portfolio_img/linux.jpg",
+                "portfolio_img/mysql.png",
+                "portfolio_img/php_slim.jpg",
+                "portfolio_img/spring.png",
+                "portfolio_img/webpack.jpg"
+            ];
+        initCanvas(900, sources, ()=>{console.log('initialisation completed')})
+    </script>
+
+    <!--
+
+    <script type="module">
+        import {initBackground, animateBackground} from './js/modules/LiveBackground/rendering.mjs'
+        const backgroundImages = [
+            "portfolio_img/gentera_bg.jpg",
+            "portfolio_img/everest_bg.jpg",
+            "portfolio_img/virreyes.png",
+            "portfolio_img/egl_bg.jpeg",
+            "portfolio_img/mpba_bg.jpg"
+        ]
+
+        let promises = backgroundImages.map(src => {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.src = src;
+                img.onload = () => resolve(img);
+                img.onerror = () => reject(new Error(`Failed to load: ${src}`));
+            })
+        })
+        Promise.all(promises).then((images)=>{
+            let background = initBackground(images[0], "canvasBg0", 50)
+            let backgroundEverest = initBackground(images[1], "canvasBg1", 20)
+            let backgroundVirreyes = initBackground(images[2], "canvasBg2", 20)
+            let backgroundEgl = initBackground(images[3], "canvasBg3", 50)
+            let backgroundMPBA = initBackground(images[4], "canvasBg4", 70)
+
+            loadAnimation("backgroundContainer", background, 200)
+            loadAnimation("backgroundContainer2", backgroundEverest, 200)
+            loadAnimation("backgroundContainer3", backgroundVirreyes, 200)
+            loadAnimation("backgroundContainer4", backgroundEgl, 200)
+            loadAnimation("backgroundContainer5", backgroundMPBA, 200)
+        })
+
+        function loadAnimation(idElement, background, delay){
+            const element = document.getElementById(idElement)
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateBackground(background, delay)
+                        entry.target.querySelector('.subsection-overlay').classList.add("slideIn")
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.05
+            });
+
+            observer.observe(element);
+        }
+        //alert("image loaded for background")
+    </script>
+
+    -->
+
+    <!-- this should be used for new engine's testing-->
+     <!--
+    <script type="module">
+        import {getCanvas} from './js/modules/CanvasEngine/factory.mjs'
+        import {registerSizingChange} from './js/modules/CanvasEngine/rendering.mjs'
+        import {generateParticles} from './js/modules/BackgroundVector/factory.mjs'
+        import {initParticles, initAnimation} from './js/modules/BackgroundVector/rendering.mjs'
+
+
+        let canvas = getCanvas('amazingDrawing')
+        canvas.adjustSizing()
+        //factory and rendering
+        let particles = generateParticles(100, 15, 45, canvas.cWidth, canvas.cHeight, 'rgba(255,255,220,1)',Math.round((canvas.cWidth+canvas.cHeight)/2*0.35))
+        initParticles(canvas, particles)
+        console.log('canvas fully drawn')
+        console.log('animation initialisation')
+        initAnimation(canvas, particles)
+        //this function does adjust DOMMatrix, so no neccesary clearings are performed
+        registerSizingChange(canvas, function (){
+            console.log("future redrawing technique will be adressed")
+            //hoisting used for testing porpouses only
+            initParticles(canvas, particles)
+        })
+    </script>
+    -->
+
+    <!-- this part is only intended for new sprite engine testing -->
+     <!--148 h1 140 w1 - r4 (h1*3)-->
+
+    <script type="module">
+        import {drawSprite, drawLandscape, drawFramedLandscape} from './js/modules/SpriteEngine/rendering.mjs'
+        import {getCanvas} from './js/modules/CanvasEngine/factory.mjs'
+        import {generateAtlas, getSpriteSheet, getLandscape} from './js/modules/SpriteEngine/dataProcessing.mjs'
+        let spriteCanvas = getCanvas('spriteCanvas')
+        spriteCanvas.adjustSizing()
+        const spriteSheetPath = './spritesheets/sprites6.png'
+        const spriteSheet = await getSpriteSheet(spriteSheetPath)
+        const widthReference = 160
+        const rowHeights = [178,165,185,185,194,153,125]
+        const atlas = generateAtlas(7,8,widthReference,rowHeights,4,4)
+        const landscapeRef = getLandscape({
+            atlas: atlas, 
+            canvasWidth: spriteCanvas.widthDOM,
+            canvasHeight: spriteCanvas.heightDOM,
+            numberOfElements: 50, 
+            portionForScale: 0.25
+        })
+        //drawLandscape(spriteCanvas, landscape, spriteSheet)
+
+        //function for landscape animation
+        const startStamp = performance.now()
+        let lastFrameStamp = startStamp
+        console.log("frame requesting is about to be called")
+        //high precision timestamp is bypassed by web browser as a callback
+        window.requestAnimationFrame(animate)
+
+        function animate(currentStamp){
+            //deltaTime means in this context time elapsed from right before first frame calling
+            let deltaTime = currentStamp - startStamp
+            drawFramedLandscape(spriteCanvas, landscapeRef.landscape, spriteSheet, deltaTime, 1000, landscapeRef.maxTimeUnits)
+            lastFrameStamp = currentStamp
+            requestAnimationFrame(animate)
+        }
+
+    </script>
+</body>
+</html>

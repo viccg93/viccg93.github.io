@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Marcas — VC</title>
+<style>
+  :root { color-scheme: dark; }
+  body {
+    margin: 0;
+    background: #000;
+    color: #eee;
+    font-family: ui-sans-serif, system-ui, sans-serif;
+    padding: 48px 24px 96px;
+  }
+  h1 { font-weight: 400; font-size: 14px; letter-spacing: .3em; text-transform: uppercase; opacity: .5; margin: 0 0 40px; }
+  .grid { display: flex; flex-direction: column; gap: 56px; max-width: 900px; margin: 0 auto; }
+  .card h2 { font-weight: 500; font-size: 15px; margin: 0 0 4px; }
+  .card p { margin: 0 0 20px; font-size: 13px; opacity: .55; max-width: 56ch; line-height: 1.5; }
+  .rows { display: flex; flex-direction: column; gap: 12px; }
+  .row { display: flex; align-items: center; gap: 28px; padding: 20px 24px; border-radius: 6px; }
+  .dark { background: #000; border: 1px solid #1c1c1c; }
+  .light { background: #fff; border: 1px solid #e6e6e6; }
+  .light img { filter: invert(1); }
+  img { display: block; }
+  .s256 { width: 160px; height: 160px; }
+  .s96  { width: 64px;  height: 64px; }
+  .s32  { width: 28px;  height: 28px; }
+  .label { font-size: 10px; letter-spacing: .18em; text-transform: uppercase; opacity: .35; margin-left: auto; }
+</style>
+</head>
+<body>
+  <h1>Marcas — Víctor Cruz</h1>
+
+  <div class="grid">
+
+    <section class="card">
+      <h2>01 · Monograma de línea</h2>
+      <p>VC dibujado con el mismo trazo que la ciudad isométrica. Geométrico, sin serif, sin ornamento. Hereda el lenguaje del sprite sheet.</p>
+      <div class="rows">
+        <div class="row dark">
+          <img class="s256" src="./vc-line.svg" alt="Monograma VC sobre negro">
+          <img class="s96"  src="./vc-line.svg" alt="">
+          <img class="s32"  src="./vc-line.svg" alt="">
+          <span class="label">negro</span>
+        </div>
+        <div class="row light">
+          <img class="s256" src="./vc-line.svg" alt="Monograma VC sobre blanco">
+          <img class="s96"  src="./vc-line.svg" alt="">
+          <img class="s32"  src="./vc-line.svg" alt="">
+          <span class="label">blanco</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>02 · El pasaje</h2>
+      <p>Un cuadro y un círculo que lo cruza. La mitad dentro, la mitad fuera. Es literalmente la ontología de tu motor: la existencia la concede el marco, y se pierde al salir. Sin letras.</p>
+      <div class="rows">
+        <div class="row dark">
+          <img class="s256" src="./passage.svg" alt="Marca pasaje sobre negro">
+          <img class="s96"  src="./passage.svg" alt="">
+          <img class="s32"  src="./passage.svg" alt="">
+          <span class="label">negro</span>
+        </div>
+        <div class="row light">
+          <img class="s256" src="./passage.svg" alt="Marca pasaje sobre blanco">
+          <img class="s96"  src="./passage.svg" alt="">
+          <img class="s32"  src="./passage.svg" alt="">
+          <span class="label">blanco</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>03 · Trayectoria</h2>
+      <p>La parábola de tus círculos, con el cuerpo en el vértice. Nada más. Es el gesto que el código dibuja miles de veces por minuto.</p>
+      <div class="rows">
+        <div class="row dark">
+          <img class="s256" src="./arc.svg" alt="Marca trayectoria sobre negro">
+          <img class="s96"  src="./arc.svg" alt="">
+          <img class="s32"  src="./arc.svg" alt="">
+          <span class="label">negro</span>
+        </div>
+        <div class="row light">
+          <img class="s256" src="./arc.svg" alt="Marca trayectoria sobre blanco">
+          <img class="s96"  src="./arc.svg" alt="">
+          <img class="s32"  src="./arc.svg" alt="">
+          <span class="label">blanco</span>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</body>
+</html>
