@@ -66,4 +66,9 @@ function assignSpeed(yPos, angle, canvasHeight){
     return Math.sqrt(2 * gravity * (yPos - apex)) / sinAngle
 }
 
-export {calculateAngle, assignXPosition, assignYPosition, calculateXPosition, calculateYPosition, assignSpeed}
+//tiempo que tarda la partícula en volver a su altura inicial
+function flightDuration(speed, angle){
+    return (2 * speed * Math.sin(angle)) / gravity
+}
+
+export {calculateAngle, assignXPosition, assignYPosition, calculateXPosition, calculateYPosition, assignSpeed, flightDuration}

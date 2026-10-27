@@ -39,13 +39,12 @@
   </header>
 
   <main>
-    <section class="hero wrap" id="top">
-      <h1>Víctor Cruz Granillo</h1>
-      <p class="claim">Construyo y mantengo software que hace lo que promete.</p>
-    </section>
-
-    <section id="particle_viewer">
+    <section class="hero" id="top">
       <canvas id="particle_canvas" class="wide-canvas"></canvas>
+      <div class="hero-copy wrap">
+        <h1>Víctor Cruz Granillo</h1>
+        <p class="claim">Construyo y mantengo software que hace lo que promete.</p>
+      </div>
     </section>
 
     <section class="wrap" id="sobre-mi">
@@ -124,7 +123,7 @@
       "portfolio_img/spring.png",
       "portfolio_img/webpack.jpg"
     ];
-    initCanvas('particle_canvas', 200, sources, ()=>{console.log('canvas has been initialised')})
+    initCanvas('particle_canvas', 60, sources)
   </script>
 
 </body>

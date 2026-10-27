@@ -1,4 +1,4 @@
-import {calculateAngle, assignXPosition, assignYPosition, assignSpeed} from './physics.mjs'
+import {calculateAngle, assignXPosition, assignYPosition, assignSpeed, flightDuration} from './physics.mjs'
 
 function generateCircles(quantityMaxLimit=0, canvasWidth, canvasHeight, minRadius, maxRadius, images){
     if(quantityMaxLimit == 0){quantityMaxLimit = 200}
@@ -19,8 +19,8 @@ function generateCircle(canvasWidth, canvasHeight, minRadius, maxRadius, images,
     const yPos = assignYPosition(canvasHeight)
     const xPos = assignXPosition(canvasWidth, isNegativeSpace)
     const earlyAngle = calculateAngle(canvasWidth, canvasHeight, xPos, yPos)
+    const speed = assignSpeed(yPos, earlyAngle, canvasHeight)
     const imgIndex = Math.trunc(Math.random()*images.length)
-    const spinStepSlice = 360
 
     let circle = {
         yPos: yPos,
@@ -29,10 +29,11 @@ function generateCircle(canvasWidth, canvasHeight, minRadius, maxRadius, images,
         yPosInitial: yPos,
         angle: earlyAngle,
         spinAngle: 0,
-        spinStep: (Math.PI * 2) / ((Math.random() * spinStepSlice) + spinStepSlice),
-        speed: assignSpeed(yPos,earlyAngle, canvasHeight),
+        speed: speed,
         radius: Math.round(Math.random() * (maxRadius - minRadius) + minRadius),
-        initialStamp: Date.now(),
+        //cada partícula nace con una edad aleatoria dentro de su vuelo,
+        //así el campo aparece repartido desde el primer frame y no en oleada
+        initialStamp: Date.now() - Math.random() * flightDuration(speed, earlyAngle) * 1000,
         hasAppeared: false,
         isVisible: false,
         image: images[imgIndex],

@@ -47,15 +47,10 @@ async function loadImages(sources) {
 }
 
 function clearCanvas(ctx){
-    ctx.fillStyle = 'rgba(255,255,255,0.6)'
-    ctx.beginPath()
-    ctx.rect(0,0,canvasWidth, canvasHeight)
-    ctx.fill()
-    ctx.closePath()
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight)
 }
 
 function drawCircle(ctx, circle, deltaTime){
-    const frameWindow = 1000/400
     if(circle.validateDrawability()){
         //translations and rotations on the cartesian field are made but original state is guaranteed post-process
         ctx.beginPath()
