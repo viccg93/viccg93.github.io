@@ -1,6 +1,6 @@
 import {calculateAngle, assignXPosition, assignYPosition, assignSpeed} from './physics.mjs'
 
-function generateCircles(quantityMaxLimit=0, canvasWidth, canvasHeight, minRadius, maxRadius,dpr, images){
+function generateCircles(quantityMaxLimit=0, canvasWidth, canvasHeight, minRadius, maxRadius, images){
     if(quantityMaxLimit == 0){quantityMaxLimit = 200}
     const realQuantity = Math.round((Math.random()*(quantityMaxLimit-1))+1)
     const positiveLimit = realQuantity - Math.round(realQuantity/3)
@@ -68,6 +68,7 @@ function generateCircle(canvasWidth, canvasHeight, minRadius, maxRadius, images,
             this.angle = calculateAngle(canvasWidth, canvasHeight, this.xPosInitial, this.yPosInitial)
             this.speed = assignSpeed(this.yPosInitial,this.angle, canvasHeight)
             this.radius = Math.round(Math.random() * (maxRadius - minRadius) + minRadius)
+            this.spinAngle = 0
         }
     }
     return circle

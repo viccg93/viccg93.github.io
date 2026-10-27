@@ -4,6 +4,7 @@ let dprGlobal = 1
 let canvasWidth = 0, canvasHeight = 0, minRadius = 0, maxRadius = 0, maxCirclesQuantity = 400
 //configuration
 const fps = 60, msBetweenFrame = Math.round(1000/fps)
+const minCoverage = 0.00035
 //canvas globals
 let canvas, ctx
 let images, circles, lastTimeFrame = 0
@@ -27,12 +28,9 @@ function adjustCanvasToWindow(canvas,ctx){
 }
 
 function updateRadiusValues(canvasWidth, canvasHeight){
-    if(canvasWidth>canvasHeight){
-        minRadius = Math.round(canvasWidth/80)
-    }else{
-        minRadius = Math.round(canvasHeight/20)
-    }
-    maxRadius = Math.round(minRadius * 4)
+   const minRadiusValue = Math.sqrt(canvasWidth * canvasHeight * minCoverage)
+    minRadius = Math.max(2, Math.round(minRadiusValue))
+    maxRadius = Math.max(minRadius + 1, Math.round(minRadiusValue * 4))
 }
 
 async function loadImages(sources) {
@@ -64,7 +62,7 @@ function drawCircle(ctx, circle, deltaTime){
         ctx.save()
         ctx.translate(Math.round(circle.xPos), Math.round(circle.yPos))
         //w refers to angular speed
-        const w = (2 * circle.speed) / circle.radius
+        const w = (0.2 * circle.speed) / circle.radius
         const dir = circle.angle > Math.PI / 2 ? -1 : 1
         circle.spinAngle += (dir * w * deltaTime) / 1000
         ctx.rotate(circle.spinAngle)
@@ -78,7 +76,7 @@ function drawCircle(ctx, circle, deltaTime){
 
 function updateAndDrawCircles(deltaTime){
     const now = Date.now()
-    circles.forEach( (circle, index) => {
+    circles.forEach( (circle) => {
         if((!circle.isVisible && !circle.hasAppeared && circle.yPos <= circle.yPosInitial) || (circle.isVisible)){
             circle.xPos = calculateXPosition(circle, now)
             circle.yPos = calculateYPosition(circle, now)
@@ -91,13 +89,13 @@ function updateAndDrawCircles(deltaTime){
 
 function animate(){
     const now = Date.now()
-    const deltaTime = now - lastTimeFrame
+    const deltaTime = Math.min(now - lastTimeFrame, 100)
     
     if(deltaTime > msBetweenFrame){
         adjustCanvasToWindow(canvas,ctx)
         clearCanvas(ctx)
         updateAndDrawCircles(deltaTime)
-        lastTimeFrame = Date.now()
+        lastTimeFrame = now
     }
     requestAnimationFrame(animate)
 }
@@ -109,7 +107,7 @@ async function initCanvas(idCanvas, maxQuantity, sources, callback) {
     maxCirclesQuantity = maxQuantity
     try{
         images = await loadImages(sources)
-        circles = generateCircles(maxCirclesQuantity,canvasWidth,canvasHeight, minRadius, maxRadius, dprGlobal, images)
+        circles = generateCircles(maxCirclesQuantity,canvasWidth,canvasHeight, minRadius, maxRadius, images)
         animate()
         if(typeof callback !== 'undefined'){
             callback()

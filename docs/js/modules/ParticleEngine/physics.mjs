@@ -3,13 +3,12 @@
 */ 
  
  //round() operations on pixel positions are necessary due canvas pixels are integers, not using it would mean extra overload
-const gravity = 9.8
+const gravity = 40
 function calculateAngle(canvasWidth, canvasHeight, xPos, yPos){
     let deltaXRD = xPos - canvasWidth
     let minimalGap = Math.PI/64
     //theta and thetaPrime are uncountinous functions, so division over zero should be handled
     //even if due to initial conditions like canvas dimensions never let those values be zero for math coherent model
-    let deltaYRD = yPos - canvasHeight
     //though atan is valid due to initial zone is always greater than canvasheight model cannot rely on those conditions
     let theta = Math.atan2(yPos,deltaXRD)
     let thetaPrime = Math.atan2(yPos,xPos)
