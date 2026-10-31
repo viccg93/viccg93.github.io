@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="404" viewBox="0 0 800 404" role="img" aria-label="Terraza Everest">
+  <title>Terraza Everest</title>
+  <g fill="none" stroke="#0a0a0a" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter">
+    <!-- planters on the roof -->
+    <path d="M150 130 V96 H260 V130 M330 130 V96 H440 V130 M500 130 V96 H610 V130 M650 130 V96 H740 V130"/>
+    <!-- roof beam -->
+    <path d="M40 130 H760 V164 H40 Z"/>
+    <path d="M40 180 H760"/>
+    <!-- solid wall and right glass box -->
+    <path d="M40 180 V402 M140 180 V402"/>
+    <path d="M660 180 V402 M760 180 V402"/>
+    <!-- folding glass doors -->
+    <path d="M160 190 L190 200 V396 L160 390 Z M190 200 L220 190 V390 L190 396"/>
+    <path d="M580 190 L610 200 V396 L580 390 Z M610 200 L640 190 V390 L610 396"/>
+    <!-- kitchen hood and island -->
+    <path d="M350 180 V238 H440 V180"/>
+    <path d="M320 402 V336 H470 V402"/>
+    <!-- deck -->
+    <path d="M20 402 H780"/>
+  </g>
+  <g fill="none" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- plants and hanging vines -->
+    <path d="M180 96 Q170 70 150 56 M205 96 Q214 62 238 48 M232 96 Q250 76 262 70"/>
+    <path d="M360 96 Q352 66 336 54 M392 96 Q398 60 420 46"/>
+    <path d="M530 96 Q520 70 504 60 M560 96 Q568 66 590 54 M590 96 Q606 80 620 76"/>
+    <path d="M680 96 Q674 72 660 62 M712 96 Q722 70 742 60"/>
+    <path d="M262 164 Q268 200 256 240 M470 164 Q478 196 468 226"/>
+    <!-- pendant lamps -->
+    <path d="M500 180 V238 M490 250 L500 238 L510 250 Z M530 180 V224 M520 236 L530 224 L540 236 Z"/>
+    <!-- glass mullion -->
+    <path d="M710 180 V402"/>
+  </g>
+</svg>

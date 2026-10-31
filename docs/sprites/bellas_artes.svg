@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="554" viewBox="0 0 800 554" role="img" aria-label="Palacio de Bellas Artes">
+  <title>Palacio de Bellas Artes</title>
+  <g fill="none" stroke="#0a0a0a" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter">
+    <!-- steps -->
+    <path d="M40 552 H760 M60 536 H740 M80 520 H720"/>
+    <!-- corner pavilions -->
+    <path d="M100 520 V300 H210 V520 M590 520 V300 H700 V520"/>
+    <path d="M110 300 A45 50 0 0 1 200 300 M600 300 A45 50 0 0 1 690 300"/>
+    <path d="M150 250 V238 H160 V250 M640 250 V238 H650 V250"/>
+    <path d="M135 520 V440 A20 20 0 0 1 175 440 V520 M625 520 V440 A20 20 0 0 1 665 440 V520"/>
+    <!-- wings -->
+    <path d="M210 340 H300 M500 340 H590 M210 360 H300 M500 360 H590"/>
+    <!-- central block and entrance arch -->
+    <path d="M300 520 V280 H500 V520"/>
+    <path d="M300 300 H500"/>
+    <path d="M340 520 V420 A60 60 0 0 1 460 420 V520"/>
+    <path d="M355 420 A45 45 0 0 1 445 420"/>
+    <!-- main dome -->
+    <path d="M330 280 V232 H470 V280"/>
+    <path d="M325 232 A75 92 0 0 1 475 232"/>
+    <path d="M400 140 V232 M362 152 Q348 190 352 232 M438 152 Q452 190 448 232"/>
+    <path d="M390 141 V118 H410 V141 M384 118 H416 M400 118 V98"/>
+  </g>
+  <g fill="none" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="square">
+    <!-- columns -->
+    <path d="M230 372 V520 M258 372 V520 M542 372 V520 M570 372 V520"/>
+    <path d="M318 310 V520 M482 310 V520"/>
+  </g>
+</svg>

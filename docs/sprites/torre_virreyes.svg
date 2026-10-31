@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="520" height="906" viewBox="0 0 520 906" role="img" aria-label="Torre Virreyes">
+  <title>Torre Virreyes</title>
+  <g fill="none" stroke="#0a0a0a" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter">
+    <!-- helipad -->
+    <path d="M310 110 V92 H390 V110"/>
+    <ellipse cx="350" cy="88" rx="62" ry="7"/>
+    <!-- inverted trapezoid tower and folded edge -->
+    <path d="M210 830 L70 110 H450 L400 830 Z"/>
+    <path d="M150 110 L210 830"/>
+    <path d="M73 124 H449"/>
+    <!-- lobby -->
+    <path d="M225 830 V904 M385 830 V904"/>
+    <!-- podium with green roof -->
+    <path d="M60 904 V860 Q60 846 80 846 H225"/>
+    <ellipse cx="130" cy="840" rx="30" ry="7"/>
+    <path d="M400 904 V872 H500"/>
+    <path d="M20 904 H500"/>
+  </g>
+  <g fill="none" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="square">
+    <!-- vertical fins -->
+    <path d="M170 124 V350 M190 124 V590 M210 124 V830 M230 124 V830 M250 124 V830 M270 124 V830 M290 124 V830 M310 124 V830 M330 124 V830 M350 124 V830 M370 124 V830 M390 124 V830 M410 124 V686 M430 124 V398"/>
+    <!-- shaded side face -->
+    <path d="M110 124 L200 780"/>
+  </g>
+</svg>

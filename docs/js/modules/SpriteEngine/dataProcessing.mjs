@@ -1,32 +1,9 @@
-import {readSpriteSheet} from './fileTreatment.mjs'
-//all values are assumed in pixels
-//heightRelation is an array representing scale for every row in the sheet
-function generateAtlas(rows, columns, spriteWidth, rowHeights, xLineGap, yLineGap){
-    let atlas = []
-    if(rowHeights != null && rows == (rowHeights.length)){
-        //indexes ought to be initialised on zero due to first spaces are only gaps in the spritesheet
-        let yAxisCovered = 0
-        for(let rowIndex=0; rowIndex<rows; rowIndex++){
-            for(let colIndex=0; colIndex<columns; colIndex++){
-                atlas.push(
-                    {
-                        x: xLineGap + (colIndex*spriteWidth),
-                        y: yLineGap + yAxisCovered,
-                        width: spriteWidth,
-                        height: rowHeights[rowIndex]
-                    }
-                )
-            }
-            //this does summarizes distance fully and effectively processed
-            yAxisCovered+= yLineGap + rowHeights[rowIndex]
-        }
-    }
-    return atlas
-}
+import {readSvg} from './fileTreatment.mjs'
+//all values are assumed in css pixels
 
-async function getSpriteSheet(path) {
-  let spriteSheet = await readSpriteSheet(path)
-  return spriteSheet
+async function getSvg(path) {
+  let svg = await readSvg(path)
+  return svg
 }
 
 function getScaleFactor(sizingRef, portion, elemSizing){
@@ -37,41 +14,33 @@ function getScaleFactor(sizingRef, portion, elemSizing){
   return  factor
 }
 
-//fixed to canvas height, only leaving custom portions
-function getLandscape({atlas, canvasWidth, canvasHeight, numberOfElements, portionForScale}){
-  let landscape = [], counter=0
-  let maxHeightInLandscape = 0
-  //offset element to fill empty gap at 0 position of x axis
-  const offsetIndex = Math.round(Math.random()*(atlas.length-1))
-  landscape.push(generateLandscapeElement(atlas[offsetIndex], canvasHeight, (-atlas[offsetIndex].width/2),portionForScale))
-  while(counter<(numberOfElements-2)){
-    const index = Math.round(Math.random()*(atlas.length-1))
-    const building = generateLandscapeElement(atlas[index],canvasHeight,Math.round(Math.random() * canvasWidth),portionForScale)
-    maxHeightInLandscape = Math.max(maxHeightInLandscape,building.height)
-    landscape.push(building)
-    counter++
-  }
-
-  //max times units elapsed to draw the whole landscape is calculated here
-  const maxTimeUnits = calculateMaxTimeAnimation(maxHeightInLandscape, 10)
-
-  return {landscape: landscape, maxHeightInLandscape: maxHeightInLandscape, maxTimeUnits: maxTimeUnits}
-}
-
-function generateLandscapeElement(atlasReference, canvasHeight, xPosition, portionForScale){
-  let scaleFactor = getScaleFactor(canvasHeight,portionForScale, atlasReference.height)
+//building is centered horizontally and vertically inside the area band and scaled to a portion of its height,
+//unless its width would exceed maxWidthPortion of canvas width, then width rules the scale
+//area defaults to the whole canvas
+//y is the baseline: final position of the building's bottom edge
+function getBuilding({svg, canvasWidth, canvasHeight, areaTop = 0, areaHeight = canvasHeight, portionForScale, maxWidthPortion, precision}){
+  const scaleFactor = Math.min(
+    getScaleFactor(areaHeight, portionForScale, svg.naturalHeight),
+    getScaleFactor(canvasWidth, maxWidthPortion, svg.naturalWidth)
+  )
+  const width = svg.naturalWidth * scaleFactor
+  const height = svg.naturalHeight * scaleFactor
   return {
-    x: xPosition,
-    //this offset is going to be formalised for optimising phase
-    //in the meantime this should be considered as an extre space below visible y-axis area
-    y: canvasHeight - (20),
-    width: atlasReference.width * scaleFactor,
-    height: atlasReference.height * scaleFactor,
-    atlasReference: atlasReference,
-    scaleFactor: scaleFactor
+    x: (canvasWidth - width)/2,
+    y: areaTop + (areaHeight + height)/2,
+    width: width,
+    height: height,
+    scaleFactor: scaleFactor,
+    //building starts hidden below the baseline until the first framed draw
+    lastY: canvasHeight,
+    isSettled: false,
+    //max times units elapsed to draw the whole building is calculated here
+    maxTimeUnits: calculateMaxTimeAnimation(height, precision)
   }
 }
 
+//remaining distance to final position is height/timeUnits,
+//so it gets below precision (in pixels) once timeUnits reaches height/precision
 function calculateMaxTimeAnimation(referenceElementHeight, precision){
   const auxPrecision = 20
   let timeUnits = 0
@@ -83,4 +52,4 @@ function calculateMaxTimeAnimation(referenceElementHeight, precision){
   return timeUnits
 }
 
-export {generateAtlas, getSpriteSheet, getLandscape}
+export {getSvg, getBuilding}

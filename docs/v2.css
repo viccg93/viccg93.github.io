@@ -161,6 +161,23 @@ section h2 {
   margin: 0 0 2rem;
 }
 
+/* experience: scene styles come from experiences.css, these adapt its panel to the dark page */
+
+.experience {
+  color: var(--fg);
+}
+
+.experience-panel {
+  max-width: var(--max);
+  margin: 0 auto;
+  width: 100%;
+  padding: 24px 28px 0;
+}
+
+.experience-period {
+  color: var(--muted);
+}
+
 /* mobile */
 
 @media (max-width: 720px) {

@@ -4,7 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>VICG</title>
-    <link rel="stylesheet" href="main_styles.css">
+    <!-- Space Grotesk: geometric and expressive, still easy to read at small sizes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="experiences.css">
 </head>
 <body>
 
@@ -17,6 +21,18 @@
             <p>particles are handled in here</p>
         </div>
     </section>
-    
+
+    <!-- experience: one canvas, a badge per place, places come from data/experience.json -->
+    <section id="experiencia" class="experience"></section>
+
+    <script type="module">
+        import {initExperience} from './js/modules/ExperienceSelector/rendering.mjs'
+        //preview helpers: ?hora=21.5 fixes the hour, ?clima=lluvia or ?clima=despejado forces the weather
+        const params = new URLSearchParams(location.search)
+        const hour = params.has('hora') ? Number(params.get('hora')) : null
+        const weather = {lluvia: 'rain', despejado: 'clear'}[params.get('clima')] ?? 'auto'
+        initExperience('experiencia', 'data/experience.json', {portionForScale: 0.9, hour: hour, weather: weather})
+    </script>
+
 </body>
 </html>

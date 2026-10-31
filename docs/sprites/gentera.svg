@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="906" viewBox="0 0 600 906" role="img" aria-label="Edificio Gentera">
+  <title>Edificio Gentera</title>
+  <g fill="none" stroke="#0a0a0a" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter">
+    <!-- antenna and cantilevered roof slab -->
+    <path d="M240 100 V72"/>
+    <path d="M165 100 H470 L460 118 H175 Z"/>
+    <!-- main tower: side face and front face -->
+    <path d="M150 904 V130 L190 118 V904"/>
+    <path d="M440 118 V904"/>
+    <!-- sign -->
+    <path d="M215 168 H318"/>
+    <circle cx="340" cy="168" r="13"/>
+    <!-- lower left volume -->
+    <path d="M100 904 V480 H150"/>
+    <!-- lower right volume with roof garden -->
+    <path d="M440 520 H560 V904"/>
+    <path d="M80 904 H580"/>
+  </g>
+  <g fill="none" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- floors on front face -->
+    <path d="M190 200 H440 M190 240 H440 M190 280 H440 M190 320 H440 M190 360 H440 M190 400 H440 M190 440 H440 M190 480 H440 M190 520 H440 M190 560 H440 M190 600 H440 M190 640 H440 M190 680 H440 M190 720 H440 M190 760 H440 M190 800 H440 M190 840 H440"/>
+    <path d="M240 200 V860 M290 200 V860 M340 200 V860 M390 200 V860"/>
+    <!-- side face and lower volumes -->
+    <path d="M170 140 V904"/>
+    <path d="M100 520 H150 M100 560 H150 M100 600 H150 M100 640 H150 M100 680 H150 M100 720 H150 M100 760 H150 M100 800 H150 M100 840 H150"/>
+    <path d="M440 560 H560 M440 600 H560 M440 640 H560 M440 680 H560 M440 720 H560 M440 760 H560 M440 800 H560 M440 840 H560"/>
+    <path d="M500 520 C500 505 512 500 518 506 C524 496 540 500 538 520"/>
+  </g>
+</svg>

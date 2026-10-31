@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sprite Engine — demo</title>
+  <style>
+    html, body { margin: 0; height: 100%; background: #fff; }
+    #building_canvas { display: block; width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+  <canvas id="building_canvas"></canvas>
+
+  <script type="module">
+    import {initBuilding} from './js/modules/SpriteEngine/rendering.mjs'
+
+    const buildings = ['bellas_artes', 'eglobal', 'terraza_everest', 'torre_virreyes', 'gentera']
+    //?edificio=gentera picks a specific building, otherwise a random one is used
+    const requested = new URLSearchParams(location.search).get('edificio')
+    const name = buildings.includes(requested) ? requested : buildings[Math.trunc(Math.random()*buildings.length)]
+    initBuilding('building_canvas', `sprites/${name}.svg`, {portionForScale: 0.7})
+  </script>
+</body>
+</html>

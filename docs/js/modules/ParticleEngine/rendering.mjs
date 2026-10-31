@@ -3,7 +3,6 @@ import {generateCircles} from './circleFactory.mjs'
 let dprGlobal = 1
 let canvasWidth = 0, canvasHeight = 0, minRadius = 0, maxRadius = 0, maxCirclesQuantity = 400
 //configuration
-const fps = 60, msBetweenFrame = Math.round(1000/fps)
 const minCoverage = 0.00035
 //canvas globals
 let canvas, ctx
@@ -51,7 +50,7 @@ function clearCanvas(ctx){
 }
 
 function drawCircle(ctx, circle, deltaTime){
-    if(circle.validateDrawability()){
+    if(circle.validateDrawability(canvasWidth, canvasHeight)){
         //translations and rotations on the cartesian field are made but original state is guaranteed post-process
         ctx.beginPath()
         ctx.save()
@@ -84,14 +83,12 @@ function updateAndDrawCircles(deltaTime){
 
 function animate(){
     const now = Date.now()
+    //no fps cap: positions depend on absolute time, so drawing on every rAF tick follows the display refresh rate
     const deltaTime = Math.min(now - lastTimeFrame, 100)
-    
-    if(deltaTime > msBetweenFrame){
-        adjustCanvasToWindow(canvas,ctx)
-        clearCanvas(ctx)
-        updateAndDrawCircles(deltaTime)
-        lastTimeFrame = now
-    }
+    adjustCanvasToWindow(canvas,ctx)
+    clearCanvas(ctx)
+    updateAndDrawCircles(deltaTime)
+    lastTimeFrame = now
     requestAnimationFrame(animate)
 }
 

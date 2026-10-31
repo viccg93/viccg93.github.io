@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="514" viewBox="0 0 800 514" role="img" aria-label="Edificio E-Global">
+  <title>E-Global (Servicios Electrónicos Globales)</title>
+  <g fill="none" stroke="#0a0a0a" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter">
+    <!-- antenna and rooftop volumes -->
+    <path d="M400 95 V58"/>
+    <path d="M170 160 V112 H330 V160"/>
+    <path d="M330 122 L360 95 H480 L492 122 V160"/>
+    <!-- body with rounded corner -->
+    <path d="M40 512 V160 H650 C696 160 720 182 720 228 V512"/>
+    <!-- ribbon windows -->
+    <path d="M40 190 H660 Q700 190 700 204 Q700 218 660 218 H40"/>
+    <path d="M40 240 H664 Q704 240 704 254 Q704 268 664 268 H40"/>
+    <path d="M40 290 H666 Q706 290 706 304 Q706 318 666 318 H40"/>
+    <path d="M40 340 H668 Q708 340 708 354 Q708 368 668 368 H40"/>
+    <path d="M40 390 H670 Q710 390 710 404 Q710 418 670 418 H40"/>
+    <path d="M40 440 H672 Q712 440 712 454 Q712 468 672 468 H40"/>
+    <!-- ground floor -->
+    <path d="M40 484 H720"/>
+    <path d="M20 512 H740"/>
+  </g>
+  <g fill="none" stroke="#0a0a0a" stroke-width="1.5" stroke-linecap="square">
+    <path d="M200 128 H300 M200 144 H300"/>
+    <path d="M120 190v28M200 190v28M280 190v28M360 190v28M440 190v28M520 190v28M600 190v28"/>
+    <path d="M120 240v28M200 240v28M280 240v28M360 240v28M440 240v28M520 240v28M600 240v28"/>
+    <path d="M120 290v28M200 290v28M280 290v28M360 290v28M440 290v28M520 290v28M600 290v28"/>
+    <path d="M120 340v28M200 340v28M280 340v28M360 340v28M440 340v28M520 340v28M600 340v28"/>
+    <path d="M120 390v28M200 390v28M280 390v28M360 390v28M440 390v28M520 390v28M600 390v28"/>
+    <path d="M120 440v28M200 440v28M280 440v28M360 440v28M440 440v28M520 440v28M600 440v28"/>
+    <path d="M120 484v28M200 484v28M280 484v28M360 484v28M440 484v28M520 484v28M600 484v28M680 484v28"/>
+  </g>
+</svg>

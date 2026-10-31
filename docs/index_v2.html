@@ -6,6 +6,10 @@
   <title>Víctor Cruz Granillo — Desarrollador</title>
   <meta name="description" content="Ingeniero en Informática. Desarrollo de software, sistemas y herramientas.">
   <link rel="icon" type="image/svg+xml" href="./brand/vc-line.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap">
+  <link rel="stylesheet" href="./experiences.css">
   <link rel="stylesheet" href="./v2.css">
 </head>
 <body>
@@ -52,9 +56,13 @@
       <p class="claim">[ pendiente ]</p>
     </section>
 
-    <section class="wrap" id="experiencia">
-      <h2>Experiencia</h2>
-      <p class="claim">[ pendiente ]</p>
+    <!-- experience canvas spans the whole viewport width, so only the heading is wrapped -->
+    <section id="experiencia">
+      <div class="wrap">
+        <h2>Experiencia</h2>
+      </div>
+      <!-- one canvas, a badge per place, places come from data/experience.json -->
+      <div id="experiencia_escena" class="experience"></div>
     </section>
 
     <section class="wrap" id="stack">
@@ -124,6 +132,15 @@
       "portfolio_img/webpack.jpg"
     ];
     initCanvas('particle_canvas', 60, sources)
+  </script>
+
+  <script type="module">
+    import {initExperience} from './js/modules/ExperienceSelector/rendering.mjs'
+    //preview helpers: ?hora=21.5 fixes the hour, ?clima=lluvia or ?clima=despejado forces the weather
+    const params = new URLSearchParams(location.search)
+    const hour = params.has('hora') ? Number(params.get('hora')) : null
+    const weather = {lluvia: 'rain', despejado: 'clear'}[params.get('clima')] ?? 'auto'
+    initExperience('experiencia_escena', 'data/experience.json', {portionForScale: 0.9, hour: hour, weather: weather})
   </script>
 
 </body>

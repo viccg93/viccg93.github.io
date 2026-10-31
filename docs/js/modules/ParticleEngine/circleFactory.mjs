@@ -37,13 +37,14 @@ function generateCircle(canvasWidth, canvasHeight, minRadius, maxRadius, images,
         hasAppeared: false,
         isVisible: false,
         image: images[imgIndex],
-        validateAppearance(){
+        //canvas dimensions are received on every call so bounds stay valid after a resize
+        validateAppearance(canvasWidth, canvasHeight){
             if(!this.hasAppeared && this.xPos > 0 && this.xPos < canvasWidth && this.yPos > 0 && this.yPos < canvasHeight){
                 this.isVisible = true
                 this.hasAppeared = true
             }
         },
-        validateVisibility(){
+        validateVisibility(canvasWidth, canvasHeight){
             if(this.hasAppeared && 
                 (this.xPos < (-1 * this.radius) || this.xPos > (canvasWidth + this.radius) || 
                 this.yPos > (canvasHeight + this.radius) || this.yPos < (-1 * this.radius))
@@ -51,9 +52,9 @@ function generateCircle(canvasWidth, canvasHeight, minRadius, maxRadius, images,
                 this.isVisible = false
             }
         },
-        validateDrawability(){
-            this.validateAppearance()
-            this.validateVisibility()
+        validateDrawability(canvasWidth, canvasHeight){
+            this.validateAppearance(canvasWidth, canvasHeight)
+            this.validateVisibility(canvasWidth, canvasHeight)
             let result = false
             if(this.isVisible && this.hasAppeared){
                 result = true
