@@ -62,12 +62,6 @@
     <section id="experiencia">
       <div class="wrap">
         <h2>Experiencia</h2>
-        <!-- eye tracking, the camera is requested when the page loads and the button turns it off -->
-        <div class="gaze-control">
-          <button type="button" id="gaze_toggle" class="gaze-toggle" aria-pressed="false">Activar seguimiento de mirada</button>
-          <p class="gaze-notice">La cámara se usa solo para esta experiencia. No se almacena ni se envía ningún dato.</p>
-          <p id="gaze_status" class="gaze-status" aria-live="polite"></p>
-        </div>
       </div>
       <!-- one canvas, a badge per place, places come from data/experience.json -->
       <div id="experiencia_escena" class="experience"></div>
@@ -156,18 +150,6 @@
     const hour = params.has('hora') ? Number(params.get('hora')) : null
     const weather = {lluvia: 'rain', despejado: 'clear'}[params.get('clima')] ?? 'auto'
     initExperience('experiencia_escena', 'data/experience.json', {portionForScale: 0.9, hour: hour, weather: weather})
-  </script>
-
-  <script type="module">
-    import {initGazeHighlight} from './js/modules/GazeReader/rendering.mjs'
-    //only the texts over the experience canvas can be underlined
-    const scene = document.getElementById('experiencia_escena')
-    initGazeHighlight({
-      button: document.getElementById('gaze_toggle'),
-      status: document.getElementById('gaze_status'),
-      getRoots: ()=> scene.querySelectorAll('.experience-title, .experience-summary, .experience-extra'),
-      autoStart: true
-    })
   </script>
 
   <script type="module">

@@ -178,64 +178,6 @@ section h2 {
   color: var(--muted);
 }
 
-/* gaze: button and status above the experience canvas */
-
-.gaze-control {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  gap: 8px 20px;
-  margin-bottom: 2rem;
-}
-
-.gaze-toggle {
-  background: none;
-  border: 0;
-  border-bottom: 1px solid var(--muted);
-  padding: 6px 0;
-  color: var(--fg);
-  font: inherit;
-  font-size: 11px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: border-color 0.2s ease;
-}
-
-.gaze-toggle:hover,
-.gaze-toggle:focus-visible {
-  border-color: var(--fg);
-  outline: none;
-}
-
-.gaze-toggle:disabled {
-  color: var(--muted);
-  border-color: transparent;
-  cursor: default;
-}
-
-.gaze-notice,
-.gaze-status {
-  margin: 0;
-  color: var(--muted);
-  font-size: 0.85rem;
-}
-
-.gaze-status:empty {
-  display: none;
-}
-
-/* webgazer places its camera preview over the top left corner with inline styles,
-   it is moved to the bottom right so it does not cover the menu */
-#webgazerVideoContainer {
-  top: auto !important;
-  left: auto !important;
-  right: 16px;
-  bottom: 16px;
-  z-index: 60 !important;
-  border: 1px solid var(--line);
-}
-
 /* mobile */
 
 @media (max-width: 720px) {
