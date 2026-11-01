@@ -1,0 +1,32 @@
+# environment files: tokens and api keys (ANTHROPIC_API_KEY, CLAUDE_CODE_OAUTH_TOKEN...)
+.env
+.env.*
+!.env.example
+*.env
+
+# claude code: personal settings and local state, .claude/settings.json is shared and stays tracked
+.claude/settings.local.json
+.claude/*.local.*
+.claude/credentials*
+.claude/.credentials*
+.claude/todos/
+.claude/projects/
+.claude/statsig/
+.claude/shell-snapshots/
+CLAUDE.local.md
+.mcp.local.json
+
+# credentials and keys
+*.pem
+*.key
+*.p12
+*.pfx
+*token*
+*secret*
+credentials*.json
+
+# editor and system files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

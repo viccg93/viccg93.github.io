@@ -41,7 +41,7 @@ function createElement(tag, attributes = {}, text = ''){
   return element
 }
 
-//builds badges, canvas and text panel inside the container
+//builds badges and canvas inside the container
 //spritesPath: folder prepended to every image name
 //any other option is passed to the building scene (hour, weather, portionForScale...)
 async function initExperience(idContainer, source, {spritesPath = 'sprites/', ...sceneOptions} = {}){
@@ -58,7 +58,7 @@ async function initExperience(idContainer, source, {spritesPath = 'sprites/', ..
     return null
   }
 
-  //tabs pattern: badges are tabs, the text below is their panel, the canvas is decorative
+  //tabs pattern: badges are tabs, canvas is decorative
   //stage holds the canvas and an overlay column laid over it:
   //title, description, building slot, extra and badges, the building is fitted inside the slot
   const stage = createElement('div', {class: 'experience-stage'})
@@ -69,10 +69,8 @@ async function initExperience(idContainer, source, {spritesPath = 'sprites/', ..
   const extra = createElement('p', {class: 'experience-extra'})
   const tablist = createElement('div', {role: 'tablist', class: 'experience-badges', 'aria-label': 'Lugares'})
   const canvas = createElement('canvas', {id: `${idContainer}_canvas`, class: 'experience-canvas', 'aria-hidden': 'true'})
-  const panel = createElement('div', {role: 'tabpanel', id: `${idContainer}_panel`, class: 'experience-panel', tabindex: '0'})
   const title = createElement('h3')
   const period = createElement('p', {class: 'experience-period'})
-  panel.append(title, period)
 
   const badges = places.map((entry, index)=>{
     const badge = createElement('button', {
@@ -80,7 +78,6 @@ async function initExperience(idContainer, source, {spritesPath = 'sprites/', ..
       role: 'tab',
       id: `${idContainer}_tab_${index}`,
       class: 'experience-badge',
-      'aria-controls': panel.id,
       'aria-selected': 'false',
       tabindex: '-1',
       //index staggers the shine that runs across the dots on narrow screens
@@ -93,7 +90,7 @@ async function initExperience(idContainer, source, {spritesPath = 'sprites/', ..
   tablist.style.setProperty('--count', badges.length)
   overlay.append(headline, summary, slot, extra, tablist)
   stage.append(canvas, overlay)
-  container.append(stage, panel)
+  container.append(stage)
 
   //canvas must be in the document before the scene measures it
   //sky colors are shared with css so texts and dots on narrow screens contrast with the sky behind them
@@ -120,7 +117,6 @@ async function initExperience(idContainer, source, {spritesPath = 'sprites/', ..
       badge.tabIndex = isSelected ? 0 : -1
     })
     const entry = places[index]
-    panel.setAttribute('aria-labelledby', badges[index].id)
     title.textContent = entry.place
     period.textContent = entry.period ?? ''
     period.hidden = !entry.period
@@ -157,9 +153,7 @@ async function initExperience(idContainer, source, {spritesPath = 'sprites/', ..
     select(next(), true)
   })
 
-  //left and right arrows also work from anywhere in the page while the stage is on screen,
-  //focus is not moved so the page does not jump to the badges
-  let isStageVisible = false
+  //here arrow motion is handled
   new IntersectionObserver(entries =>{
     isStageVisible = entries[0].isIntersecting
   }, {threshold: 0.5}).observe(stage)

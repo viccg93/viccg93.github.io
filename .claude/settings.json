@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./docs/spritesheets/buildings.svg)",
+      "Read(./docs/spritesheets/sprites7.svg)",
+      "Read(./docs/spritesheets/sprites8.svg)",
+      "Read(./docs/spritesheets/*.png)",
+      "Read(./docs/spritesheets/*.jpg)",
+      "Read(./docs/preliminar_ideas/**)",
+      "Read(./docs/archive/**)",
+      "Read(./**/*.zip)",
+      "Read(./**/*.min.js)",
+      "Read(./**/*.map)",
+      "Read(./node_modules/**)",
+      "Read(./.env)",
+      "Read(./.env.*)"
+    ]
+  }
+}
