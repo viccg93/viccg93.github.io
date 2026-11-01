@@ -14,7 +14,8 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--fg);
-  font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  /* Space Grotesk is loaded in the page head, the whole page shares the experience font */
+  font-family: "Space Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -139,6 +140,74 @@ body {
   margin: 0 0 0.6rem;
 }
 
+/* work status badge: green pill, pulsing dot and a shine that crosses it every few seconds */
+.status-badge {
+  --status: #16a34a;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 1.2rem;
+  padding: 7px 16px 7px 12px;
+  border: 1px solid rgba(22, 163, 74, 0.4);
+  border-radius: 999px;
+  /* nearly solid so the particles passing behind do not show through the text */
+  background: rgba(236, 248, 240, 0.94);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: #0f6e33;
+  font-size: clamp(11px, 0.6rem + 0.3vw, 13px);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  box-shadow: 0 0 18px rgba(22, 163, 74, 0.25);
+  overflow: hidden;
+  animation: status-glow 2.4s ease-in-out infinite;
+}
+
+.status-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--status);
+  animation: status-pulse 2.4s ease-out infinite;
+}
+
+/* light band sweeping from left to right */
+.status-badge::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.85) 50%, transparent 70%);
+  transform: translateX(-100%);
+  animation: status-shine 3.6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes status-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(22, 163, 74, 0.6); }
+  70%, 100% { box-shadow: 0 0 0 8px rgba(22, 163, 74, 0); }
+}
+
+@keyframes status-glow {
+  0%, 100% { box-shadow: 0 0 12px rgba(22, 163, 74, 0.18); }
+  50% { box-shadow: 0 0 22px rgba(22, 163, 74, 0.4); }
+}
+
+@keyframes status-shine {
+  0%, 55% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-badge,
+  .status-dot,
+  .status-badge::after {
+    animation: none;
+  }
+}
+
 .claim {
   color: var(--muted);
   font-size: clamp(1rem, 2vw, 1.35rem);
@@ -176,6 +245,83 @@ section h2 {
 
 .experience-period {
   color: var(--muted);
+}
+
+/* contact: one row per link, icon, kind of link and value */
+
+.contact-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--line);
+}
+
+.contact-link {
+  display: grid;
+  grid-template-columns: auto 9rem 1fr;
+  align-items: center;
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+  color: var(--fg);
+  text-decoration: none;
+  transition: color 0.2s ease, padding-left 0.25s ease;
+}
+
+.contact-icon {
+  display: block;
+  width: 22px;
+  height: 22px;
+  color: var(--muted);
+  transition: color 0.2s ease;
+}
+
+.contact-type {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.contact-value {
+  font-size: clamp(1.05rem, 0.9rem + 0.8vw, 1.5rem);
+  overflow-wrap: anywhere;
+}
+
+.contact-link:hover,
+.contact-link:focus-visible {
+  padding-left: 10px;
+  outline: none;
+}
+
+.contact-link:hover .contact-icon,
+.contact-link:focus-visible .contact-icon {
+  color: var(--fg);
+}
+
+.contact-link:hover .contact-value,
+.contact-link:focus-visible .contact-value {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* narrow screens put the kind of link above the value */
+@media (max-width: 520px) {
+  .contact-link {
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    gap: 4px 16px;
+  }
+
+  .contact-icon {
+    grid-row: span 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-link {
+    transition: none;
+  }
 }
 
 /* mobile */
