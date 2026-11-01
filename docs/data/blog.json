@@ -1,0 +1,16 @@
+[
+  {
+    "id": "escenario-de-experiencias",
+    "file": "posts/escenario-de-experiencias.md",
+    "title": "Cómo funciona el escenario de experiencias",
+    "date": "2026-10-31",
+    "summary": "Artículo de prueba: edificios que emergen del suelo, un cielo que sigue la hora de la Ciudad de México y textos que contrastan solos."
+  },
+  {
+    "id": "guia-de-markdown",
+    "file": "posts/guia-de-markdown.md",
+    "title": "Guía rápida para escribir en este blog",
+    "date": "2026-10-30",
+    "summary": "Artículo de prueba con todo el Markdown que entiende el lector: títulos, listas, citas, código, enlaces e imágenes."
+  }
+]

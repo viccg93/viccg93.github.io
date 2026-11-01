@@ -11,6 +11,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap">
   <link rel="stylesheet" href="./experiences.css">
   <link rel="stylesheet" href="./v2.css">
+  <link rel="stylesheet" href="./blog.css">
 </head>
 <body>
 
@@ -38,6 +39,7 @@
       <a href="#sobre-mi">Sobre mí</a>
       <a href="#experiencia">Experiencia</a>
       <a href="#stack">Stack</a>
+      <a href="#blog">Blog</a>
       <a href="#contacto">Contacto</a>
     </nav>
   </header>
@@ -68,6 +70,13 @@
     <section class="wrap" id="stack">
       <h2>Stack</h2>
       <p class="claim">[ pendiente ]</p>
+    </section>
+
+    <!-- latest posts from data/blog.json, cards open them in blog.html -->
+    <section class="wrap" id="blog">
+      <h2>Blog</h2>
+      <div id="blog_posts"></div>
+      <a class="blog-more" href="./blog.html">Ver todo el blog →</a>
     </section>
 
     <section class="wrap" id="contacto">
@@ -141,6 +150,12 @@
     const hour = params.has('hora') ? Number(params.get('hora')) : null
     const weather = {lluvia: 'rain', despejado: 'clear'}[params.get('clima')] ?? 'auto'
     initExperience('experiencia_escena', 'data/experience.json', {portionForScale: 0.9, hour: hour, weather: weather})
+  </script>
+
+  <script type="module">
+    import {initBlog} from './js/modules/BlogReader/rendering.mjs'
+    //only the latest posts are shown here, the cards open them in the blog page
+    initBlog('blog_posts', 'data/blog.json', {articleHref: 'blog.html', limit: 3})
   </script>
 
 </body>

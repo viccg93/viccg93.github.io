@@ -1,0 +1,336 @@
+/* blog: grid and reader are created by BlogReader, colors come from v2.css variables */
+
+/* grid: top and left lines belong to the grid, right and bottom ones to each card,
+   so the lines stay closed even when the last row is not full */
+.blog-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+  counter-reset: blog-card;
+}
+
+/* item stretches the card, so a card with long text keeps its row lines aligned */
+.blog-grid li {
+  display: flex;
+  counter-increment: blog-card;
+}
+
+.blog-card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  aspect-ratio: 1;
+  padding: clamp(18px, 2.4vw, 28px);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  color: var(--fg);
+  text-decoration: none;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.blog-card:hover,
+.blog-card:focus-visible {
+  background: var(--fg);
+  color: var(--bg);
+  outline: none;
+}
+
+/* muted texts get darker on the white hover so they stay readable */
+.blog-card:hover .blog-card-meta,
+.blog-card:hover .blog-card-summary,
+.blog-card:focus-visible .blog-card-meta,
+.blog-card:focus-visible .blog-card-summary {
+  color: #5a5a5a;
+}
+
+/* card number and date share the top row */
+.blog-card-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.blog-card-meta::before {
+  content: counter(blog-card, decimal-leading-zero);
+}
+
+/* title sits at the bottom of the square, the summary right below it */
+.blog-card .blog-card-title {
+  margin: auto 0 0;
+  font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(1.2rem, 0.9rem + 1vw, 1.75rem);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  text-transform: none;
+  color: inherit;
+}
+
+.blog-card-summary {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  color: var(--muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* phones show one column, squares would be too tall */
+@media (max-width: 520px) {
+  .blog-card {
+    aspect-ratio: auto;
+    min-height: 200px;
+  }
+}
+
+/* reader: full screen dialog, it opens from the middle line of the screen and closes back into it */
+
+html.blog-reading {
+  overflow: hidden;
+}
+
+.blog-reader {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: var(--bg);
+  color: var(--fg);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.blog-reader::backdrop {
+  background: transparent;
+}
+
+.blog-reader[open] {
+  animation: blog-reader-open 0.6s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+
+/* content appears once the reader is almost open */
+.blog-reader[open] .blog-article {
+  animation: blog-article-in 0.45s 0.3s ease both;
+}
+
+/* declared after [open] so it wins while both apply */
+.blog-reader.is-closing {
+  animation: blog-reader-close 0.45s cubic-bezier(0.6, 0, 0.8, 0.3) both;
+}
+
+@keyframes blog-reader-open {
+  from { clip-path: inset(50% 0 50% 0); }
+  to { clip-path: inset(0 0 0 0); }
+}
+
+@keyframes blog-reader-close {
+  from { clip-path: inset(0 0 0 0); }
+  to { clip-path: inset(50% 0 50% 0); }
+}
+
+@keyframes blog-article-in {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: none; }
+}
+
+.blog-reader-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px 28px;
+  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
+.blog-reader-close {
+  background: none;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  padding: 6px 0;
+  color: var(--muted);
+  font: inherit;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.blog-reader-close:hover,
+.blog-reader-close:focus-visible {
+  color: var(--fg);
+  border-color: var(--fg);
+  outline: none;
+}
+
+/* article typography */
+
+.blog-article {
+  max-width: 68ch;
+  margin: 0 auto;
+  padding: clamp(36px, 8vh, 80px) 28px 14vh;
+  font-size: clamp(1rem, 0.95rem + 0.25vw, 1.15rem);
+  line-height: 1.7;
+}
+
+.blog-article-date {
+  display: block;
+  margin-bottom: 1rem;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.blog-article h2,
+.blog-article h3,
+.blog-article h4,
+.blog-article h5,
+.blog-article h6 {
+  font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 2.2em 0 0.6em;
+}
+
+.blog-article-header h2 {
+  margin: 0 0 1.5em;
+  font-size: clamp(2rem, 1.3rem + 3vw, 3.4rem);
+  letter-spacing: -0.02em;
+}
+
+.blog-article-body h3 { font-size: 1.5em; }
+.blog-article-body h4 { font-size: 1.25em; }
+.blog-article-body h5,
+.blog-article-body h6 { font-size: 1.05em; }
+
+.blog-article-body p,
+.blog-article-body ul,
+.blog-article-body ol,
+.blog-article-body pre,
+.blog-article-body blockquote {
+  margin: 0 0 1.2em;
+}
+
+.blog-article-body a {
+  color: var(--fg);
+  text-underline-offset: 3px;
+}
+
+.blog-article-body code {
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.88em;
+  background: #141414;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+}
+
+.blog-article-body pre {
+  overflow-x: auto;
+  padding: 18px 20px;
+  background: #0d0d0d;
+  border: 1px solid var(--line);
+  line-height: 1.5;
+}
+
+.blog-article-body pre code {
+  background: none;
+  padding: 0;
+}
+
+.blog-article-body blockquote {
+  padding-left: 1.2em;
+  border-left: 2px solid var(--fg);
+  color: #cfcfcf;
+}
+
+.blog-article-body hr {
+  border: 0;
+  border-top: 1px solid var(--line);
+  margin: 2.5em 0;
+}
+
+/* line drawings are dark, a light card keeps them visible on the black page */
+.blog-article-body img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 1.5em auto;
+  padding: 16px;
+  background: #fff;
+}
+
+.blog-article-status {
+  color: var(--muted);
+}
+
+/* blog page */
+
+.menu a[aria-current="page"] {
+  color: var(--fg);
+  border-color: var(--fg);
+}
+
+.blog-page h1 {
+  font-family: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+  font-size: clamp(2.2rem, 6vw, 4.5rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin: 0 0 0.6rem;
+}
+
+.blog-page .claim {
+  margin-bottom: 3rem;
+}
+
+.blog-more {
+  display: inline-block;
+  margin-top: 2rem;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 6px 0;
+  border-bottom: 1px solid transparent;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.blog-more:hover,
+.blog-more:focus-visible {
+  color: var(--fg);
+  border-color: var(--fg);
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blog-reader[open],
+  .blog-reader[open] .blog-article,
+  .blog-reader.is-closing {
+    animation: none;
+  }
+
+  .blog-card {
+    transition: none;
+  }
+}
