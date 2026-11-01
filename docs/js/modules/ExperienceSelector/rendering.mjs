@@ -65,6 +65,11 @@ async function initExperience(idContainer, source, {spritesPath = 'sprites/', ..
   const overlay = createElement('div', {class: 'experience-overlay'})
   const headline = createElement('p', {class: 'experience-title'})
   const summary = createElement('p', {class: 'experience-summary'})
+  //title and description share one glass card, its band keeps a fixed height so the slot never moves
+  const topBand = createElement('div', {class: 'experience-top'})
+  const glass = createElement('div', {class: 'experience-glass'})
+  glass.append(headline, summary)
+  topBand.append(glass)
   const slot = createElement('div', {class: 'experience-slot', 'aria-hidden': 'true'})
   const extra = createElement('p', {class: 'experience-extra'})
   const tablist = createElement('div', {role: 'tablist', class: 'experience-badges', 'aria-label': 'Lugares'})
@@ -88,7 +93,7 @@ async function initExperience(idContainer, source, {spritesPath = 'sprites/', ..
     return badge
   })
   tablist.style.setProperty('--count', badges.length)
-  overlay.append(headline, summary, slot, extra, tablist)
+  overlay.append(topBand, slot, extra, tablist)
   stage.append(canvas, overlay)
   container.append(stage)
 
@@ -96,7 +101,12 @@ async function initExperience(idContainer, source, {spritesPath = 'sprites/', ..
   //sky colors are shared with css so texts and dots on narrow screens contrast with the sky behind them
   const scene = createBuildingScene(canvas.id, {
     ...sceneOptions,
-    onSkyChange: sky => stage.style.setProperty('--sky-ink', sky.ink),
+    onSkyChange: sky =>{
+      stage.style.setProperty('--sky-ink', sky.ink)
+      //light ink means a dark sky, the glass is tinted the opposite way of the text
+      const [red, green, blue] = sky.ink.match(/\d+/g).map(Number)
+      stage.dataset.ink = (red + green + blue)/3 > 127 ? 'light' : 'dark'
+    },
     //slot position relative to the canvas, it is read again on every restart so resizes are followed
     getArea: ()=>{
       const canvasRect = canvas.getBoundingClientRect()
