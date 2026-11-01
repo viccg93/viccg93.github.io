@@ -154,6 +154,8 @@ async function initExperience(idContainer, source, {spritesPath = 'sprites/', ..
   })
 
   //here arrow motion is handled
+  //left and right arrows work from anywhere in the page while at least half of the stage is on screen
+  let isStageVisible = false
   new IntersectionObserver(entries =>{
     isStageVisible = entries[0].isIntersecting
   }, {threshold: 0.5}).observe(stage)

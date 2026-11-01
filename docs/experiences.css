@@ -264,3 +264,10 @@ body {
     font-size: clamp(0.85rem, 0.75rem + 0.4vw, 1.05rem);
     color: #5a5a5a;
 }
+
+/* word the visitor is looking at, set by GazeReader through the css highlight api */
+::highlight(gaze-word) {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.2em;
+}
