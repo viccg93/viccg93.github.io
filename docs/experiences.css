@@ -26,23 +26,22 @@ body {
     inset: 0;
     display: flex;
     flex-direction: column;
-    padding-bottom: 3svh;
+    padding-bottom: calc(3 * var(--vh, 1svh));
     /* texts follow the sky ink so they contrast with day and night skies */
     color: var(--sky-ink, #0a0a0a);
     text-align: center;
     transition: color 0.6s ease;
 }
 
-/* top band: 10svh for the title plus 15svh for the description, the glass card is centered inside it */
+/* top band: 10vh for the title plus 15vh for the description, the glass card is centered inside it */
 .experience-top {
     flex: none;
     box-sizing: border-box;
-    height: 25vh;
-    height: 25svh;
+    height: calc(25 * var(--vh, 1svh));
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.5svh 4vw 0;
+    padding: calc(1.5 * var(--vh, 1svh)) 4vw 0;
 }
 
 /* crystal glass: translucent tint, blurred sky behind and a bright edge on top */
@@ -51,7 +50,7 @@ body {
     max-width: 60ch;
     max-height: 100%;
     overflow: hidden;
-    padding: clamp(10px, 1.8svh, 20px) clamp(16px, 2.6vw, 34px);
+    padding: clamp(10px, calc(1.8 * var(--vh, 1svh)), 20px) clamp(16px, 2.6vw, 34px);
     border-radius: clamp(14px, 1.6vw, 22px);
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.32), rgba(255, 255, 255, 0.1));
     -webkit-backdrop-filter: blur(14px) saturate(160%);
@@ -72,7 +71,7 @@ body {
     margin: 0;
     /* text sizes grow with the smaller of width and height, so they fit their bands on any screen,
        the rem part keeps them following the user's zoom */
-    font-size: clamp(1.25rem, 0.6rem + min(3vw, 3.4svh), 3rem);
+    font-size: clamp(1.25rem, 0.6rem + min(3vw, calc(3.4 * var(--vh, 1svh))), 3rem);
     font-weight: 700;
     letter-spacing: -0.02em;
     line-height: 1.15;
@@ -80,7 +79,7 @@ body {
 
 .experience-summary {
     margin: 0.5em 0 0;
-    font-size: clamp(0.85rem, 0.6rem + min(0.9vw, 1.1svh), 1.2rem);
+    font-size: clamp(0.85rem, 0.6rem + min(0.9vw, calc(1.1 * var(--vh, 1svh))), 1.2rem);
     line-height: 1.45;
 }
 
@@ -96,9 +95,8 @@ body {
     margin: 0 auto;
     padding: 0 4vw;
     overflow: hidden;
-    height: 15vh;
-    height: 15svh;
-    font-size: clamp(0.85rem, 0.6rem + min(0.9vw, 1.1svh), 1.2rem);
+    height: calc(15 * var(--vh, 1svh));
+    font-size: clamp(0.85rem, 0.6rem + min(0.9vw, calc(1.1 * var(--vh, 1svh))), 1.2rem);
     line-height: 1.45;
 }
 
@@ -279,12 +277,11 @@ body {
 }
 
 /* canvases are sized in viewport units, the sprite engine follows them on every resize,
-   svh keeps the height fixed while the mobile address bar shows and hides */
+   --vh keeps the height fixed while the mobile toolbars show and hide, 1svh covers pages without the script */
 .experience-canvas {
     display: block;
     width: 100vw;
-    height: 90vh;
-    height: 90svh;
+    height: calc(90 * var(--vh, 1svh));
 }
 
 .experience-panel {

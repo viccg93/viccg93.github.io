@@ -186,7 +186,7 @@ html.blog-reading {
 .blog-article {
   max-width: 68ch;
   margin: 0 auto;
-  padding: clamp(36px, 8svh, 80px) 28px 14svh;
+  padding: clamp(36px, calc(8 * var(--vh, 1svh)), 80px) 28px calc(14 * var(--vh, 1svh));
   font-size: clamp(1rem, 0.95rem + 0.25vw, 1.15rem);
   line-height: 1.7;
 }
