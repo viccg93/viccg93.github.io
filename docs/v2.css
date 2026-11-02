@@ -230,6 +230,69 @@ section h2 {
   margin: 0 0 2rem;
 }
 
+/* about: lead on the left, background on the right, one column on narrow screens */
+
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+
+.about-lead {
+  margin: 0;
+  font-size: clamp(1.25rem, 1rem + 1.2vw, 1.85rem);
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  text-wrap: balance;
+}
+
+.about-body {
+  max-width: 60ch;
+  color: var(--muted);
+  font-size: clamp(0.98rem, 0.92rem + 0.25vw, 1.08rem);
+  line-height: 1.7;
+}
+
+.about-body p {
+  margin: 0 0 1.2em;
+  text-wrap: pretty;
+}
+
+.about-body p:last-child {
+  margin-bottom: 0;
+}
+
+/* links stand out from the muted body only by color and a thin underline */
+.about-body a {
+  color: var(--fg);
+  text-decoration: underline;
+  text-decoration-color: var(--muted);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.about-body a:hover,
+.about-body a:focus-visible {
+  text-decoration-color: var(--fg);
+  outline: none;
+}
+
+/* education closes the block, set apart by a thin rule */
+.about-education {
+  padding-top: 1.2em;
+  border-top: 1px solid var(--line);
+}
+
+@media (max-width: 820px) {
+  .about {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+}
+
 /* experience: scene styles come from experiences.css, these adapt its panel to the dark page */
 
 .experience {
