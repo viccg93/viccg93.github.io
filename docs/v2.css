@@ -98,9 +98,11 @@ body {
   position: relative;
   display: flex;
   align-items: flex-end;
+  /* svh ignores the mobile address bar, so the hero does not jump when the bar hides */
   height: 72vh;
+  height: 72svh;
   min-height: 460px;
-  padding-block: 0 7vh;
+  padding-block: 0 7svh;
   border-top: 0;
   background: #fff;
   color: #0a0a0a;
@@ -218,7 +220,7 @@ body {
 
 section {
   border-top: 1px solid var(--line);
-  padding-block: 12vh;
+  padding-block: 12svh;
 }
 
 section h2 {
@@ -413,8 +415,8 @@ section h2 {
 
   .menu-toggle { display: block; }
 
-  .hero { height: 68vh; min-height: 400px; }
-  section { padding-block: 9vh; }
+  .hero { height: 68vh; height: 68svh; min-height: 400px; }
+  section { padding-block: 9svh; }
 }
 
 /* particle canvas */
