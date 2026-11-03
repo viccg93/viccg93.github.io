@@ -141,6 +141,15 @@ body {
   margin: 0 0 0.6rem;
 }
 
+/* badges row over the name: work status and cv download, they wrap on narrow screens */
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 1.2rem;
+}
+
 /* work status badge: green pill, pulsing dot and a shine that crosses it every few seconds */
 .status-badge {
   --status: #16a34a;
@@ -148,7 +157,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  margin: 0 0 1.2rem;
+  margin: 0;
   padding: 7px 16px 7px 12px;
   border: 1px solid rgba(22, 163, 74, 0.4);
   border-radius: 999px;
@@ -184,6 +193,52 @@ body {
   transform: translateX(-100%);
   animation: status-shine 3.6s ease-in-out infinite;
   pointer-events: none;
+}
+
+/* cv badge: same pill as the status one in black and white, it inverts on hover */
+.cv-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 16px 7px 12px;
+  border: 1px solid rgba(10, 10, 10, 0.3);
+  border-radius: 999px;
+  /* nearly solid so the particles passing behind do not show through the text */
+  background: rgba(255, 255, 255, 0.94);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: #0a0a0a;
+  font-size: clamp(11px, 0.6rem + 0.3vw, 13px);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.cv-badge-icon {
+  flex: none;
+  width: 14px;
+  height: 14px;
+}
+
+.cv-badge:hover,
+.cv-badge:focus-visible {
+  background: #0a0a0a;
+  border-color: #0a0a0a;
+  color: #fff;
+}
+
+/* double ring stays visible over the white hero and the particles */
+.cv-badge:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px #0a0a0a;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cv-badge {
+    transition: none;
+  }
 }
 
 @keyframes status-pulse {
