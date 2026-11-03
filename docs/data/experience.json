@@ -42,7 +42,7 @@
     "title": "Gentera",
     "role": "Consultor Redwood / Control-M",
     "period": "Jul 2023 – Sep 2025",
-    "description": "Refactorización de scripts en RedwoodScript (Java) y shell script. Ejecución de flujos y BPA de pruebas. Migración a Control-M. Cliente REST en Python y Mitigaciòn de vulnerabilidades.",
+    "description": "Refactorización de scripts en RedwoodScript (Java) y shell. Ejecución de flujos y BPA de pruebas. Migración a Control-M. Mitigaciòn de vulnerabilidades.",
     "extra": "RedwoodScript, Python, shell script, Redwood, Control-M, OpenSSL."
   }
 ]
