@@ -3,46 +3,46 @@
     "image": "bellas_artes.svg",
     "place": "Museo del Palacio de Bellas Artes",
     "title": "Museo del Palacio de Bellas Artes",
-    "role": "Puesto de ejemplo",
-    "period": "Mes Año - Mes Año",
-    "description": "Texto de ejemplo: describe aquí tu rol, el proyecto en el que participaste y lo que aprendiste en este lugar.",
-    "extra": "Texto extra de ejemplo: tecnologías, logros o un dato breve."
+    "role": "Programador web",
+    "period": "Feb 2016 – Ago 2017",
+    "description": "Modernización del sistema central del museo, de JSP a Struts2 y de Flash a HTML5. Desarrollo de micrositios.",
+    "extra": "Java 7, Struts2, Spring, Oracle 9i, PHP, PHP-PDO, Bootstrap, MySQL."
   },
   {
     "image": "eglobal.svg",
     "place": "E-Global",
     "title": "E-Global",
-    "role": "Puesto de ejemplo",
-    "period": "Mes Año - Mes Año",
-    "description": "Texto de ejemplo: describe aquí tu rol, el proyecto en el que participaste y lo que aprendiste en este lugar.",
-    "extra": "Texto extra de ejemplo: tecnologías, logros o un dato breve."
+    "role": "Programador analista Sr.",
+    "period": "Ene 2018 – Sep 2020",
+    "description": "Refactorización de los procesos del ciclo de aclaraciones y nuevas funcionalidades en sistemas multiemisor y multiadquirente. Integración de nuevos bancos: BanCoppel y Banco Azteca.",
+    "extra": "Java 8, Spring (web, security, JDBC, Batch), Maven, MSSQL, Bootstrap, jQuery, JavaFX."
   },
   {
     "image": "torre_virreyes.svg",
     "place": "Directo Telecom",
     "title": "Directo Telecom",
-    "role": "Puesto de ejemplo",
-    "period": "Mes Año - Mes Año",
-    "description": "Texto de ejemplo: describe aquí tu rol, el proyecto en el que participaste y lo que aprendiste en este lugar.",
-    "extra": "Texto extra de ejemplo: tecnologías, logros o un dato breve."
+    "role": "Ingeniero DevOps",
+    "period": "Mar 2021 – Jun 2021",
+    "description": "Creación de pipelines en Jenkins para el despliegue del frontend, programación de una API para números 800 y de un pool de conexiones, y creación de un teléfono web (web phone).",
+    "extra": "Jenkins, Node.js, Express, MongoDB, Redis, Bootstrap, MariaDB."
   },
   {
     "image": "terraza_everest.svg",
     "place": "Terraza Everest",
     "title": "Terraza Everest",
-    "role": "Puesto de ejemplo",
-    "period": "Mes Año - Mes Año",
-    "description": "Texto de ejemplo: describe aquí tu rol, el proyecto en el que participaste y lo que aprendiste en este lugar.",
-    "extra": "Texto extra de ejemplo: tecnologías, logros o un dato breve."
+    "role": "Desarrollador",
+    "period": "Oct 2022 – Jun 2023",
+    "description": "Creación de una plataforma SPA para cotizaciones, seguimiento de eventos, cálculo de costos y balance de ganancias.",
+    "extra": "PHP, PHP-PDO, MySQL, Bootstrap, JavaScript, Docker, FPDF, integración con Google Calendar."
   },
 
   {
     "image": "gentera.svg",
     "place": "Gentera",
     "title": "Gentera",
-    "role": "Puesto de ejemplo",
-    "period": "Mes Año - Mes Año",
-    "description": "Texto de ejemplo: describe aquí tu rol, el proyecto en el que participaste y lo que aprendiste en este lugar.",
-    "extra": "Texto extra de ejemplo: tecnologías, logros o un dato breve."
+    "role": "Consultor Redwood / Control-M",
+    "period": "Jul 2023 – Sep 2025",
+    "description": "Refactorización de scripts en RedwoodScript (Java) y shell script. Ejecución de flujos y BPA de prueba. Migración de scripts a Control-M. Desarrollo de un cliente REST en Python y solución de vulnerabilidades en servidores de pruebas.",
+    "extra": "RedwoodScript, Python, shell script, Redwood, Control-M, OpenSSL."
   }
 ]

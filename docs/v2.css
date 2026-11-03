@@ -311,6 +311,56 @@ section h2 {
   color: var(--muted);
 }
 
+/* stack: one row per area, area name on the left and its tools on the right, stacked on narrow screens */
+
+.stack-list {
+  margin: 0;
+  border-top: 1px solid var(--line);
+}
+
+.stack-group {
+  display: grid;
+  grid-template-columns: 14rem 1fr;
+  align-items: baseline;
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.stack-area {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.stack-group dd {
+  margin: 0;
+}
+
+.stack-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em 1.6em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: clamp(1rem, 0.9rem + 0.45vw, 1.25rem);
+  line-height: 1.4;
+}
+
+/* tools from personal projects are dimmed, so they read apart from the ones used at work */
+.stack-group--learning .stack-items {
+  color: var(--muted);
+}
+
+@media (max-width: 720px) {
+  .stack-group {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+}
+
 /* contact: one row per link, icon, kind of link and value */
 
 .contact-list {
