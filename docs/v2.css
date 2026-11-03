@@ -361,6 +361,134 @@ section h2 {
   }
 }
 
+/* stack repos: items with github repositories become buttons with a dotted underline and a small count,
+   hover or click opens a panel with the repositories under the item */
+
+.stack-item--repos {
+  position: relative;
+}
+
+.stack-tech {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  text-decoration: underline dotted;
+  text-decoration-color: var(--muted);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 5px;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.stack-tech:hover,
+.stack-tech[aria-expanded="true"] {
+  text-decoration-color: currentColor;
+}
+
+.stack-tech:focus-visible {
+  outline: 1px solid var(--fg);
+  outline-offset: 4px;
+}
+
+.stack-tech-count {
+  margin-left: 0.3em;
+  font-size: 0.6em;
+  vertical-align: super;
+  color: var(--muted);
+}
+
+/* text read by screen readers only */
+.stack-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.stack-repos {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  z-index: 20;
+  width: max-content;
+  min-width: 14rem;
+  max-width: min(22rem, calc(100vw - 56px));
+  max-height: 18rem;
+  overflow-y: auto;
+  padding: 14px 18px;
+  background: #0a0a0a;
+  border: 1px solid #2a2a2a;
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.7);
+  /* the learning row dims its items, the panel keeps full contrast */
+  color: var(--fg);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.stack-repos--end {
+  left: auto;
+  right: 0;
+}
+
+.stack-repos-title {
+  margin: 0 0 10px;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.stack-repos-list {
+  display: grid;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stack-repos a {
+  color: inherit;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.stack-repos a:hover,
+.stack-repos a:focus-visible {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  outline: none;
+}
+
+.stack-repos-arrow {
+  color: var(--muted);
+}
+
+/* repositories from another account show the owner dimmed before the name */
+.stack-repos-owner {
+  color: var(--muted);
+}
+
+.stack-repos-all {
+  display: inline-block;
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--line);
+  width: 100%;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .stack-tech {
+    transition: none;
+  }
+}
+
 /* courses: one row per course, name, where it was taken and the certificate link,
    the link column keeps its width so names line up even when a course has no certificate */
 

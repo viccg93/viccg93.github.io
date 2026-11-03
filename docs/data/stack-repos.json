@@ -1,0 +1,36 @@
+{
+  "user": "viccg93",
+  "technologies": {
+    "Java 7 / 8": {"repos": ["Java8-review", "numeros-romanos", "spring-forms", "Spring-boot-essentials", "udemy-boot-di", "udemy-spring5", "vicivancg/Farmacia-en-linea"]},
+    "Spring Boot": {"repos": ["spring-forms", "Spring-boot-essentials", "udemy-boot-di", "udemy-spring5"]},
+    "Thymeleaf": {"repos": ["spring-forms", "Spring-boot-essentials", "udemy-boot-di", "udemy-spring5"]},
+    "JSP / JSTL": {"repos": ["vicivancg/Farmacia-en-linea"]},
+    "PHP": {"repos": ["agenda", "vicivancg/AdminUsuarios", "vicivancg/restapi"]},
+    "Slim": {"repos": ["vicivancg/restapi"]},
+    "PDO": {"repos": ["agenda"]},
+    "Node.js": {"repos": ["vicivancg/TheNetNinja-Mongodb", "vicivancg/TODOApp", "vicivancg/TheNetNinja-Nodejs"]},
+    "Express": {"repos": ["vicivancg/TODOApp", "vicivancg/TheNetNinja-Nodejs"]},
+    "MySQL": {"repos": ["agenda"]},
+    "MongoDB": {"repos": ["vicivancg/TheNetNinja-Mongodb", "vicivancg/TODOApp"]},
+    "Shell script": {"repos": ["linux-utils"]},
+    "awk": {"repos": ["linux-utils"]},
+    "Make": {"repos": ["MakeFile_tutorial"]},
+    "JavaScript": {"repos": ["viccg93.github.io", "Connection_canvas", "vicivancg/TheNetNinja-Mongodb", "vicivancg/TODOApp", "vicivancg/TheNetNinja-Nodejs"]},
+    "TypeScript": {"repos": ["angular-tour-of-heroes"]},
+    "Angular": {"repos": ["angular-tour-of-heroes"]},
+    "Bootstrap": {"repos": ["agenda"]},
+    "Canvas 2D": {"repos": ["viccg93.github.io", "Connection_canvas"]},
+    "C#": {"repos": ["vicivancg/ventasV2", "vicivancg/Encriptador-de-imagenes-Blowfish"]},
+    "Windows Forms": {"repos": ["vicivancg/ventasV2", "vicivancg/Encriptador-de-imagenes-Blowfish"]},
+    "JUnit": {"repos": ["numeros-romanos"]},
+    "Kotlin": {
+      "repos": ["woofApp", "gridApp", "CoursesGridApp", "scrollableList", "Kotlin_basics", "ArtSpace", "TipCalculator", "LemonadeCompose", "Dice_Roller", "Business_Card_JetpackCompose", "compose_task_manager", "Birthday_card_compose", "GreetingApp_Compose", "limonada", "Ejemplo_depuracion", "dado", "tarjetas-de-cumplea-os"],
+      "all": "https://github.com/viccg93?tab=repositories&language=kotlin"
+    },
+    "Jetpack Compose": {"repos": ["woofApp", "gridApp", "CoursesGridApp", "scrollableList", "ArtSpace", "TipCalculator", "LemonadeCompose", "Dice_Roller", "Business_Card_JetpackCompose", "compose_task_manager", "Birthday_card_compose", "GreetingApp_Compose"]},
+    "Rust": {
+      "repos": ["generics_traits_lifetimes", "error_handling", "departments", "pig_latin", "collections", "restaurant", "backyard", "module_system", "match_control_flow", "enums", "rectangles", "structs", "slices", "references_and_borrowing", "ownership", "fibonacci_binet", "fahrenheit_to_celsius_converter", "loops", "flow_control", "funciones", "tipos", "variables", "guessing_game", "hello_world", "hello_cargo"],
+      "all": "https://github.com/viccg93?tab=repositories&language=rust"
+    }
+  }
+}
