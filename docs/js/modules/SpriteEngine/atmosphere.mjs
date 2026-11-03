@@ -162,11 +162,14 @@ function drawCelestial(ctx, width, height, sky){
   ctx.restore()
 }
 
+//drops are born up to this distance above the canvas
+const dropSpawnBand = 40
+
 function createDrop(width, height, scale, anywhere){
   return {
     //drops drift with the wind, so they are born a bit to the left of the canvas too
     x: Math.random()*width*1.2 - width*0.2,
-    y: anywhere ? Math.random()*height : -Math.random()*40,
+    y: anywhere ? Math.random()*height : -Math.random()*dropSpawnBand,
     length: (10 + Math.random()*14) * scale,
     speed: (520 + Math.random()*300) * scale
   }
@@ -188,7 +191,9 @@ function updateRain(drops, width, height, frameSeconds, isRaining){
   }
 }
 
-function drawRain(ctx, drops, ink){
+//offset shifts drops vertically for parallax, a drop pushed out of one edge comes back from the other one,
+//rain is random so the wrap is not noticed and the canvas never shows an empty band
+function drawRain(ctx, drops, ink, height = 0, offset = 0){
   if(drops.length == 0){
     return
   }
@@ -201,8 +206,14 @@ function drawRain(ctx, drops, ink){
   for(const drop of drops){
     //slant follows the wind: horizontal over vertical speed
     const slant = rainWind/drop.speed
-    ctx.moveTo(drop.x, drop.y)
-    ctx.lineTo(drop.x - slant*drop.length, drop.y - drop.length)
+    let y = drop.y
+    if(offset != 0){
+      //a drop lives between the spawn band and its tail leaving the bottom edge
+      const span = height + dropSpawnBand + drop.length
+      y = (((y + offset + dropSpawnBand) % span) + span) % span - dropSpawnBand
+    }
+    ctx.moveTo(drop.x, y)
+    ctx.lineTo(drop.x - slant*drop.length, y - drop.length)
   }
   ctx.stroke()
   ctx.restore()

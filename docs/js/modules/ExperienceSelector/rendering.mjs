@@ -1,9 +1,10 @@
 import {createBuildingScene} from '../SpriteEngine/rendering.mjs'
 
 //places json is an array, badge order follows array order and the first place is selected by default
-//[{"image": "gentera.svg", "place": "Gentera", "period": "2021 - 2023", "title": "...", "description": "...", "extra": "..."}]
-//image and place are required, period, title, description and extra are optional
-//title and description are shown above the building, extra below it and above the badges
+//[{"image": "gentera.svg", "place": "Gentera", "title": "...", "role": "...", "period": "2021 - 2023", "description": "...", "extra": "..."}]
+//image and place are required, title, role, period, description and extra are optional
+//title, role, period and description are shown above the building, extra below it and above the badges
+//role and period share a short line under the title, each one is hidden when missing
 //title falls back to place when it is missing
 //a new place only needs its svg in the sprites folder and one more entry in the json
 
@@ -64,18 +65,21 @@ async function initExperience(idContainer, source, {spritesPath = 'sprites/', ..
   const stage = createElement('div', {class: 'experience-stage'})
   const overlay = createElement('div', {class: 'experience-overlay'})
   const headline = createElement('p', {class: 'experience-title'})
+  //role and period are spans of one line, css puts a separator between them when both are shown
+  const meta = createElement('p', {class: 'experience-meta'})
+  const role = createElement('span', {class: 'experience-role'})
+  const period = createElement('span', {class: 'experience-period'})
+  meta.append(role, period)
   const summary = createElement('p', {class: 'experience-summary'})
-  //title and description share one glass card, its band keeps a fixed height so the slot never moves
+  //title, role, period and description share one glass card, its band keeps a fixed height so the slot never moves
   const topBand = createElement('div', {class: 'experience-top'})
   const glass = createElement('div', {class: 'experience-glass'})
-  glass.append(headline, summary)
+  glass.append(headline, meta, summary)
   topBand.append(glass)
   const slot = createElement('div', {class: 'experience-slot', 'aria-hidden': 'true'})
   const extra = createElement('p', {class: 'experience-extra'})
   const tablist = createElement('div', {role: 'tablist', class: 'experience-badges', 'aria-label': 'Lugares'})
   const canvas = createElement('canvas', {id: `${idContainer}_canvas`, class: 'experience-canvas', 'aria-hidden': 'true'})
-  const title = createElement('h3')
-  const period = createElement('p', {class: 'experience-period'})
 
   const badges = places.map((entry, index)=>{
     const badge = createElement('button', {
@@ -127,9 +131,11 @@ async function initExperience(idContainer, source, {spritesPath = 'sprites/', ..
       badge.tabIndex = isSelected ? 0 : -1
     })
     const entry = places[index]
-    title.textContent = entry.place
+    role.textContent = entry.role ?? ''
+    role.hidden = !entry.role
     period.textContent = entry.period ?? ''
     period.hidden = !entry.period
+    meta.hidden = !entry.role && !entry.period
     //overlay texts keep their space even when empty, so the building slot never moves
     headline.textContent = entry.title ?? entry.place
     summary.textContent = entry.description ?? ''

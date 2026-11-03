@@ -3,6 +3,8 @@
     "image": "bellas_artes.svg",
     "place": "Museo del Palacio de Bellas Artes",
     "title": "Museo del Palacio de Bellas Artes",
+    "role": "Puesto de ejemplo",
+    "period": "Mes Año - Mes Año",
     "description": "Texto de ejemplo: describe aquí tu rol, el proyecto en el que participaste y lo que aprendiste en este lugar.",
     "extra": "Texto extra de ejemplo: tecnologías, logros o un dato breve."
   },
@@ -10,6 +12,8 @@
     "image": "eglobal.svg",
     "place": "E-Global",
     "title": "E-Global",
+    "role": "Puesto de ejemplo",
+    "period": "Mes Año - Mes Año",
     "description": "Texto de ejemplo: describe aquí tu rol, el proyecto en el que participaste y lo que aprendiste en este lugar.",
     "extra": "Texto extra de ejemplo: tecnologías, logros o un dato breve."
   },
@@ -17,6 +21,8 @@
     "image": "torre_virreyes.svg",
     "place": "Directo Telecom",
     "title": "Directo Telecom",
+    "role": "Puesto de ejemplo",
+    "period": "Mes Año - Mes Año",
     "description": "Texto de ejemplo: describe aquí tu rol, el proyecto en el que participaste y lo que aprendiste en este lugar.",
     "extra": "Texto extra de ejemplo: tecnologías, logros o un dato breve."
   },
@@ -24,6 +30,8 @@
     "image": "terraza_everest.svg",
     "place": "Terraza Everest",
     "title": "Terraza Everest",
+    "role": "Puesto de ejemplo",
+    "period": "Mes Año - Mes Año",
     "description": "Texto de ejemplo: describe aquí tu rol, el proyecto en el que participaste y lo que aprendiste en este lugar.",
     "extra": "Texto extra de ejemplo: tecnologías, logros o un dato breve."
   },
@@ -32,6 +40,8 @@
     "image": "gentera.svg",
     "place": "Gentera",
     "title": "Gentera",
+    "role": "Puesto de ejemplo",
+    "period": "Mes Año - Mes Año",
     "description": "Texto de ejemplo: describe aquí tu rol, el proyecto en el que participaste y lo que aprendiste en este lugar.",
     "extra": "Texto extra de ejemplo: tecnologías, logros o un dato breve."
   }

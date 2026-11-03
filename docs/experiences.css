@@ -77,6 +77,35 @@ body {
     line-height: 1.15;
 }
 
+/* meta: small line under the title with the role and the period, it follows the sky ink with less weight */
+.experience-meta {
+    margin: 0.35em 0 0;
+    font-size: clamp(0.75rem, 0.55rem + min(0.7vw, calc(0.9 * var(--vh, 1svh))), 1rem);
+    line-height: 1.35;
+}
+
+.experience-role {
+    font-weight: 600;
+}
+
+.experience-period {
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    opacity: 0.75;
+}
+
+/* separator only when both parts are shown */
+.experience-role:not([hidden]) + .experience-period:not([hidden])::before {
+    content: "\00b7";
+    margin: 0 0.6em;
+}
+
+.experience-meta[hidden],
+.experience-role[hidden],
+.experience-period[hidden] {
+    display: none;
+}
+
 .experience-summary {
     margin: 0.5em 0 0;
     font-size: clamp(0.85rem, 0.6rem + min(0.9vw, calc(1.1 * var(--vh, 1svh))), 1.2rem);
@@ -294,8 +323,4 @@ body {
     font-weight: 400;
 }
 
-.experience-period {
-    margin: 0;
-    font-size: clamp(0.85rem, 0.75rem + 0.4vw, 1.05rem);
-    color: #5a5a5a;
-}
+

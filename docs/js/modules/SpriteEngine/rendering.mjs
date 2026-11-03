@@ -11,6 +11,9 @@ const groundOpacity = 0.25
 const appearedPortion = 0.05
 //sky colors are recalculated with this period in milliseconds
 const skyRefreshMs = 30000
+//parallax depth per layer: canvas height portion a layer is shifted when the canvas is one canvas height away from rest
+//negative values are far layers that move slower than the page, positive ones are near layers that move faster
+const parallaxDepth = {celestial: -0.12, streaks: -0.05, building: -0.035, rain: 0.08}
 
 //this module relies on canvasEngine, whenever canvasObj is called you should take for granted that it refers to an instance of that
 function drawSprite(canvasObj, image, x, y, destinyWidth, destinyHeight){
@@ -93,7 +96,8 @@ function drawFramedBuilding(canvasObj, building, image, deltaTime, unitDivider){
 //onSkyChange: called with the sky every time its ink changes, lets the page match elements over the canvas
 //getArea: returns {top, height} in css pixels of the canvas band the building must fit in,
 //portionForScale then applies to that band, null uses the whole canvas
-function createBuildingScene(idCanvas, {portionForScale = 0.7, maxWidthPortion = 0.8, unitDivider = 150, precision = 2, hour = null, weather = 'auto', onSkyChange = null, getArea = null} = {}){
+//parallax: multiplier of the layer depths while scrolling, 0 turns it off
+function createBuildingScene(idCanvas, {portionForScale = 0.7, maxWidthPortion = 0.8, unitDivider = 150, precision = 2, hour = null, weather = 'auto', onSkyChange = null, getArea = null, parallax = 1} = {}){
   const canvasObj = getCanvas(idCanvas)
   canvasObj.adjustSizing()
   //users asking for reduced motion get the building already in place and a still atmosphere
@@ -155,6 +159,17 @@ function createBuildingScene(idCanvas, {portionForScale = 0.7, maxWidthPortion =
     }
   }
 
+  //scroll position of the canvas relative to rest, rest means its top edge on the top of the viewport
+  //canvas height is the unit instead of the viewport, so mobile toolbars showing and hiding do not shake the layers
+  //result goes from -1 to 1, reduced motion keeps every layer still
+  function getScrollShift(){
+    if(reducedMotion || parallax == 0 || canvasObj.heightDOM == 0){
+      return 0
+    }
+    const top = canvasObj.canvas.getBoundingClientRect().top
+    return Math.max(-1, Math.min(1, top/canvasObj.heightDOM))
+  }
+
   //loop never ends: once the building is in place the atmosphere keeps moving
   function animate(currentStamp){
     requestAnimationFrame(animate)
@@ -176,10 +191,21 @@ function createBuildingScene(idCanvas, {portionForScale = 0.7, maxWidthPortion =
       refreshSky(currentStamp)
     }
     const width = canvasObj.widthDOM, height = canvasObj.heightDOM
+    const ctx = canvasObj.ctx
+    //every layer is drawn with its own vertical offset, physics keeps working in unshifted coordinates
+    const shift = getScrollShift() * parallax * height
+    const offsetOf = layer => shift * parallaxDepth[layer]
 
-    drawSky(canvasObj.ctx, width, height, sky)
-    drawCelestial(canvasObj.ctx, width, height, sky)
+    //sky is a gradient over the whole canvas, shifting it would not be noticed
+    drawSky(ctx, width, height, sky)
+    ctx.save()
+    ctx.translate(0, offsetOf('celestial'))
+    drawCelestial(ctx, width, height, sky)
+    ctx.restore()
 
+    //ground, building and debris move together, the building keeps fitting its slot
+    ctx.save()
+    ctx.translate(0, offsetOf('building'))
     if(building != null){
       drawGround(canvasObj, building, sky.ink)
       const previousTop = building.lastY
@@ -203,11 +229,18 @@ function createBuildingScene(idCanvas, {portionForScale = 0.7, maxWidthPortion =
       }
     }
     updateParticles(particles, frameSeconds, deltaTime/1000)
-    drawParticles(canvasObj.ctx, particles, sky.ink)
+    drawParticles(ctx, particles, sky.ink)
+    ctx.restore()
+
     updateStreaks(streaks, width, frameSeconds)
-    drawStreaks(canvasObj.ctx, streaks, sky.ink)
+    ctx.save()
+    ctx.translate(0, offsetOf('streaks'))
+    drawStreaks(ctx, streaks, sky.ink)
+    ctx.restore()
+
+    //rain covers the whole canvas, so instead of translating it the drops wrap around its height
     updateRain(drops, width, height, reducedMotion ? 0 : frameSeconds, sky.isRaining)
-    drawRain(canvasObj.ctx, drops, sky.ink)
+    drawRain(ctx, drops, sky.ink, height, offsetOf('rain'))
   }
 
   //restarting only resets the state, the loop is the same
