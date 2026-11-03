@@ -14,7 +14,7 @@
     "title": "E-Global",
     "role": "Programador analista Sr.",
     "period": "Ene 2018 – Sep 2020",
-    "description": "Refactorización de los procesos del ciclo de aclaraciones y nuevas funcionalidades en sistemas multiemisor y multiadquirente. Integración de nuevos bancos: BanCoppel y Banco Azteca.",
+    "description": "Refactorización de los procesos del ciclo de aclaraciones y nuevas funcionalidades en sistemas emisor y adquirente. Integración de nuevos bancos.",
     "extra": "Java 8, Spring (web, security, JDBC, Batch), Maven, MSSQL, Bootstrap, jQuery, JavaFX."
   },
   {
@@ -42,7 +42,7 @@
     "title": "Gentera",
     "role": "Consultor Redwood / Control-M",
     "period": "Jul 2023 – Sep 2025",
-    "description": "Refactorización de scripts en RedwoodScript (Java) y shell script. Ejecución de flujos y BPA de prueba. Migración de scripts a Control-M. Desarrollo de un cliente REST en Python y solución de vulnerabilidades en servidores de pruebas.",
+    "description": "Refactorización de scripts en RedwoodScript (Java) y shell script. Ejecución de flujos y BPA de pruebas. Migración a Control-M. Cliente REST en Python y Mitigaciòn de vulnerabilidades.",
     "extra": "RedwoodScript, Python, shell script, Redwood, Control-M, OpenSSL."
   }
 ]
