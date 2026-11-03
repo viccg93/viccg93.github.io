@@ -1,8 +1,8 @@
 [
   {
     "image": "bellas_artes.svg",
-    "place": "Palacio de Bellas Artes",
-    "title": "Palacio de Bellas Artes",
+    "place": "Museo del Palacio de Bellas Artes",
+    "title": "Museo del Palacio de Bellas Artes",
     "description": "Texto de ejemplo: describe aquí tu rol, el proyecto en el que participaste y lo que aprendiste en este lugar.",
     "extra": "Texto extra de ejemplo: tecnologías, logros o un dato breve."
   },
@@ -14,19 +14,20 @@
     "extra": "Texto extra de ejemplo: tecnologías, logros o un dato breve."
   },
   {
+    "image": "torre_virreyes.svg",
+    "place": "Directo Telecom",
+    "title": "Directo Telecom",
+    "description": "Texto de ejemplo: describe aquí tu rol, el proyecto en el que participaste y lo que aprendiste en este lugar.",
+    "extra": "Texto extra de ejemplo: tecnologías, logros o un dato breve."
+  },
+  {
     "image": "terraza_everest.svg",
     "place": "Terraza Everest",
     "title": "Terraza Everest",
     "description": "Texto de ejemplo: describe aquí tu rol, el proyecto en el que participaste y lo que aprendiste en este lugar.",
     "extra": "Texto extra de ejemplo: tecnologías, logros o un dato breve."
   },
-  {
-    "image": "torre_virreyes.svg",
-    "place": "Torre Virreyes",
-    "title": "Torre Virreyes",
-    "description": "Texto de ejemplo: describe aquí tu rol, el proyecto en el que participaste y lo que aprendiste en este lugar.",
-    "extra": "Texto extra de ejemplo: tecnologías, logros o un dato breve."
-  },
+
   {
     "image": "gentera.svg",
     "place": "Gentera",
