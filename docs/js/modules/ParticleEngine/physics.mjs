@@ -17,7 +17,7 @@ function calculateAngle(canvasWidth, canvasHeight, xPos, yPos){
     //the main model relies on division, so not computable values should be handled as well
     //cases when atan2 returns -0 are not possible due to yPos is always positive, but this should be handled as part of the model
     //it's handled as 1 because canvas use pixels for drawing
-    if(theta == 0 || theta == -0){theta = 1}
+    if(theta == 0 || theta == -0){theta = 0.2}
     if(thetaPrime == 0 || thetaPrime == -0){thetaPrime = 1} 
     //the math model is by definition a not continous function, but at this point is guaranteed that zero values don't 
     //get into the math model 

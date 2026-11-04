@@ -1,5 +1,12 @@
 [
   {
+    "id": "motivo-portafolio",
+    "file": "posts/motivo-portafolio.md",
+    "title": "Motivo de este portafolio",
+    "date": "2026-11-02",
+    "summary": "Un pequeño manifiesto de los motivos por los que este portafolio existe"
+  },
+  {
     "id": "escenario-de-experiencias",
     "file": "posts/escenario-de-experiencias.md",
     "title": "Cómo funciona el escenario de experiencias",
