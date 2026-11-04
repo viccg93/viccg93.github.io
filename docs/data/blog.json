@@ -7,17 +7,17 @@
     "summary": "Un pequeño manifiesto de los motivos por los que este portafolio existe"
   },
   {
-    "id": "escenario-de-experiencias",
-    "file": "posts/escenario-de-experiencias.md",
-    "title": "Cómo funciona el escenario de experiencias",
-    "date": "2026-10-31",
-    "summary": "Artículo de prueba: edificios que emergen del suelo, un cielo que sigue la hora de la Ciudad de México y textos que contrastan solos."
+    "id": "Musas-centros-de-datos",
+    "file": "posts/Musas-centros-datos.md",
+    "title": "Las musas y los centros de datos",
+    "date": "2025-12-17",
+    "summary": "Los datos y la memoria pueden tener mucho en común con la memoria y las musas."
   },
   {
-    "id": "guia-de-markdown",
-    "file": "posts/guia-de-markdown.md",
-    "title": "Guía rápida para escribir en este blog",
+    "id": "comentario-radicalizacion-elenchos",
+    "file": "posts/comentario-radicalizacion-elenchos.md",
+    "title": "Comentario sobre el artículo «La radicalización del élenchos»",
     "date": "2026-10-30",
-    "summary": "Artículo de prueba con todo el Markdown que entiende el lector: títulos, listas, citas, código, enlaces e imágenes."
+    "summary": "¿Un 'depende' como respuesta puede frenar cualquier intento de diálogo?"
   }
 ]
