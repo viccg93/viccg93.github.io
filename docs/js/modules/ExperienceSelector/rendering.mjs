@@ -190,6 +190,41 @@ async function initExperience(idContainer, source, {spritesPath = 'sprites/', ..
     select(step())
   })
 
+  //here swipe motion is handled
+  //a horizontal swipe on the stage moves to the next or previous badge, like the arrow keys
+  //swiping left goes forward, swiping right goes back
+  //listeners are passive so vertical scrolling of the page is never blocked,
+  //swipes that start on the badge row are ignored because the row scrolls sideways on narrow screens
+  const minSwipeDistance = 50
+  let touchStart = null
+  stage.addEventListener('touchstart', event =>{
+    if(event.touches.length != 1 || tablist.contains(event.target)){
+      touchStart = null
+      return
+    }
+    const touch = event.touches[0]
+    touchStart = {x: touch.clientX, y: touch.clientY}
+  }, {passive: true})
+
+  stage.addEventListener('touchend', event =>{
+    if(touchStart === null){
+      return
+    }
+    const touch = event.changedTouches[0]
+    const deltaX = touch.clientX - touchStart.x
+    const deltaY = touch.clientY - touchStart.y
+    touchStart = null
+    //the swipe must be mostly horizontal so a vertical scroll is not taken as a swipe
+    if(Math.abs(deltaX) < minSwipeDistance || Math.abs(deltaX) < Math.abs(deltaY)*1.5){
+      return
+    }
+    select(deltaX < 0 ? nextIndex() : previousIndex())
+  }, {passive: true})
+
+  stage.addEventListener('touchcancel', ()=>{
+    touchStart = null
+  }, {passive: true})
+
   select(0)
   return {select}
 }
