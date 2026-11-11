@@ -2,7 +2,8 @@ import {calculateAngle, assignXPosition, assignYPosition, assignSpeed, flightDur
 
 function generateCircles(quantityMaxLimit=0, canvasWidth, canvasHeight, minRadius, maxRadius, images){
     if(quantityMaxLimit == 0){quantityMaxLimit = 200}
-    const realQuantity = Math.round((Math.random()*(quantityMaxLimit-1))+1)
+    let halfQuantity = Math.round(quantityMaxLimit/2)
+    const realQuantity = Math.round(halfQuantity + (Math.random() * halfQuantity))
     const positiveLimit = realQuantity - Math.round(realQuantity/3)
     //array with size of realQuantity is created on the fly
     return Array.from({length: realQuantity},(_,index)=>{
